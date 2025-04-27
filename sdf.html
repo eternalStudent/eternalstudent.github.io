@@ -1,0 +1,591 @@
+<html>
+	<head>
+		<meta name="author" content="Noam Weisberg">
+		<meta property="og:type" content="article">
+		<meta property="og:title" content="eternalStudent">
+		<meta property="og:image" content="https://eternalstudent.github.io/profile.png">
+		<meta property="og:site_name" content="eternalStudent">
+		<meta property="og:url" content="https://eternalstudent.github.io">
+		<link rel="icon" type="image/png" href="profile.png"/>
+		<link rel="preconnect" href="https://fonts.gstatic.com">
+		<link href="https://fonts.googleapis.com/css2?family=Spectral&display=swap" rel="stylesheet">
+		<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+		<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+		<style type="text/css">
+			body {
+				font-family: 'Spectral', serif;
+				font-size: 19px;
+				color: #1a1a1a;
+				margin: 0;
+			}
+			article {
+				display: block;
+			}
+			code {
+				background-color: hsl(212, 15%, 22%);
+				color: hsl(208, 28%, 88%);
+				font-family: Consolas, Monospace;
+			}
+			.page-header {
+				background: lightgray;
+				padding: 6px;
+			}
+			.page-header-content {
+				margin: 0 auto;
+				width: fit-content;
+				font-family: Consolas, Monospace;
+			}
+			.page-header-title {
+				display: inline;
+			}
+			.content {
+				margin: 0 15px;
+				min-width: 280px;
+				overflow-wrap: break-word;
+			}
+			.post-title {
+				font-size: 2em;
+			}
+			@media screen and (min-width: 768px) {
+				body {
+					
+				}
+				.content {
+					margin: 0 auto;
+					width: 728px;
+				}
+			}
+		</style>
+		<title>eternalStudent</title>
+	</head>
+	<body>
+		<div class="page-header">
+			<div class="page-header-content">
+				<h1 class="page-header-title">eternalStudent</h1>
+				<img src="profile.png" style="height: 128px; display:inline;"/>
+			</div>
+		</div>
+		<div class="content">
+			<div>
+				<article>
+					<div>
+						<h1 class="post-title">SDF Anti-Aliasing</h1>
+					</div>
+					<div style="text-align: justify;">
+
+		<h2>Pixel Coverage and Linear RGB</h2>
+		<p>
+			The basic idea behind pixel-coverage anti-aliasing is: Given a pixel that is 80% blue and 20% red, 
+			the resulting color of the pixel should be <code>&nbsp;0.8*blue + 0.2*red&nbsp;</code>. 
+			This computation only works correctly if we assume linear RGB color space. 
+		</p>
+		<p>
+			On the face of it, it might not be clear why this is the case. 
+			In both Linear RGB and sRGB the resulting color will be a shade of purple. 
+			What makes the Linear RGB the “correct” one? 
+			It is because Linear RGB is a color space that preserves the proportional amount of light under linear transformations, 
+			i.e. <code>&nbsp;0.8*blue&nbsp;</code> has 80% of the light that blue has, 
+			and that <code>&nbsp;blue + red&nbsp;</code> light is the sum of the lights blue and red have.
+		</p>
+		<p>
+			Let's assume that we have a <code>&nbsp;background&nbsp;</code> color and a shape filled with a <code>&nbsp;foreground&nbsp;</code> color.
+			To create a pixel-coverage anti-aliasing we need to figure out for each pixel by how much the shape covers it, 
+			if we mark it by <code>&nbsp;a&nbsp;</code> we can compute <code>&nbsp;a*foregoround + (1 - a)*background&nbsp;</code> to get the correct color.
+			Unfortunately figuring out the exact coverage is a very computationally heavy thing to do.
+		</p>
+		<h2>Approximation I: Use tangents</h2>
+		<p>
+			Take the point on the perimeter of the shape that is closest to the center of the pixel, 
+			and draw a tangent line to that shape at that point. 
+			The tangent will split the pixel in two, and will create a coverage that is a close approximation to the shape's coverage.
+		</p>
+		<p>
+			I have created a small interactive visualization that helps illustrate the idea.
+			You can drag the red sphere around and see the coverage changes.
+		</p>
+		<canvas id="canvas1" width="600" height="600" tabindex='1'></canvas>
+		<p>
+			(Foreshadowing: Did you notice that when the center of the pixel is on the shape's perimeter, the coverage is exactly 0.5?)
+		</p>
+		<p>
+			Unfortunately, this computation requires several branching use-cases, 
+			the coverage shape can be either a triangle, a trapezoid or a pentagon,
+			which makes it still not a good fit to run per pixel.
+		</p>
+		<p>
+			We want to find something simpler.
+		</p>
+
+		<h2>Approximation II: Pretend the pixel is a sphere</h2>
+		<p>
+			What if instead of using squares as pixels, we pretend that the pixels are shaped as a sphere of area 1.
+			That would mean that the radius of the sphere is R = 1/√π ≈ 0.56418958354775628695.
+			And there is only one coverage shape: Circular segment.
+		</p>
+		<canvas id="canvas2" width="600" height="600" tabindex='1'></canvas>
+		<p>
+			Did you notice that the only parameter we need to compute the circular segment area is the distance from the pixel center to its closest point on the perimeter?
+			I have added a line segment that illustrates this.
+		</p>
+
+		<h2>Signed Distance Field (SDF)</h2>
+		<p>
+			Well more precisely we need the "signed distance". It is similar to distance, 
+			but it has a negative value if the pixel center is inside the shape.
+			You don't need to figure out the formula for the signed distance (although it can be fun to do so), 
+			<a href="https://iquilezles.org/articles/distfunctions2d/">other people have already done this for you</a>.
+		</p>
+		<p>
+			This is the formula to compute circular segment coverage, where x is the signed distance:
+		</p>
+		<p>
+			\[
+		    \begin{cases}
+				1 & x < -\frac{1}{\sqrt{\pi}} \\
+				0 & x > \frac{1}{\sqrt{\pi}} \\
+				\frac{1}{\pi} \cdot \arccos\left( x \sqrt{\pi} \right) - x \sqrt{ \frac{1}{\pi} - x^2 } & \text{otherwise} \\
+		    \end{cases}
+		    \]
+		</p>
+		<p>
+			At last this is a simple formula that we can easily plug in to our shaders. So what's next?
+		</p>
+		<h2>Approximation III: Smoothstep</h2>
+		<p>
+			Although the formula from the previous section is a very good approximation, 
+			there is a simpler formula that is much simpler to compute and is often good enough.
+		</p>
+		<p>
+			It is the smoothstep formula that is an intrinsic in both glsl and hlsl,
+			which means the GPU can compute it very efficiently.
+		</p>
+		<p>
+			The code goes like this: <code>&nbsp;a = smoothstep(-smoothness, smoothness, -sd);&nbsp;</code> 
+			where "smoothness" is a value between 0.5, and √0.5 ≈ 0.7071067811865475244, 
+			the distance from the pixel center to its borders.
+			(You might have seen <code>&nbsp;a = 1 - smoothstep(-smoothness, smoothness, sd);&nbsp;</code>, 
+			i.e: Instead of negating the sd, you invert the final result, both are equivalent.)
+		</p>
+		<p>
+			If you wonder what is the "best" smoothness value, then 0.5 works best on right angles,
+			and √0.5 works best on 45 degrees, but if you want a value that minimizes the error for all angles,
+			you can use 0.573896787348 (note how close this is to 1/√π).
+		</p>
+		<p>
+			You can compute this yourself by creating a curve function γ that goes along the pixel borders, 
+			and measures the distance to its center, then finding out the value C, such that ∫(γ(t) - C)dt = 0.
+		</p>
+		<script>
+			let grabPosX = 0;
+			let grabPosY = 0;
+
+			const canvas1 = document.getElementById("canvas1");
+			const ctx1 = canvas1.getContext("2d");
+			const canvas2 = document.getElementById("canvas2");
+			const ctx2 = canvas2.getContext("2d");
+
+			let isGrabbing1 = false;
+			let isHover1 = false;
+			let centerX1 = 500;
+			let centerY1 = 500;
+
+			let cursorX2 = 0;
+			let cursorY2 = 0;
+			let isGrabbing2 = false;
+			let isHover2 = false;
+			let centerX2 = 500;
+			let centerY2 = 500;
+
+			const radius = 300;
+			const pixelX = 200;
+			const pixelY = 200;
+			const pixelCenterX = 300;
+			const pixelCenterY = 300;
+			const pixelSize = 200;
+			const pixelArea = pixelSize*pixelSize;
+
+			canvas1.addEventListener('mousemove', function (event) {
+				const cursorX = event.offsetX + 0.5;
+				const cursorY = event.offsetY + 0.5;
+
+				if (isGrabbing1) {
+					centerX1 = grabPosX + cursorX;
+					centerY1 = grabPosY + cursorY;
+					canvas1.style.cursor = "grabbing";
+
+					return;
+				}
+
+				if (centerX1 - radius <= cursorX && cursorX < centerX1 + radius && centerY1 - radius <= cursorY && cursorY < centerY1 + radius) {
+					canvas1.style.cursor = "grab";
+					isHover1 = true;
+
+					return;
+				}
+
+				canvas1.style.cursor = "default";
+			});
+
+			canvas1.addEventListener('mousedown', function (event) {
+				if (event.button == 0) {
+					const cursorX = event.offsetX + 0.5;
+					const cursorY = event.offsetY + 0.5;
+
+					if (isHover1) {
+						grabPosX = centerX1 - cursorX;
+						grabPosY = centerY1 - cursorY;
+						isGrabbing1 = true;
+						canvas1.style.cursor = "grabbing";
+					}
+				}
+			});
+
+			canvas1.addEventListener('mouseup', function (event) {
+				if (event.button == 0) {
+					isGrabbing1 = false;
+				}
+			});
+
+			canvas1.addEventListener('mouseleave', function (event) {
+				if (event.button == 0) {
+					isGrabbing1 = false;
+				}
+			});
+
+			canvas2.addEventListener('mousemove', function (event) {
+				const cursorX = event.offsetX + 0.5;
+				const cursorY = event.offsetY + 0.5;
+
+				if (isGrabbing2) {
+					centerX2 = grabPosX + cursorX;
+					centerY2 = grabPosY + cursorY;
+					canvas2.style.cursor = "grabbing";
+
+					return;
+				}
+
+				if (centerX2 - radius <= cursorX && cursorX < centerX2 + radius && centerY1 - radius <= cursorY && cursorY < centerY2 + radius) {
+					canvas2.style.cursor = "grab";
+					isHover2 = true;
+
+					return;
+				}
+
+				canvas2.style.cursor = "default";
+			});
+
+			canvas2.addEventListener('mousedown', function (event) {
+				if (event.button == 0) {
+					const cursorX = event.offsetX + 0.5;
+					const cursorY = event.offsetY + 0.5;
+
+					if (isHover2) {
+						grabPosX = centerX2 - cursorX;
+						grabPosY = centerY2 - cursorY;
+						isGrabbing2 = true;
+						canvas2.style.cursor = "grabbing";
+					}
+				}
+			});
+
+			canvas2.addEventListener('mouseup', function (event) {
+				if (event.button == 0) {
+					isGrabbing2 = false;
+				}
+			});
+
+			canvas2.addEventListener('mouseleave', function (event) {
+				if (event.button == 0) {
+					isGrabbing2 = false;
+				}
+			});
+
+			// --- Create diagonal line pattern ---
+			const patternCanvas = document.createElement('canvas');
+			patternCanvas.width = 5;
+			patternCanvas.height = 5;
+			const pctx = patternCanvas.getContext('2d');
+
+			pctx.strokeStyle = 'purple';
+			pctx.lineWidth = 2;
+			pctx.beginPath();
+			pctx.moveTo(0, 5);
+			pctx.lineTo(5, 0);
+			pctx.stroke();
+
+			const pattern = ctx1.createPattern(patternCanvas, 'repeat');
+
+			function render() {
+				ctx1.fillStyle = 'lightblue';
+				ctx1.fillRect(0, 0, canvas1.width, canvas1.height);
+
+				ctx1.beginPath();
+				ctx1.arc(centerX1, centerY1, radius, 0, Math.PI * 2);
+				ctx1.fillStyle = 'red';
+				ctx1.fill();
+				ctx1.closePath();
+
+				ctx1.strokeStyle = 'black';
+				ctx1.strokeRect(200, 200, 200, 200);
+
+				let dx = centerX1 - pixelCenterX;
+				let dy = centerY1 - pixelCenterY;
+				let distance = Math.sqrt(dx * dx + dy * dy);
+
+				let nx = dx / distance;
+				let ny = dy / distance;
+
+				let pointX = centerX1 - nx * radius;
+				let pointY = centerY1 - ny * radius;
+
+				let tangentX = -ny;
+				let tangentY = nx;
+
+				ctx1.save(); // Save the canvas state
+				ctx1.beginPath();
+				ctx1.moveTo(pointX + tangentX * 1000, pointY + tangentY * 1000);
+				ctx1.lineTo(pointX - tangentX * 1000, pointY - tangentY * 1000);
+				ctx1.lineTo(centerX1 + (centerX1 - pixelCenterX) * 10, centerY1 + (centerY1 - pixelCenterY) * 10); // Far away toward ball side
+				ctx1.closePath();
+				ctx1.clip();
+
+				ctx1.fillStyle = pattern;
+				ctx1.fillRect(200, 200, 200, 200);
+				ctx1.restore();
+
+				ctx1.save();
+				ctx1.beginPath();
+				ctx1.rect(pixelX, pixelY, pixelSize, pixelSize);
+				ctx1.clip();
+
+				ctx1.beginPath();
+				ctx1.moveTo(pointX - tangentX * 1000, pointY - tangentY * 1000);
+				ctx1.lineTo(pointX + tangentX * 1000, pointY + tangentY * 1000);
+				ctx1.strokeStyle = 'white';
+				ctx1.lineWidth = 2;
+				ctx1.stroke();
+				ctx1.closePath();
+				ctx1.restore();
+
+				let m, b;
+				if (dx === 0) {
+					// Radial line is vertical => tangent is horizontal
+					m = 0;
+					b = pointY;
+				} else if (dy === 0) {
+					// Radial line is horizontal => tangent is vertical
+					m = Infinity;
+					b = pointX; // x = b
+				} else {
+					const radialSlope = dy / dx;
+					m = -1 / radialSlope;
+					b = pointY - m * pointX;
+				}
+
+				let hitLeft = false, hitRight = false, hitTop = false, hitBottom = false;
+				const points = [];
+				let sideY;
+				let sideX;
+				if (Number.isFinite(m)) {
+					let y = m * pixelX + b;
+					if (y >= pixelY && y <= pixelY + pixelSize) {
+						points.push({ x: pixelX, y });
+						hitLeft = true;
+					}
+
+					y = m * (pixelX + pixelSize) + b;
+					if (y >= pixelY && y <= pixelY + pixelSize) {
+						points.push({ x: pixelX + pixelSize, y });
+						hitRight = true;
+					}
+
+					let x = (pixelY - b) / m;
+					if (x >= pixelX && x <= pixelX + pixelSize) {
+						points.push({ x, y: pixelY });
+						hitTop = true;
+					}
+
+					x = (pixelY + pixelSize - b) / m;
+					if (x >= pixelX && x <= pixelX + pixelSize) {
+						points.push({ x, y: pixelY + pixelSize });
+						hitBottom = true;
+					}
+
+					const yLineAtCenterX = m * centerX1 + b;
+					if (centerY1 < yLineAtCenterX) {
+						sideY = 'above';
+					} else if (centerY1 > yLineAtCenterX) {
+						sideY = 'below';
+					} else {
+						sideY = 'on'; // exactly on the line (rare)
+					}
+
+					if (m !== 0) {
+						const xLineAtCenterX = (centerY1 - b)/m;
+						if (centerX1 < xLineAtCenterX) {
+							sideX = 'left';
+						} else if (centerX1 > xLineAtCenterX) {
+							sideX = 'right';
+						}
+					} 
+				}
+				else {
+					// Vertical line x = const
+					const xConst = b; // For vertical line, b represents x-intercept
+					if (xConst >= pixelX && xConst <= pixelX + pixelSize) {
+						points.push({ x: xConst, y: pixelY });
+						points.push({ x: xConst, y: pixelX });
+						hitTop = true;
+						hitBottom = true;
+					}
+
+					if (centerX1 < b) {
+						sideX = 'left';
+					} else if (centerX1 > b) {
+						sideX = 'right';
+					} else {
+						sideX = 'on';
+					}
+				}
+
+				const hits = points.length;
+				let area = 0;
+
+    			if (hits === 2) {
+					const p1 = points[0];
+					const p2 = points[1];
+
+					if (hitLeft && hitRight) {
+						area = 0.5*pixelSize*(Math.abs(pixelY - p1.y) + Math.abs(pixelY - p2.y));
+						if (sideY === "below") area = pixelArea - area;
+					} 
+					else if (hitTop && hitBottom) {
+						area = 0.5*pixelSize*(Math.abs(pixelX - p1.x) + Math.abs(pixelX - p2.x));
+						if (sideX === "right") area = pixelArea - area;
+					}
+					else if (hitLeft && hitTop) {
+						area = 0.5*Math.abs(pixelY - p1.y)*Math.abs(pixelX - p2.x);
+						if (sideY === "below") area = pixelArea - area;
+					} 
+					else if (hitLeft && hitBottom) {
+						area = 0.5*Math.abs(pixelY + pixelSize - p1.y)*Math.abs(pixelX - p2.x);
+						if (sideY === "above") area = pixelArea - area;
+					}
+					else if (hitRight && hitTop) {
+						area = 0.5*Math.abs(pixelY - p1.y)*Math.abs(pixelX + pixelSize - p2.x);
+						if (sideY === "below") area = pixelArea - area;
+					} 
+					else if (hitRight && hitBottom) {
+						area = 0.5*Math.abs(pixelY + pixelSize - p1.y)*Math.abs(pixelX + pixelSize - p2.x);
+						if (sideY === "above") area = pixelArea - area;
+					}
+				}
+				else if (distance <= radius) {
+					area = pixelArea;
+				}
+
+				ctx1.font = "17px consolas";
+				ctx1.fillStyle = "black";
+				ctx1.fillText("coverage: " + (area/pixelArea).toString(), 20, 20);
+
+				//----------------------------------------------------------------------
+
+				ctx2.fillStyle = 'lightblue';
+				ctx2.fillRect(0, 0, canvas2.width, canvas2.height);
+
+				ctx2.beginPath();
+				ctx2.arc(centerX2, centerY2, radius, 0, Math.PI * 2);
+				ctx2.fillStyle = 'red';
+				ctx2.fill();
+				ctx2.closePath();
+
+				ctx2.strokeStyle = 'rgba(0, 0, 0, 0.25)';
+				ctx2.strokeRect(pixelX, pixelY, pixelSize, pixelSize);
+
+				ctx2.beginPath();
+				ctx2.arc(pixelCenterX, pixelCenterY, 112.83791670955125738962, 0, Math.PI * 2);
+				ctx2.strokeStyle = 'black';
+				ctx2.stroke();
+				ctx2.closePath();
+
+				dx = centerX2 - pixelCenterX;
+				dy = centerY2 - pixelCenterY;
+				distance = Math.sqrt(dx * dx + dy * dy);
+
+				// Normalized vector from center to ball
+				nx = dx / distance;
+				ny = dy / distance;
+
+				// Closest point on ball perimeter
+				pointX = centerX2 - nx * radius;
+				pointY = centerY2 - ny * radius;
+
+				// Tangent vector (perpendicular)
+				tangentX = -ny;
+				tangentY = nx;
+
+				// --- Draw the half-plane containing the ball ---
+				ctx2.save(); // Save the canvas state
+				ctx2.beginPath();
+				ctx2.moveTo(pointX + tangentX * 1000, pointY + tangentY * 1000);
+				ctx2.lineTo(pointX - tangentX * 1000, pointY - tangentY * 1000);
+				ctx2.lineTo(centerX2 + (centerX2 - pixelCenterX) * 10, centerY2 + (centerY2 - pixelCenterY) * 10); // Far away toward ball side
+				ctx2.closePath();
+				ctx2.clip();
+
+				// Fill the clipped area with the pattern
+				ctx2.fillStyle = pattern;
+				ctx2.beginPath();
+				ctx2.arc(pixelCenterX, pixelCenterY, 112.83791670955125738962, 0, Math.PI * 2);
+				ctx2.fill();
+				ctx2.closePath();
+				ctx2.restore();
+
+				ctx2.save();
+				ctx2.beginPath();
+				ctx2.arc(pixelCenterX, pixelCenterY, 112.83791670955125738962, 0, Math.PI * 2);
+				ctx2.clip();
+
+				ctx2.beginPath();
+				ctx2.moveTo(pointX - tangentX * 1000, pointY - tangentY * 1000);
+				ctx2.lineTo(pointX + tangentX * 1000, pointY + tangentY * 1000);
+				ctx2.strokeStyle = 'white';
+				ctx2.lineWidth = 2;
+				ctx2.stroke();
+				ctx2.closePath();
+				ctx2.restore();
+
+				ctx2.beginPath();
+				ctx2.moveTo(pixelCenterX, pixelCenterY);
+				ctx2.lineTo(pointX, pointY);
+				ctx2.strokeStyle = 'white';
+				ctx2.lineWidth = 2;
+				ctx2.stroke();
+				ctx2.closePath();
+
+				const sqrt_pi = Math.sqrt(Math.PI);
+				const pi_inv = 1/Math.PI;
+				const sqrt_pi_inv = 1/sqrt_pi;
+				let sd = (distance - radius)/pixelSize;
+				if (sd < -sqrt_pi_inv)
+					area = 1;
+				else if (sd > sqrt_pi_inv)
+					area = 0;
+				else
+					area = pi_inv*Math.acos(sd*sqrt_pi) - sd*Math.sqrt(pi_inv - sd*sd);
+				
+				ctx2.font = "17px consolas";
+				ctx2.fillStyle = "black";
+				ctx2.fillText("coverage: " + area.toString(), 20, 20);
+
+				requestAnimationFrame(render);
+			}
+			requestAnimationFrame(render);
+		</script>
+					</div>
+		</article>
+			</div>
+			<div class="footer" style="height: 150px;"></div>
+		</div>
+	</body>
+</html>
