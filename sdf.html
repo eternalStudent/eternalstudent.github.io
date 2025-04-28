@@ -328,7 +328,7 @@
 				}
 			});
 
-			// --- Create diagonal line pattern ---
+			// Create diagonal line pattern ---
 			const patternCanvas = document.createElement('canvas');
 			patternCanvas.width = 5;
 			patternCanvas.height = 5;
@@ -348,37 +348,37 @@
 				ctx1.fillRect(0, 0, canvas1.width, canvas1.height);
 
 				ctx1.beginPath();
-				ctx1.arc(centerX1, centerY1, radius, 0, Math.PI * 2);
+				ctx1.arc(centerX1, centerY1, radius, 0, 2*Math.PI);
 				ctx1.fillStyle = 'red';
 				ctx1.fill();
 				ctx1.closePath();
 
 				ctx1.strokeStyle = 'black';
-				ctx1.strokeRect(200, 200, 200, 200);
+				ctx1.strokeRect(pixelX, pixelY, pixelSize, pixelSize);
 
 				let dx = centerX1 - pixelCenterX;
 				let dy = centerY1 - pixelCenterY;
-				let distance = Math.sqrt(dx * dx + dy * dy);
+				let distance = Math.sqrt(dx*dx + dy*dy);
 
-				let nx = dx / distance;
-				let ny = dy / distance;
+				let nx = dx/distance;
+				let ny = dy/distance;
 
-				let pointX = centerX1 - nx * radius;
-				let pointY = centerY1 - ny * radius;
+				let pointX = centerX1 - nx*radius;
+				let pointY = centerY1 - ny*radius;
 
 				let tangentX = -ny;
 				let tangentY = nx;
 
-				ctx1.save(); // Save the canvas state
+				ctx1.save();
 				ctx1.beginPath();
-				ctx1.moveTo(pointX + tangentX * 1000, pointY + tangentY * 1000);
-				ctx1.lineTo(pointX - tangentX * 1000, pointY - tangentY * 1000);
-				ctx1.lineTo(centerX1 + (centerX1 - pixelCenterX) * 10, centerY1 + (centerY1 - pixelCenterY) * 10); // Far away toward ball side
+				ctx1.moveTo(pointX + tangentX*1000, pointY + tangentY*1000);
+				ctx1.lineTo(pointX - tangentX*1000, pointY - tangentY*1000);
+				ctx1.lineTo(centerX1 + (centerX1 - pixelCenterX)*10, centerY1 + (centerY1 - pixelCenterY)*10);
 				ctx1.closePath();
 				ctx1.clip();
 
 				ctx1.fillStyle = pattern;
-				ctx1.fillRect(200, 200, 200, 200);
+				ctx1.fillRect(pixelX, pixelY, pixelSize, pixelSize);
 				ctx1.restore();
 
 				ctx1.save();
@@ -387,8 +387,8 @@
 				ctx1.clip();
 
 				ctx1.beginPath();
-				ctx1.moveTo(pointX - tangentX * 1000, pointY - tangentY * 1000);
-				ctx1.lineTo(pointX + tangentX * 1000, pointY + tangentY * 1000);
+				ctx1.moveTo(pointX - tangentX*1000, pointY - tangentY*1000);
+				ctx1.lineTo(pointX + tangentX*1000, pointY + tangentY*1000);
 				ctx1.strokeStyle = 'white';
 				ctx1.lineWidth = 2;
 				ctx1.stroke();
@@ -397,115 +397,125 @@
 
 				let m, b;
 				if (dx === 0) {
-					// Radial line is vertical => tangent is horizontal
 					m = 0;
 					b = pointY;
 				} else if (dy === 0) {
-					// Radial line is horizontal => tangent is vertical
 					m = Infinity;
-					b = pointX; // x = b
+					b = pointX;
 				} else {
-					const radialSlope = dy / dx;
-					m = -1 / radialSlope;
-					b = pointY - m * pointX;
+					const radialSlope = dy/dx;
+					m = -1/radialSlope;
+					b = pointY - m*pointX;
 				}
 
 				let hitLeft = false, hitRight = false, hitTop = false, hitBottom = false;
-				const points = [];
-				let sideY;
-				let sideX;
+				let hits = 0;
+				const left = 0;
+				const right = 2;
+				const top = 4;
+				const bottom = 6;
+				const points = new Float32Array(8);
+				//----------------
+				const above = 1;
+				const below = 2;
+				const leftSide = 1
+				const rightSide = 2;
+				let sideY = 0;
+				let sideX = 0;
 				if (Number.isFinite(m)) {
-					let y = m * pixelX + b;
+					let y = m*pixelX + b;
 					if (y >= pixelY && y <= pixelY + pixelSize) {
-						points.push({ x: pixelX, y });
+						points[left + 0] = pixelX;
+						points[left + 1] = y;
+						hits++;
 						hitLeft = true;
 					}
 
-					y = m * (pixelX + pixelSize) + b;
+					y = m*(pixelX + pixelSize) + b;
 					if (y >= pixelY && y <= pixelY + pixelSize) {
-						points.push({ x: pixelX + pixelSize, y });
+						points[right + 0] = pixelX + pixelSize;
+						points[right + 1] = y;
+						hits++;
 						hitRight = true;
 					}
 
-					let x = (pixelY - b) / m;
+					let x = (pixelY - b)/m;
 					if (x >= pixelX && x <= pixelX + pixelSize) {
-						points.push({ x, y: pixelY });
+						points[top + 0] = x;
+						points[top + 1] = pixelY;
+						hits++;
 						hitTop = true;
 					}
 
-					x = (pixelY + pixelSize - b) / m;
+					x = (pixelY + pixelSize - b)/m;
 					if (x >= pixelX && x <= pixelX + pixelSize) {
-						points.push({ x, y: pixelY + pixelSize });
+						points[bottom + 0] = x;
+						points[bottom + 1] = pixelY + pixelSize;
+						hits++;
 						hitBottom = true;
 					}
 
-					const yLineAtCenterX = m * centerX1 + b;
+					const yLineAtCenterX = m*centerX1 + b;
 					if (centerY1 < yLineAtCenterX) {
-						sideY = 'above';
+						sideY = above;
 					} else if (centerY1 > yLineAtCenterX) {
-						sideY = 'below';
-					} else {
-						sideY = 'on'; // exactly on the line (rare)
+						sideY = below;
 					}
 
 					if (m !== 0) {
 						const xLineAtCenterX = (centerY1 - b)/m;
 						if (centerX1 < xLineAtCenterX) {
-							sideX = 'left';
+							sideX = leftSide;
 						} else if (centerX1 > xLineAtCenterX) {
-							sideX = 'right';
+							sideX = rightSide;
 						}
 					} 
 				}
 				else {
-					// Vertical line x = const
-					const xConst = b; // For vertical line, b represents x-intercept
+					const xConst = b;
 					if (xConst >= pixelX && xConst <= pixelX + pixelSize) {
-						points.push({ x: xConst, y: pixelY });
-						points.push({ x: xConst, y: pixelX });
+						points[top + 0] = xConst;
+						points[top + 1] = pixelY;
+						points[bottom + 0] = xConst;
+						points[bottom + 1] = pixelY + pixelSize;
+						hits = 2;
 						hitTop = true;
 						hitBottom = true;
 					}
 
 					if (centerX1 < b) {
-						sideX = 'left';
+						sideX = leftSide;
 					} else if (centerX1 > b) {
-						sideX = 'right';
-					} else {
-						sideX = 'on';
+						sideX = rightSide;
 					}
 				}
 
-				const hits = points.length;
 				let area = 0;
 
     			if (hits === 2) {
-					const p1 = points[0];
-					const p2 = points[1];
-
 					if (hitLeft && hitRight) {
-						area = 0.5*pixelSize*(Math.abs(pixelY - p1.y) + Math.abs(pixelY - p2.y));
-						if (sideY === "below") area = pixelArea - area;
+						area = 0.5*pixelSize*((points[left + 1] - pixelY) + (points[right + 1] - pixelY));
+						if (sideY === below) area = pixelArea - area;
 					} 
 					else if (hitTop && hitBottom) {
-						area = 0.5*pixelSize*(Math.abs(pixelX - p1.x) + Math.abs(pixelX - p2.x));
-						if (sideX === "right") area = pixelArea - area;
+						area = 0.5*pixelSize*((points[top] - pixelX) + (points[bottom] - pixelX));
+						if (sideX === rightSide) area = pixelArea - area;
 					}
 					else if (hitLeft && hitTop) {
-						area = 0.5*Math.abs(pixelY - p1.y)*Math.abs(pixelX - p2.x);
-						if (sideY === "below") area = pixelArea - area;
+						area = 0.5*(points[left + 1] - pixelY)*(points[top] - pixelX);
+						if (sideY === below) area = pixelArea - area;
 					} 
 					else if (hitLeft && hitBottom) {
-						area = 0.5*Math.abs(pixelY + pixelSize - p1.y)*Math.abs(pixelX - p2.x);
-						if (sideY === "above") area = pixelArea - area;
+						area = 0.5*(pixelY + pixelSize - points[left + 1])*(points[bottom] - pixelX);
+						if (sideY === above) area = pixelArea - area;
 					}
 					else if (hitRight && hitTop) {
-						area = 0.5*Math.abs(pixelY - p1.y)*Math.abs(pixelX + pixelSize - p2.x);
-						if (sideY === "below") area = pixelArea - area;
+						area = 0.5*(points[right + 1] - pixelY)*(pixelX + pixelSize - points[top]);
+						if (sideY === below) area = pixelArea - area;
 					} 
 					else if (hitRight && hitBottom) {
-						area = 0.5*Math.abs(pixelY + pixelSize - p1.y)*Math.abs(pixelX + pixelSize - p2.x);
-						if (sideY === "above") area = pixelArea - area;
+						area = 0.5*(pixelY + pixelSize - points[right + 1])*(pixelX + pixelSize - points[bottom]);
+						if (sideY === above) area = pixelArea - area;
 					}
 				}
 				else if (distance <= radius) {
@@ -522,7 +532,7 @@
 				ctx2.fillRect(0, 0, canvas2.width, canvas2.height);
 
 				ctx2.beginPath();
-				ctx2.arc(centerX2, centerY2, radius, 0, Math.PI * 2);
+				ctx2.arc(centerX2, centerY2, radius, 0, 2*Math.PI);
 				ctx2.fillStyle = 'red';
 				ctx2.fill();
 				ctx2.closePath();
@@ -531,52 +541,47 @@
 				ctx2.strokeRect(pixelX, pixelY, pixelSize, pixelSize);
 
 				ctx2.beginPath();
-				ctx2.arc(pixelCenterX, pixelCenterY, 112.83791670955125738962, 0, Math.PI * 2);
+				ctx2.arc(pixelCenterX, pixelCenterY, 112.83791670955125738962, 0, 2*Math.PI);
 				ctx2.strokeStyle = 'black';
 				ctx2.stroke();
 				ctx2.closePath();
 
 				dx = centerX2 - pixelCenterX;
 				dy = centerY2 - pixelCenterY;
-				distance = Math.sqrt(dx * dx + dy * dy);
+				distance = Math.sqrt(dx*dx + dy*dy);
 
-				// Normalized vector from center to ball
-				nx = dx / distance;
-				ny = dy / distance;
+				nx = dx/distance;
+				ny = dy/distance;
 
-				// Closest point on ball perimeter
-				pointX = centerX2 - nx * radius;
-				pointY = centerY2 - ny * radius;
+				pointX = centerX2 - nx*radius;
+				pointY = centerY2 - ny*radius;
 
-				// Tangent vector (perpendicular)
 				tangentX = -ny;
 				tangentY = nx;
 
-				// --- Draw the half-plane containing the ball ---
-				ctx2.save(); // Save the canvas state
+				ctx2.save();
 				ctx2.beginPath();
-				ctx2.moveTo(pointX + tangentX * 1000, pointY + tangentY * 1000);
-				ctx2.lineTo(pointX - tangentX * 1000, pointY - tangentY * 1000);
-				ctx2.lineTo(centerX2 + (centerX2 - pixelCenterX) * 10, centerY2 + (centerY2 - pixelCenterY) * 10); // Far away toward ball side
+				ctx2.moveTo(pointX + tangentX*1000, pointY + tangentY*1000);
+				ctx2.lineTo(pointX - tangentX*1000, pointY - tangentY*1000);
+				ctx2.lineTo(centerX2 + (centerX2 - pixelCenterX)*10, centerY2 + (centerY2 - pixelCenterY)*10);
 				ctx2.closePath();
 				ctx2.clip();
 
-				// Fill the clipped area with the pattern
 				ctx2.fillStyle = pattern;
 				ctx2.beginPath();
-				ctx2.arc(pixelCenterX, pixelCenterY, 112.83791670955125738962, 0, Math.PI * 2);
+				ctx2.arc(pixelCenterX, pixelCenterY, 112.83791670955125738962, 0, 2*Math.PI);
 				ctx2.fill();
 				ctx2.closePath();
 				ctx2.restore();
 
 				ctx2.save();
 				ctx2.beginPath();
-				ctx2.arc(pixelCenterX, pixelCenterY, 112.83791670955125738962, 0, Math.PI * 2);
+				ctx2.arc(pixelCenterX, pixelCenterY, 112.83791670955125738962, 0, 2*Math.PI);
 				ctx2.clip();
 
 				ctx2.beginPath();
-				ctx2.moveTo(pointX - tangentX * 1000, pointY - tangentY * 1000);
-				ctx2.lineTo(pointX + tangentX * 1000, pointY + tangentY * 1000);
+				ctx2.moveTo(pointX - tangentX*1000, pointY - tangentY*1000);
+				ctx2.lineTo(pointX + tangentX*1000, pointY + tangentY*1000);
 				ctx2.strokeStyle = 'white';
 				ctx2.lineWidth = 2;
 				ctx2.stroke();
