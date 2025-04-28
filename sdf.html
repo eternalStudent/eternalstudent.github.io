@@ -2,7 +2,7 @@
 	<head>
 		<meta name="author" content="Noam Weisberg">
 		<meta property="og:type" content="article">
-		<meta property="og:title" content="SDF - Anti-Aliasing">
+		<meta property="og:title" content="SDF Anti-Aliasing">
 		<meta property="og:image" content="https://eternalstudent.github.io/profile.png">
 		<meta property="og:site_name" content="eternalStudent">
 		<meta property="og:url" content="https://eternalstudent.github.io">
@@ -55,7 +55,7 @@
 				}
 			}
 		</style>
-		<title>SDF - Anti-Aliasing</title>
+		<title>SDF Anti-Aliasing</title>
 	</head>
 	<body>
 		<div class="page-header">
@@ -139,7 +139,7 @@
 		</p>
 		<p>
 			\[
-		    \begin{cases}
+		    a(x) = \begin{cases}
 				1 & x < -\frac{1}{\sqrt{\pi}} \\
 				0 & x > \frac{1}{\sqrt{\pi}} \\
 				\frac{1}{\pi} \cdot \arccos\left( x \sqrt{\pi} \right) - x \sqrt{ \frac{1}{\pi} - x^2 } & \text{otherwise} \\
@@ -152,7 +152,7 @@
 		<h2>Approximation III: Smoothstep</h2>
 		<p>
 			Although the formula from the previous section is a very good approximation, 
-			there is a simpler formula that is much simpler to compute and is often good enough.
+			there is a simpler formula that is much easy to compute and is often good enough.
 		</p>
 		<p>
 			It is the smoothstep formula that is an intrinsic in both glsl and hlsl,
@@ -166,6 +166,21 @@
 			i.e: Instead of negating the sd, you invert the final result, both are equivalent.)
 		</p>
 		<p>
+			This is equivalent to:
+		</p>
+		<p>
+			\[
+			a(x) = \begin{cases}
+				1 & x < -s \\
+				0 & x > s \\
+				3\left(\frac{s-x}{2s}\right)^{2}-2\left(\frac{s-x}{2s}\right)^3 & \text{otherwise} \\
+			\end{cases}
+			\]
+		</p>
+		<p>
+			Where x is the signed distance and s is the smoothness.
+		</p>
+		<p>
 			If you wonder what is the "best" smoothness value, then 0.5 works best on right angles,
 			and √0.5 works best on 45 degrees, but if you want a value that minimizes the error for all angles,
 			you can use 0.573896787348 (note how close this is to 1/√π).
@@ -173,6 +188,21 @@
 		<p>
 			You can compute this yourself by creating a curve function γ that goes along the pixel borders, 
 			and measures the distance to its center, then finding out the value C, such that ∫(γ(t) - C)dt = 0.
+		</p>
+		<p>
+			You can compare the graphs of the two formulae using <a href="https://www.desmos.com/calculator/kvhc00pd1n">desmos</a>.
+		</p>
+		<iframe src="https://www.desmos.com/calculator/t1agurpyoq?embed" width="720" height="500" style="border: 1px solid #ccc" frameborder=0></iframe>
+		<h2>Conclusion</h2>
+		<p>
+			When I started investigating what makes SDF anti-aliasing works, 
+			I could not find a mathematical explanation of why smoothstep specifically is used in SDF anti-aliasing.
+			I wanted to find a perfect formula that will be my gold standard, one that I will forever use.
+			I did not find one. Instead I found a bunch of approximations, each with different errors,
+			depending on angles and how close the shape is to the edges of the pixel.
+		</p>
+		<p>
+			But maybe one day I will...
 		</p>
 		<script>
 			let grabPosX = 0;
