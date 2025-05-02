@@ -12,6 +12,7 @@
 		<script type="text/javascript" id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 		<style type="text/css">
 			body {
+				background-color: #eee;
 				font-family: 'Spectral', serif;
 				font-size: 19px;
 				color: #1a1a1a;
@@ -88,7 +89,7 @@
 		</p>
 		<p>
 			Let's assume that we have a <code>&nbsp;background&nbsp;</code> color and a shape filled with a <code>&nbsp;foreground&nbsp;</code> color.
-			To create a pixel-coverage anti-aliasing we need to figure out for each pixel by how much the shape covers it, 
+			To create a pixel-coverage anti-aliasing we need to figure out how much of each pixel is covered by the shape, 
 			if we mark it by <code>&nbsp;a&nbsp;</code> we can compute <code>&nbsp;a*foregoround + (1 - a)*background&nbsp;</code> to get the correct color.
 			Unfortunately figuring out the exact coverage is a very computationally heavy thing to do.
 		</p>
@@ -96,11 +97,11 @@
 		<p>
 			Take the point on the perimeter of the shape that is closest to the center of the pixel, 
 			and draw a tangent line to that shape at that point. 
-			The tangent will split the pixel in two, and will create a coverage that is a close approximation to the shape's coverage.
+			The tangent will split the pixel in two, and will form a coverage that is a close approximation to the shape's coverage.
 		</p>
 		<p>
 			I have created a small interactive visualization that helps illustrate the idea.
-			You can drag the red sphere around and see the coverage changes.
+			You can drag the red disc around and see the coverage changes.
 		</p>
 		<canvas id="canvas1" width="600" height="600" tabindex='1'></canvas>
 		<p>
@@ -115,10 +116,10 @@
 			We want to find something simpler.
 		</p>
 
-		<h2>Approximation II: Pretend the pixel is a sphere</h2>
+		<h2>Approximation II: Pretend the pixel is a disc</h2>
 		<p>
-			What if instead of using squares as pixels, we pretend that the pixels are shaped as a sphere of area 1.
-			That would mean that the radius of the sphere is R = 1/√π ≈ 0.56418958354775628695.
+			What if instead of using squares as pixels, we pretend that the pixels are shaped as a disc of area 1.
+			That would mean that the radius of the disc is R = 1/√π ≈ 0.56418958354775628695.
 			And there is only one coverage shape: Circular segment.
 		</p>
 		<canvas id="canvas2" width="600" height="600" tabindex='1'></canvas>
