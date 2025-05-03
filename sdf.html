@@ -75,8 +75,21 @@
 					</div>
 					<div style="text-align: justify;">
 
+		<p>
+			The GPU is very good at drawing straight lines, and axis-aligned rectangles, but whenever you want to draw
+			curves or diagonal lines, the result would by default look jagged and pixelated.
+			One common approach to solving this is utilizing SDF anti-aliasing. 
+		</p>
+		<p>
+			But how exactly does it work? I couldn't find a good explanation, so once I figured it out, I decided to write one myself.
+		</p>
+		<p>
+			Everything I'm going to present here is done per-pixel, distances are measured in pixel length,
+			and areas are measured in whole pixels.
+		</p>
 		<h2>Pixel Coverage and Linear RGB</h2>
 		<p>
+			SDF Anti-Aliasing approximates Pixel-Coverage Anti-Aliasing, so let's start there:
 			The basic idea behind pixel-coverage anti-aliasing is: Given a pixel that is 80% blue and 20% red, 
 			the resulting color of the pixel should be <code>&nbsp;0.8*blue + 0.2*red&nbsp;</code>. 
 			This computation only works correctly if we assume linear RGB color space. 
@@ -91,8 +104,8 @@
 		</p>
 		<p>
 			Let's assume that we have a <code>&nbsp;background&nbsp;</code> color and a shape filled with a <code>&nbsp;foreground&nbsp;</code> color.
-			To create a pixel-coverage anti-aliasing we need to figure out how much of each pixel is covered by the shape, 
-			if we mark it by <code>&nbsp;a&nbsp;</code> we can compute <code>&nbsp;a*foregoround + (1 - a)*background&nbsp;</code> to get the correct color.
+			To create a pixel-coverage anti-aliasing we need to figure out what fraction of each pixel is covered by the shape, 
+			if we mark it by <code>&nbsp;a&nbsp;</code> we can compute <code>&nbsp;a*foreground + (1 - a)*background&nbsp;</code> to get the correct color.
 			Unfortunately figuring out the exact coverage is a very computationally heavy thing to do.
 		</p>
 		<h2>Approximation I: Use tangents</h2>
@@ -184,18 +197,22 @@
 			Where x is the signed distance and s is the smoothness.
 		</p>
 		<p>
-			If you wonder what is the "best" smoothness value, then 0.5 works best on right angles,
-			and √0.5 works best on 45 degrees, but if you want a value that minimizes the error for all angles,
-			you can use 0.573896787348 (note how close this is to 1/√π).
-		</p>
-		<p>
-			You can compute this yourself by creating a curve function γ that goes along the pixel borders, 
-			and measures the distance to its center, then finding out the value C, such that ∫(γ(t) - C)dt = 0.
-		</p>
-		<p>
 			You can compare the graphs of the two formulae using <a href="https://www.desmos.com/calculator/kvhc00pd1n">desmos</a>.
 		</p>
 		<iframe src="https://www.desmos.com/calculator/t1agurpyoq?embed" width="720" height="500" style="border: 1px solid #ccc" frameborder=0></iframe>
+		<h2>Choosing the smoothness parameter</h2>
+		<p>
+			If you wonder what is the "best" smoothness value, then 0.5 works best on right angles,
+			and √0.5 works best on 45 degrees. You can use the average distance from a pixel center to a point on its borders, 
+			that value is 0.573896787348 (note how close this is to 1/√π).
+		</p>
+		<p>
+			To compute this yourself create a curve function γ that goes along the pixel borders, 
+			and measures the distance to its center, compute ∫γ(t)dt, and divide by the length of the curve.
+		</p>
+		<p>
+			You might want to use smoothness parameter that minimizes the error between the two formulae. 0.643339 seems to minimizes the error across the entire range, and 0.661616 minimizes the error closest to the center of the graph.
+		</p>
 		<h2>Conclusion</h2>
 		<p>
 			When I started investigating what makes SDF anti-aliasing works,
