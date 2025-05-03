@@ -90,7 +90,7 @@
 		<h2>Pixel Coverage and Linear RGB</h2>
 		<p>
 			SDF anti-aliasing approximates pixel-coverage anti-aliasing, so let's start there:
-			The basic idea behind pixel-coverage anti-aliasing is: Given a pixel that is 80% blue and 20% red, 
+			The basic idea behind pixel-coverage anti-aliasing is if a pixel is 80% blue and 20% red, 
 			the resulting color of the pixel should be <code>&nbsp;0.8*blue + 0.2*red&nbsp;</code>. 
 			This computation only works correctly if we assume linear RGB color space. 
 		</p>
@@ -205,13 +205,16 @@
 			If you wonder what is the "best" smoothness value, then 0.5 works best on right angles,
 			and √0.5 works best on 45 degrees. You can use the average distance from a pixel center to a point on its borders, 
 			that value is 0.573896787348 (note how close this is to 1/√π).
+			This would be the best smoothness value if the angle is unknown and the shape either covers very little of the pixel, 
+			or almost all of the pixel.
 		</p>
 		<p>
 			To compute this yourself create a curve function γ that goes along the pixel borders, 
 			and measures the distance to its center, compute ∫γ(t)dt, and divide by the length of the curve.
 		</p>
 		<p>
-			You might want to use smoothness parameter that minimizes the error between the two formulae. 0.643339 seems to minimizes the error across the entire range, and 0.661616 minimizes the error closest to the center of the graph.
+			You might want to use a smoothness parameter that minimizes the error between the two formulae. 0.643339 seems to minimizes the error across the entire range, and 0.661616 minimizes the error closest to the center of the graph, 
+			when the shape covers around half the pixel.
 		</p>
 		<h2>Conclusion</h2>
 		<p>
