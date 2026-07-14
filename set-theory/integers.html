@@ -1,0 +1,391 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="author" content="Noam Weisberg">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta property="og:type" content="article">
+	<meta property="og:title" content="The Integers">
+	<meta property="og:image" content="https://eternalstudent.github.io/profile.png">
+	<meta property="og:site_name" content="eternalStudent">
+	<meta property="og:url" content="https://eternalstudent.github.io/set-theory/integers.html">
+	<link rel="icon" type="image/png" href="../profile.png">
+	<link rel="preconnect" href="https://fonts.gstatic.com">
+	<link href="https://fonts.googleapis.com/css2?family=Spectral&display=swap" rel="stylesheet">
+
+	<script>
+		window.MathJax = {
+			tex: {
+				macros: {
+					nicefrac: ['{}^{#1}\\!/\\!_{#2}', 2]
+				}
+			}
+		};
+	</script>
+	<script type="text/javascript" id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+	<link rel="stylesheet" href="style.css">
+	<title>The Integers</title>
+</head>
+<body>
+	<div class="page-header">
+		<a href="../index.html">
+			<div class="page-header-content">
+				<h1 class="page-header-title">eternalStudent</h1>
+				<img src="../profile.png" alt="">
+			</div>
+		</a>
+	</div>
+	<div class="content">
+		<article>
+			<p class="kicker">Set Theory</p>
+			<h1 class="post-title">The Integers</h1>
+			<p><a class="toc-link" href="index.html">Table of contents</a></p>
+
+			<h2>Equivalence Classes</h2>
+			<blockquote>
+				<p>We now want to add the negative numbers to the natural numbers in order to obtain all the integers. The way to define negative numbers passes through subtraction: the number \(-1\) is the result of \(0-1\), but also of \(1-2\), of \(2-3\), and so on. To express the common property of pairs of numbers, we now define the concept of an equivalence relation.</p>
+			</blockquote>
+
+			<p class="label">Definition:</p>
+			<p>Let \(A\) be a set, and let \(\sim\subseteq A\times A\) be a symmetric, reflexive, and transitive relation. Then \(\sim\) is called an equivalence relation on \(A\).</p>
+
+			<p class="label">Definition:</p>
+			<p>Let \(A\) be a set, let \(\sim\) be an equivalence relation on \(A\), and let \(a\in A\). Then \(\{b\in A:a\sim b\}\) is called the equivalence class of \(a\) with respect to \(\sim\), and is denoted \([a]_{\sim}\).</p>
+
+			<p class="label">Definition:</p>
+			<p>Let \(A\) be a set, and let \(\sim\) be an equivalence relation on \(A\). Then \(\{[a]_{\sim}:a\in A\}\) is called the quotient set of \(A\) by \(\sim\), and is denoted \(A/\sim\).</p>
+
+			<p class="label">Claim:</p>
+			<p>Let \(A\) be a set, and let \(\sim\) be an equivalence relation on \(A\). Then the quotient set of \(A\) by \(\sim\) is a set.</p>
+
+			<p class="label">Proof:</p>
+			<p>Let \(X\in A/\sim\). Then there exists \(a\in A\) such that \(X=[a]_{\sim}\subseteq A\), hence \([a]_{\sim}\in P(A)\). Therefore \(A/\sim=\{X\in P(A):\text{ exists }a\in A\text{ s.t. }X=[a]_{\sim}\}\), so by the axiom of separation \(A/\sim\) is a set.</p>
+
+			<p class="label">Claim:</p>
+			<p>Let \(A\) be a set, let \(\sim\) be an equivalence relation on \(A\), and let \(\{[x]_{\sim},[y]_{\sim}\}\subseteq A/\sim\). If \([x]_{\sim}\cap[y]_{\sim}\neq\emptyset\), then \([x]_{\sim}=[y]_{\sim}\).</p>
+
+			<p class="label">Proof:</p>
+			<p>Assume that there exists \(a\in[x]_{\sim}\cap[y]_{\sim}\). By reflexivity, \(a\sim x\) and \(a\sim y\). By symmetry, \(x\sim a\sim y\), and by transitivity \(x\sim y\). Therefore \([x]_{\sim}=[y]_{\sim}\).</p>
+
+			<p class="label">Claim:</p>
+			<p>The relation \(\eqsim:=\left\{ ((n_{0},m_{0}),(n_{1},m_{1})):n_{0}+m_{1}=m_{0}+n_{1}\right\}\) is an equivalence relation on \(\mathbb{N}\times\mathbb{N}\).</p>
+
+			<p class="label">Proof:</p>
+			<p>Let \(\{(n_{0},m_{0}),(n_{1},m_{1}),(n_{2},m_{2})\}\subset\mathbb{N}\times\mathbb{N}\).</p>
+			<ul>
+				<li>Reflexivity: \(n_{0}+m_{0}=m_{0}+n_{0}\).</li>
+				<li>Symmetry: if \(n_{1}+m_{2}=m_{1}+n_{2}\), then \(n_{2}+m_{1}=m_{2}+n_{1}\).</li>
+				<li>Transitivity: if \(n_{0}+m_{1}=m_{0}+n_{1}\) and \(n_{1}+m_{2}=m_{1}+n_{2}\), then
+				\[
+				\begin{align*}
+					n_{0}+m_{1}+n_{1}+m_{2} &= m_{0}+n_{1}+m_{1}+n_{2}\\
+					n_{0}+m_{2}+(m_{1}+n_{1}) &= m_{0}+n_{2}+(n_{1}+m_{1})\\
+					n_{0}+m_{2} &= m_{0}+n_{2}.
+				\end{align*}
+				\]</li>
+			</ul>
+
+			<p class="label">Claim:</p>
+			<p>Let \((m,k)\in\mathbb{N}\times\mathbb{N}\). Then there exists \(n\in\mathbb{N}\) such that \((n,0)\eqsim(m,k)\) or \((0,n)\eqsim(m,k)\).</p>
+
+			<p class="label">Proof:</p>
+			<p>Assume without loss of generality that \(m\le k\). Then there exists \(n\in\mathbb{N}\) such that \(m+n=k\). Thus \(m+n=k+0\), and therefore \((0,n)\eqsim(m,k)\).</p>
+
+			<p class="label">Corollaries:</p>
+			<p>Let \(\{n,m,k\}\subset\mathbb{N}\) be natural numbers. Then:</p>
+			<ol>
+				<li>\((n,n)\eqsim(0,0)\)</li>
+				<li>\((n,m)+(m,n)\eqsim(0,0)\)</li>
+				<li>\((n,m)\eqsim(n+k,m+k)\)</li>
+				<li>\((n,0)\eqsim(m,0)\Longrightarrow n=m\).</li>
+				<li>\((0,n)\eqsim(0,m)\Longrightarrow n=m\).</li>
+			</ol>
+
+			<p class="label">Definitions:</p>
+			<p>Let \(\{(n_{0},m_{0}),(n_{1},m_{1})\}\subset\mathbb{N}\times\mathbb{N}\). Define:</p>
+			<ol>
+				<li>\((n_{0},m_{0})+(n_{1},m_{1}):=(n_{0}+n_{1},m_{0}+m_{1})\)</li>
+				<li>\((n_{0},m_{0})\cdot(n_{1},m_{1}):=(n_{0}\cdot n_{1}+m_{0}\cdot m_{1},n_{0}\cdot m_{1}+m_{0}\cdot n_{1})\)</li>
+				<li>\(-(n_{0},n_{1}):=(n_{1},n_{0})\)</li>
+			</ol>
+
+			<p class="label">Claims:</p>
+			<p>Let \(\{x,y\}\subset\mathbb{N}\times\mathbb{N}\), and let \(a\eqsim x,b\eqsim y\). Then:</p>
+			<ol>
+				<li>\(a+b\eqsim x+y\)</li>
+				<li>\(a\cdot b\eqsim x\cdot y\)</li>
+				<li>\(-a\eqsim-x\)</li>
+			</ol>
+
+			<p class="label">Proofs:</p>
+			<p>Write \(a=(a_{0},a_{1}),b=(b_{0},b_{1}),x=(x_{0},x_{1}),y=(y_{0},y_{1})\). We are given that</p>
+			<p>\[
+			\begin{align*}
+				a_{0}+x_{1} &= a_{1}+x_{0}\\
+				b_{0}+y_{1} &= b_{1}+y_{0}.
+			\end{align*}
+			\]</p>
+			<ol>
+				<li>We have \(a_{0}+x_{1}+b_{0}+y_{1}=a_{1}+x_{0}+b_{1}+y_{0}\). Also,
+				\[
+				\begin{align*}
+					a+b&=(a_{0}+b_{0},a_{1}+b_{1})\\
+					x+y&=(x_{0}+y_{0},x_{1}+y_{1}),
+				\end{align*}
+				\]
+				and therefore \(a+b\eqsim x+y\).</li>
+				<li>For multiplication, substituting the two given equalities into the expanded products gives
+				\[
+					a_{0}b_{0}+a_{1}b_{1}+x_{0}y_{1}+x_{1}y_{0}
+					=
+					a_{0}b_{1}+a_{1}b_{0}+x_{0}y_{0}+x_{1}y_{1},
+				\]
+				and hence \(a\cdot b\eqsim x\cdot y\).</li>
+				<li>\[-a=(a_{1},a_{0})\eqsim(x_{1},x_{0})=-x.\]</li>
+			</ol>
+
+			<p class="label">Definition:</p>
+			<p>We denote the set \((\mathbb{N}\times\mathbb{N})/\eqsim\) by \(\mathbb{Z}\), and call it the set of integers, or the integers for short.</p>
+
+			<p class="label">Definition:</p>
+			<p>Let \(z\in\mathbb{Z}\). Then \(z\) is called an integer.</p>
+
+			<p class="label">Definitions:</p>
+			<p>Let \(\{[x]_{\eqsim},[y]_{\eqsim}\}\subset\mathbb{Z}\) be integers. Then:</p>
+			<ol>
+				<li>\([x]_{\eqsim}+[y]_{\eqsim}:=[x+y]_{\eqsim}\).</li>
+				<li>\([x]_{\eqsim}\cdot[y]_{\eqsim}:=[x\cdot y]_{\eqsim}\).</li>
+				<li>\(-[x]_{\eqsim}:=[-x]_{\eqsim}\).</li>
+				<li>\([x]_{\eqsim}-[y]_{\eqsim}:=[x]_{\eqsim}+(-[y]_{\eqsim})\).</li>
+			</ol>
+
+			<p class="label">Corollaries:</p>
+			<p>Let \(\{x,y,z\}\subset\mathbb{Z}\). Then:</p>
+			<ol>
+				<li>\(x+y=y+x\).</li>
+				<li>\((x+y)+z=x+(y+z)\), and we may write \(x+y+z\) briefly.</li>
+				<li>\(x+0=x\).</li>
+				<li>\(x-x=0\).</li>
+				<li>\(x\cdot y=y\cdot x\).</li>
+				<li>\((x\cdot y)\cdot z=x\cdot(y\cdot z)\), and we may write \(x\cdot y\cdot z\) briefly.</li>
+				<li>\(x\cdot0=0\).</li>
+				<li>\(x\cdot1=x\).</li>
+				<li>\(x\cdot(-1)=-x\).</li>
+				<li>\((-x)\cdot(-y)=x\cdot y\).</li>
+				<li>\((-x)\cdot y=x\cdot(-y)=-(x\cdot y)\).</li>
+				<li>\(x\cdot(y+z)=x\cdot y+x\cdot z\).</li>
+			</ol>
+
+			<p class="label">Definition:</p>
+			<p>\(\le:=\left\{ (x,y)\in\mathbb{Z}\times\mathbb{Z}:\text{ exists }n\in\mathbb{N}\text{ s.t. }y-x=[(n,0)]_{\eqsim}\right\}\).</p>
+
+			<p class="label">Claim:</p>
+			<p>\(\le\) is a total order relation on the integers.</p>
+
+			<p class="label">Proof:</p>
+			<p>Let \(\{x_{0},x_{1},y_{0},y_{1},z_{0},z_{1}\}\subset\mathbb{N}\) be natural numbers.</p>
+			<ul>
+				<li>Reflexivity: \((x_{0},x_{1})+(x_{1},x_{0})=(x_{0}+x_{1},x_{0}+x_{1})\eqsim(0,0)\).</li>
+				<li>Antisymmetry: assume there exists \(n\in\mathbb{N}\) such that \((y_{0},y_{1})+(x_{1},x_{0})\eqsim(n,0)\), and also \((x_{0},x_{1})+(y_{1},y_{0})\eqsim(n,0)\). Then \((x_{0}+y_{1},x_{1}+y_{0})\eqsim(y_{0}+x_{1},y_{1}+x_{0})\), hence \(x_{0}+y_{1}=x_{1}+y_{0}\), so \((x_{0},x_{1})\eqsim(y_{0},y_{1})\).</li>
+				<li>Transitivity: if \((y_{0},y_{1})+(x_{1},x_{0})\eqsim(n,0)\), and \((z_{0},z_{1})+(y_{1},y_{0})\eqsim(m,0)\), then
+				\[
+					(z_{0},z_{1})+(x_{1},x_{0})
+					\eqsim(z_{0},z_{1})+(y_{1},y_{0})+(y_{0},y_{1})+(x_{1},x_{0})
+					\eqsim(m+n,0).
+				\]</li>
+				<li>Totality: there exists \(n\in\mathbb{N}\) such that \((y_{0},y_{1})+(x_{1},x_{0})\eqsim(n,0)\), or \((y_{0},y_{1})+(x_{1},x_{0})\eqsim(0,n)\). In the first case we are done; in the second, \((x_{0},x_{1})+(y_{1},y_{0})\eqsim(n,0)\).</li>
+			</ul>
+
+			<p class="label">Definition:</p>
+			<p>Let \(\{x,y\}\subset\mathbb{Z}\). If \(x\le y\) and \(x\neq y\), we write \(x&lt;y\).</p>
+
+			<p class="label">Corollaries:</p>
+			<p>Let \(\{n,m\}\subset\mathbb{N}\). Then:</p>
+			<ol>
+				<li>\([(n,0)]_{\eqsim}+[(m,0)]_{\eqsim}=[(n+m,0)]_{\eqsim}\).</li>
+				<li>\([(n,0)]_{\eqsim}\cdot[(m,0)]_{\eqsim}=[(n\cdot m,0)]_{\eqsim}\).</li>
+				<li>\(n\le m\Longleftrightarrow[(n,0)]_{\eqsim}\le[(m,0)]_{\eqsim}\).</li>
+			</ol>
+
+			<p class="label">Claims:</p>
+			<p>Let \(\{x,y,z\}\subset\mathbb{Z}\). Then:</p>
+			<ol>
+				<li>\(x\le y\Longleftrightarrow x+z\le y+z\).</li>
+				<li>If \(z&gt;0\), then \(x\le y\Longleftrightarrow x\cdot z\le y\cdot z\).</li>
+				<li>If \(z&lt;0\), then \(x\ge y\Longleftrightarrow y\cdot z\le x\cdot z\).</li>
+			</ol>
+
+			<p class="label">Proofs:</p>
+			<p>Let \((x_{0},x_{1})\in x,(y_{0},y_{1})\in y,(z_{0},z_{1})\in z\).</p>
+			<ol>
+				<li>\(x+z\le y+z\) if and only if there exists \(n\in\mathbb{N}\) such that \((x_{1}+y_{0}+z_{0}+z_{1},x_{0}+y_{1}+z_{0}+z_{1})\eqsim(n,0)\), which is equivalent to \(x_{1}+y_{0}=x_{0}+y_{1}+n\), which is equivalent to \(x\le y\).</li>
+				<li>Assume \(z&gt;0\), and without loss of generality \(z_{1}=0\). Then \(x\cdot z\le y\cdot z\) is equivalent to
+				\[
+					x_{0}z_{0}+y_{1}z_{0}=x_{1}z_{0}+y_{0}z_{0}+n
+				\]
+				for some \(n\in\mathbb{N}\), which is equivalent to \(x\le y\).</li>
+				<li>Assume \(z&lt;0\). Then \(-z&gt;0\). If \(x\ge y\), then by the previous part, since \(-z&gt;0\), \(y(-z)\le x(-z)\). Adding \(xz+yz\) to both sides gives \(xz\le yz\). Conversely, if \(xz\le yz\), add \(-yz-xz\) to both sides to get \(-yz\le -xz\). Since \(-z&gt;0\), the previous part gives \(y\le x\), that is, \(x\ge y\).</li>
+			</ol>
+
+			<p class="label">Notation:</p>
+			<p>Let \(n\in\mathbb{N}\) be natural. From now on we will no longer distinguish between \(n\) and \([(n,0)]_{\eqsim}\), and \([(0,n)]_{\eqsim}\) will be denoted briefly by \(-n\). For all practical purposes, we assume \(\mathbb{N}\subset\mathbb{Z}\).</p>
+
+			<h2>Divisors</h2>
+			<blockquote>
+				<p>The study of the integers almost always centers on the study of the prime numbers, which are the building blocks or atoms of number theory, out of the understanding that every integer can be represented uniquely by a product of primes. There are many questions about the nature of the primes that remain unanswered to this day.</p>
+			</blockquote>
+
+			<p class="label">Definition:</p>
+			<p>Let \(x\in\mathbb{Z}\) be an integer, and let \(n\in\mathbb{N}\) be natural. If there exists \(y\in\mathbb{Z}\) such that \(x=n\cdot y\), we say that \(n\) divides \(x\), or that \(n\) is a divisor of \(x\), and write \(n\mid x\). Otherwise we write \(n\nmid x\).</p>
+
+			<p class="label">Corollaries:</p>
+			<p>Let \(x\in\mathbb{Z}\), and let \(\{m,n\}\subset\mathbb{N}\). Then:</p>
+			<ol>
+				<li>\(0\nmid x\).</li>
+				<li>\(n\mid0\)</li>
+				<li>\(1\mid x\).</li>
+				<li>\(n\mid n\).</li>
+				<li>\(n\mid m\Rightarrow n\le m\).</li>
+				<li>\(n\mid x\Longleftrightarrow n\mid-x\).</li>
+				<li>Let \(y\in\mathbb{Z}\). Then \(n\mid(x+y)\) if and only if \(n\mid x\) and \(n\mid y\).</li>
+			</ol>
+
+			<p class="label">Definition:</p>
+			<p>Let \(x\in\mathbb{Z}\). Then \(x\) is called even if \(2\mid x\); otherwise it is called odd.</p>
+
+			<p class="label">Claim:</p>
+			<p>\(\mid\) is an order relation on \(\mathbb{N}\).</p>
+
+			<p class="label">Proof:</p>
+			<p>Reflexivity is clear. Let \(\{m,n,k\}\subset\mathbb{N}\), and suppose \(n\mid k\) and \(m\mid n\). Then there exist \(\{a,b\}\subset\mathbb{N}\) such that \(n\cdot b=k\) and \(m\cdot a=n\). Hence \(m\cdot a\cdot b=n\cdot b=k\), so \(m\mid k\), proving transitivity. Now suppose \(n\mid m\) and \(m\mid n\). Then there exist \(\{a,b\}\subset\mathbb{N}\) such that \(m\cdot b=n\) and \(n\cdot a=m\). Then \(n\cdot a\cdot b=n\), hence \(a\cdot b=1\). Since \(a\in\mathbb{N}\), \(a=b=1\), and therefore \(n=m\), proving antisymmetry.</p>
+
+			<p class="label">Definition:</p>
+			<p>Let \(n\in\mathbb{N}\). Then \(n\) is called composite if there exists \(m\in\mathbb{N}\setminus\{1,n\}\) such that \(m\mid n\).</p>
+
+			<p class="label">Definition:</p>
+			<p>Let \(n\in\mathbb{N}\setminus\{0,1\}\). Then \(n\) is called prime if it is not composite. We denote by \(\mathbb{P}\) the set of all prime numbers.</p>
+
+			<p class="label">Corollaries:</p>
+			<ol>
+				<li>Let \(n\in\mathbb{N}\) be composite. Then there exist \(\{m,k\}\subset\mathbb{N}\) satisfying \(1&lt;k\le m&lt;n\) and \(m\cdot k=n\).</li>
+				<li>\(2\) and \(3\) are prime numbers.</li>
+			</ol>
+
+			<p class="label">Claim:</p>
+			<p>Let \(n\in\mathbb{N}\setminus\{0,1\}\). Then there exists \(p\in\mathbb{P}\) such that \(p\mid n\).</p>
+
+			<p class="label">Proof:</p>
+			<p>Write \(S:=\left\{ n\in\mathbb{N}\setminus\{0,1\}:\text{there is no }p\in\mathbb{P}\text{ s.t. }p\mid n\right\}\), and assume for contradiction that \(S\neq\emptyset\). Then \(n_{0}:=\min S\) exists. The number \(n_{0}\) is not prime, because \(n_{0}\mid n_{0}\); hence it is composite. Therefore there exist \(\{m,k\}\) satisfying \(1&lt;k\le m&lt;n_{0}\) and \(m\cdot k=n_{0}\). Since they are smaller than \(n_{0}\), by the assumption they are not in \(S\), so they have a prime divisor that also divides \(n_{0}\), a contradiction.</p>
+
+			<p class="label">Definition:</p>
+			<p>Let \(\{x,y\}\subset\mathbb{Z}\). Then \(n\in\mathbb{N}\) is called a common divisor of \(x\) and \(y\) if \(n\mid x\) and \(n\mid y\).</p>
+
+			<p class="label">Definition:</p>
+			<p>Let \(\{x,y\}\subset\mathbb{Z}\), and let \(n\in\mathbb{N}\) be a common divisor of \(x\) and \(y\). If for every \(m\in\mathbb{N}\setminus\{0\}\) such that \(m\mid x\) and \(m\mid y\), we also have \(m\mid n\), then \(n\) is called a greatest common divisor of \(x\) and \(y\), and we write \(\gcd(x,y)=n\).</p>
+
+			<p class="label">Corollaries:</p>
+			<p>Let \(\{x,y\}\subset\mathbb{Z}\) be integers that have a greatest common divisor. Then:</p>
+			<ol>
+				<li>\(\gcd(x,y)=\gcd(y,x)\)</li>
+				<li>\(\gcd(x,y)=\gcd(-x,y)\)</li>
+				<li>If \(x\in\mathbb{N}\), then \(\gcd(0,x)=x\)</li>
+				<li>If \(x\in\mathbb{N}\) and \(x\mid y\), then \(\gcd(x,y)=x\).</li>
+				<li>If \(x\in\mathbb{N}\), then \(\gcd(x,x)=x\).</li>
+			</ol>
+
+			<p class="label">Claim:</p>
+			<p>Let \(\{x,y\}\subset\mathbb{Z}\), and let \(\{m,n\}\subset\mathbb{N}\) be greatest common divisors of \(x\) and \(y\). Then \(m=n\).</p>
+
+			<p class="label">Proof:</p>
+			<p>We get \(m\mid n\) and \(n\mid m\), so by antisymmetry \(n=m\).</p>
+
+			<p class="label">Claim:</p>
+			<p>Let \(\{x,y\}\subset\mathbb{Z}\), and let \(n\in\mathbb{N}\) be a common divisor of them. Then for every \(\{p,q\}\subset\mathbb{Z}\), \(n\mid(px+qy)\).</p>
+
+			<p class="label">Proof:</p>
+			<p>There exist \(\{a,b\}\subset\mathbb{Z}\) such that \(x=a\cdot n\) and \(y=b\cdot n\). Let \(\{p,q\}\subset\mathbb{Z}\). Then \(px+qy=pan+qbn=(pa+qb)n\), and therefore \(n\mid(px+qy)\).</p>
+
+			<p class="label">Claim (Division Theorem):</p>
+			<p>Let \(n\in\mathbb{Z}\), and let \(m\in\mathbb{N}\setminus\{0\}\). Then there exist unique \(q\in\mathbb{Z}\) and \(r\in\mathbb{N}\) such that \(n=qm+r\) and \(r&lt;m\).</p>
+
+			<p class="label">Proof:</p>
+			<p>Assume first that \(n\in\mathbb{N}\), and write \(S:=\{k\in\mathbb{N}:\text{exists }z\in\mathbb{Z}\text{ s.t. }k=n-z\cdot m\}\). Since \(n=n-0\cdot m\), \(n\in S\). Thus \(S\) is a nonempty subset of \(\mathbb{N}\), so it has a minimum; write \(r:=\min S\). By definition of \(S\), there exists \(q\in\mathbb{Z}\) such that \(r=n-qm\), that is, \(n=qm+r\).</p>
+			<p>Assume for contradiction that \(m\le r\). Then \(r-m\in\mathbb{N}\), and \(n=(q+1)m+(r-m)\), so \(r-m=n-(q+1)m\in S\). Since \(r-m&lt;r\), this contradicts the definition of \(r\). Hence \(r&lt;m\).</p>
+			<p>If \(n&lt;0\), then \(-n\in\mathbb{N}\). There exist \(r\in\mathbb{N}\) and \(q\in\mathbb{Z}\) such that \(-n=qm+r\) and \(r&lt;m\). Hence \(n=-qm-r=(-q-1)m+(m-r)\), and since \(r\in\mathbb{N}\), \(0\le m-r&lt;m\).</p>
+			<p>For uniqueness, suppose \(n=q_{1}m+r_{1}=q_{2}m+r_{2}\), with \(\{r_{1},r_{2}\}\subset\mathbb{N}\), \(\{q_{1},q_{2}\}\subset\mathbb{Z}\), and \(\max\{r_{1},r_{2}\}&lt;m\). Then \(0=m(q_{1}-q_{2})+(r_{1}-r_{2})\), so \(m(q_{1}-q_{2})=r_{2}-r_{1}\). If \(q_{2}&lt;q_{1}\), then \(1\le q_{1}-q_{2}\), so \(m\le r_{2}-r_{1}\le r_{2}\), a contradiction. Hence \(q_{2}=q_{1}\), and therefore \(r_{1}=r_{2}\).</p>
+
+			<p class="label">Definition:</p>
+			<p>Let \(x\in\mathbb{Z}\), let \(n\in\mathbb{N}\setminus\{0\}\), and let \(q\in\mathbb{Z}\), \(r\in\mathbb{N}\) be such that \(x=nq+r\) and \(r&lt;n\). Then \(r\) is called the remainder of the division of \(x\) by \(n\), and is denoted \(r:=x\mod n\). Sometimes we also write \(r\equiv x(\text{mod }n)\).</p>
+
+			<p class="label">Claim:</p>
+			<p>Let \(\{x,y\}\subset\mathbb{Z}\), and let \(\{q,r\}\subset\mathbb{Z}\) be such that \(x=qy+r\). Assume that \(y\) and \(r\) have a greatest common divisor. Then \(\gcd(y,r)\) is also the greatest common divisor of \(x\) and \(y\).</p>
+
+			<p class="label">Proof:</p>
+			<p>Write \(m:=\gcd(y,r)\). Then \(m\mid y\) and \(m\mid(qy+r)\), meaning \(m\mid x\). Let \(n\in\mathbb{N}\) satisfy \(n\mid x\) and \(n\mid y\). Then \(n\mid(x-qy)\), meaning \(n\mid r\). Since \(m\mid r\), by the definition of \(\gcd\), \(n\mid m\). Hence \(m=\gcd(x,y)\).</p>
+
+			<p class="label">Claim:</p>
+			<p>Let \(0\le n_{0}\le n_{1}\neq0\) be natural numbers. Then \(n_{0}\) and \(n_{1}\) have a greatest common divisor.</p>
+
+			<p class="label">Proof (Euclid's Algorithm):</p>
+			<p>Let \(N\) be the set of natural numbers greater than \(0\) such that for every \(n_{1}\in N\), and every \(0\le n_{0}\le n_{1}\), the numbers \(n_{0}\) and \(n_{1}\) have a greatest common divisor. Write \(\text{co}N:=(\mathbb{N}\setminus\{0\})\setminus N\), and assume for contradiction that \(\text{co}N\neq\emptyset\). Then \(m_{1}:=\min\text{co}N\) exists, and there is \(0\le m_{0}\le m_{1}\) such that \(m_{0}\) and \(m_{1}\) do not have a greatest common divisor.</p>
+			<p>If \(m_{0}=0\) or \(m_{0}=m_{1}\), then \(\gcd(m_{0},m_{1})=m_{1}\), a contradiction. Otherwise, let \(r_{1}:=m_{1}\mod m_{0}&lt;m_{0}\). If \(r_{1}\) and \(m_{0}\) have a greatest common divisor, then \(\gcd(r_{1},m_{0})=\gcd(m_{0},m_{1})\), so \(m_{1}\in N\), a contradiction. Otherwise \(m_{0}\in\text{co}N\), contradicting the minimality of \(m_{1}\). Hence \(\text{co}N=\emptyset\), and for every \(0\le n_{0}\le n_{1}\neq0\), \(n_{0}\) and \(n_{1}\) have a greatest common divisor.</p>
+
+			<p class="label">Corollary:</p>
+			<p>Let \(\{x,y\}\subset\mathbb{Z}\) be integers such that \(x\neq0\) or \(y\neq0\). Then they have a greatest common divisor, and
+			\[
+				\gcd(x,y)=\max\{n\in\mathbb{N}:n\mid x\text{ and }n\mid y\}.
+			\]</p>
+
+			<p class="label">Claim (Bezout's Lemma):</p>
+			<p>Let \(\{x,y\}\subset\mathbb{Z}\) be integers such that \(x\neq0\) or \(y\neq0\). Then there exist \(\{a,b\}\subset\mathbb{Z}\) such that \(ax+by=\gcd(x,y)\).</p>
+
+			<p class="label">Proof:</p>
+			<p>Let \(N\) be the set of natural numbers greater than \(0\) such that for every \(n_{1}\in N\), and every \(0\le n_{0}\le n_{1}\), there exist \(\{a,b\}\subset\mathbb{Z}\) satisfying \(an_{0}+bn_{1}=\gcd(n_{0},n_{1})\). Write \(\text{co}N:=(\mathbb{N}\setminus\{0\})\setminus N\), and assume for contradiction that \(\text{co}N\neq\emptyset\). Then \(m_{1}:=\min\text{co}N\) exists, and there is \(0\le m_{0}\le m_{1}\) such that for all \(\{a,b\}\subset\mathbb{Z}\), \(am_{0}+bm_{1}\neq\gcd(m_{0},m_{1})\).</p>
+			<p>If \(m_{0}=0\) or \(m_{0}=m_{1}\), then \(0\cdot m_{0}+1\cdot m_{1}=m_{1}=\gcd(m_{0},m_{1})\), a contradiction. Otherwise there exist \(q\in\mathbb{Z}\) and \(r&lt;m_{0}\) such that \(m_{1}=m_{0}q+r\), meaning \(-qm_{0}+m_{1}=r\). By minimality of \(m_{1}\), there exist \(\{a,b\}\subset\mathbb{Z}\) such that \(ar+bm_{0}=\gcd(r,m_{0})=\gcd(m_{0},m_{1})\). Thus
+			\[
+			\begin{align*}
+				a(-qm_{0}+m_{1})+bm_{0}&=\gcd(m_{0},m_{1})\\
+				(b-aq)m_{0}+am_{1}&=\gcd(m_{0},m_{1}),
+			\end{align*}
+			\]
+			a contradiction. Since every pair of integers not both zero has a greatest common divisor, and \(\gcd(x,y)=\gcd(-x,y)=\gcd(x,-y)=\gcd(-x,-y)\), the claim also holds for integers.</p>
+
+			<p class="label">Definition:</p>
+			<p>Let \(\{x,y\}\subset\mathbb{Z}\) satisfy \(\gcd(x,y)=1\). Then \(x,y\) are called relatively prime.</p>
+
+			<p class="label">Corollary:</p>
+			<p>Let \(p\in\mathbb{P}\), and let \(x\in\mathbb{Z}\) satisfy \(p\nmid x\). Then \(p\) and \(x\) are relatively prime.</p>
+
+			<p class="label">Claim (Euclid's Lemma):</p>
+			<p>Let \(p\in\mathbb{P}\) be prime, and let \(\{n,m\}\subset\mathbb{N}\) satisfy \(p\mid n\cdot m\). Then \(p\mid n\) or \(p\mid m\).</p>
+
+			<p class="label">Proof:</p>
+			<p>We split into cases. If \(p\mid n\), we are done. Otherwise \(p\nmid n\), so \(p\) and \(n\) are relatively prime. By Bezout's lemma there exist \(\{a,b\}\subset\mathbb{Z}\) such that \(ap+bn=1\). Therefore \(apm+bnm=m\). Since \(p\mid apm\) and \(p\mid bnm\), we get \(p\mid m\), as desired.</p>
+
+			<p class="label">Claim (Euclid's Theorem):</p>
+			<p>\(\mathbb{P}\) is infinite.</p>
+
+			<p class="label">Proof:</p>
+			<p>Let \(P\) be a finite set of primes, and write \(n:=\left(\prod\limits _{p\in P}p\right)+1\). For every \(p_{0}\in P\), \(n=p_{0}\cdot\left(\prod\limits _{p\in P\setminus\{p_{0}\}}p\right)+1\), so no \(p_{0}\in P\) divides \(n\). Hence there exists \(p\in\mathbb{P}\setminus P\) such that \(p\mid n\).</p>
+
+			<p class="label">Claim (The Fundamental Theorem of Arithmetic):</p>
+			<p>Let \(n\in\mathbb{N}\) be natural with \(n&gt;1\). Then there exists a natural \(m\in\mathbb{N}\) and primes \(p_{0},p_{1},\ldots,p_{m-1}\) such that \(n=\prod\limits _{k&lt;m}p_{k}\). This representation is unique up to reordering of the primes.</p>
+
+			<p class="label">Proof:</p>
+			<p>Let \(A\) be the set of all natural numbers greater than \(1\) that cannot be written as a product of primes, and assume for contradiction that \(A\neq\emptyset\). Then \(n_{0}:=\min A\) exists. If \(n_{0}\) is prime, then \(p_{0}:=n_{0}\) satisfies \(n_{0}=\prod\limits _{k&lt;1}p_{k}\), a contradiction. Otherwise \(n_{0}\) is composite, so there exist natural numbers \(1&lt;n_{2}\le n_{1}&lt;n_{0}\) such that \(n_{0}=n_{1}\cdot n_{2}\). By minimality of \(n_{0}\), both \(n_{1}\) and \(n_{2}\) are products of primes, and therefore so is \(n_{0}\), a contradiction.</p>
+			<p>For uniqueness, the case \(n=2\) is clear. Assume inductively that every \(1&lt;n_{1}&lt;n_{0}\) has a unique prime-product representation. Let
+			\[
+				n_{0}+1=\prod\limits _{k&lt;m_{1}}p_{k}
+				=\prod\limits _{k&lt;m_{2}}q_{k},
+			\]
+			where \(p_{0}\le p_{1}\le\cdots\le p_{m_{1}-1}\) and \(q_{0}\le q_{1}\le\cdots\le q_{m_{2}-1}\) are primes. Since \(p_{0}\mid\prod_{k&lt;m_{2}}q_{k}\), Euclid's lemma gives some \(k&lt;m_{2}\) such that \(p_{0}\mid q_{k}\). Since \(q_{k}\) is prime, \(q_{0}\le q_{k}=p_{0}\). Symmetrically, there exists \(i&lt;m_{1}\) such that \(q_{0}\mid p_{i}\), hence \(p_{0}\le p_{i}=q_{0}\). Therefore \(p_{0}=q_{0}\).</p>
+			<p>Cancelling the common first prime leaves a product strictly smaller than \(n_{0}+1\), so by the induction hypothesis the remaining prime factors agree up to order. Hence \(m_{1}=m_{2}\), and for every \(k&lt;m_{1}\), \(p_{k}=q_{k}\). By induction, the uniqueness claim holds for every \(n&gt;1\).</p>
+
+			<nav class="nav" aria-label="Section navigation">
+				<a href="arithmetic-of-natural-numbers.html">Previous: Arithmetic of the Natural Numbers</a>
+				<a href="rational-numbers.html">Next: The Rational Numbers</a>
+			</nav>
+		</article>
+	</div>
+</body>
+</html>

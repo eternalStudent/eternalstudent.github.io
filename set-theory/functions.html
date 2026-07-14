@@ -1,0 +1,199 @@
+﻿<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="author" content="Noam Weisberg">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta property="og:type" content="article">
+	<meta property="og:title" content="Functions">
+	<meta property="og:image" content="https://eternalstudent.github.io/profile.png">
+	<meta property="og:site_name" content="eternalStudent">
+	<meta property="og:url" content="https://eternalstudent.github.io/set-theory/functions.html">
+	<link rel="icon" type="image/png" href="../profile.png">
+	<link rel="preconnect" href="https://fonts.gstatic.com">
+	<link href="https://fonts.googleapis.com/css2?family=Spectral&display=swap" rel="stylesheet">
+
+	<script>
+		window.MathJax = {
+			tex: {
+				macros: {
+					nicefrac: ['{}^{#1}\\!/\\!_{#2}', 2]
+				}
+			}
+		};
+	</script>
+	<script type="text/javascript" id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+	<link rel="stylesheet" href="style.css">
+	<title>Functions</title>
+</head>
+<body>
+	<div class="page-header">
+		<a href="../index.html">
+			<div class="page-header-content">
+				<h1 class="page-header-title">eternalStudent</h1>
+				<img src="../profile.png" alt="">
+			</div>
+		</a>
+	</div>
+	<div class="content">
+		<article>
+			<p class="kicker">Set Theory</p>
+			<h1 class="post-title">Functions</h1>
+			<p><a class="toc-link" href="index.html">Table of contents</a></p>
+
+			<h2>Image and Inverse Image</h2>
+			<blockquote>
+				<p>Perhaps the most important concept in mathematics after the natural numbers is that of the function. In modern mathematics the function has become the main object of study in most mathematical fields. A function is a relation between a set of outputs and a set of possible inputs.</p>
+			</blockquote>
+
+			<p class="label">Definition:</p>
+			<p>Let \(A,B\) be sets. Then a binary relation \(f\subseteq A\times B\) is called a function or a mapping if for every \(a\in A\) there exists a unique \(b\in B\) such that \((a,b)\in f\). We write \(f:A\rightarrow B\).</p>
+
+			<p class="label">Definition:</p>
+			<p>Let \(A,B\) be sets, let \(f:A\rightarrow B\) be a function, let \(a\in A\), and let \(b\in B\) be the unique element satisfying \((a,b)\in f\). Then \(b\) is called the value of \(f\) at \(a\), and is denoted \(f(a)\) or \(f_{a}\). We also say that \(f\) maps \(a\) to \(b\).</p>
+
+			<p class="label">Notation:</p>
+			<p>Let \(A,B\) be sets. A function \(f:A\rightarrow B\) will sometimes also be denoted by \((f_{a})_{a\in A}\).</p>
+
+			<p class="label">Corollary:</p>
+			<p>Let \(A,B\) be sets, and let \(f,g:A\rightarrow B\) be functions. Then \(f=g\) if and only if for every \(a\in A\), \(f(a)=g(a)\).</p>
+
+			<p class="label">Notation:</p>
+			<p>Let \(A,B\) be sets, let \(f:A\rightarrow B\) be a function, and let \(A_{0}\subseteq A\). Then we also denote the class \(\{b\in B:\text{exists }a\in A_{0}\text{ s.t. }f(a)=b\}\) by \(\{f(a):a\in A_{0}\}\), or by \(\{f(a)\}_{a\in A_{0}}\), or briefly by \(\{f_{a}\}_{a\in A_{0}}\).</p>
+
+			<p class="label">Definition:</p>
+			<p>Let \(A,B\) be sets, let \(f:A\rightarrow B\) be a function, and let \(A_{0}\subseteq A\). Then \(\{f(a):a\in A_{0}\}\) is called the image of \(A_{0}\) under \(f\), and is denoted \(f(A_{0})\). If \(A_{0}\) may also be an element of \(A\), we also write \(f[A_{0}]\) to avoid confusion.</p>
+
+			<p class="label">Corollaries:</p>
+			<p>Let \(A,B\) be sets, let \(f:A\rightarrow B\) be a function, and let \(\{A_{0},A_{1}\}\subseteq P(A)\) be subsets of \(A\). Then:</p>
+			<ol>
+				<li>\(f(A_{0})\) is a set by the axiom of replacement.</li>
+				<li>\(A_{0}\subseteq A_{1}\Longrightarrow f(A_{0})\subseteq f(A_{1})\)</li>
+			</ol>
+			<p>Let \(\{A_{\alpha}\}_{\alpha\in I}\subseteq P(A)\) be subsets of \(A\). Then:</p>
+			<ol start="4">
+				<li>\(f(\bigcup\limits _{\alpha\in I}A_{\alpha})=\bigcup\limits _{\alpha\in I}f(A_{\alpha})\)</li>
+				<li>\(A_{\alpha}\neq\emptyset\Longrightarrow f(\bigcap\limits _{\alpha\in I}A_{\alpha})\subseteq\bigcap\limits _{\alpha\in I}f(A_{\alpha})\)</li>
+			</ol>
+
+			<p class="label">Definition:</p>
+			<p>Let \(A,B\) be sets, let \(f:A\rightarrow B\) be a function, and let \(B_{0}\subseteq B\). Then the set \(\{a\in A:f(a)\in B_{0}\}\) is called the inverse image of \(B_{0}\) under \(f\), and is denoted \(f^{-1}(B_{0})\) or \(f^{-1}[B_{0}]\).</p>
+
+			<p class="label">Corollaries:</p>
+			<p>Let \(A,B\) be sets, let \(f:A\rightarrow B\) be a function, and let \(\{B_{0},B_{1}\}\subseteq P(B)\) be subsets of \(B\). Then:</p>
+			<ol>
+				<li>\(f^{-1}(B_{0})\) is a set.</li>
+				<li>\(f^{-1}(B_{0}\setminus B_{1})=f^{-1}(B_{0})\setminus f^{-1}(B_{1})\)</li>
+				<li>\(B_{0}\subseteq B_{1}\Longrightarrow f^{-1}(B_{0})\subseteq f^{-1}(B_{1})\)</li>
+				<li>\(f(f^{-1}(B_{0}))\subseteq B_{0}\)</li>
+			</ol>
+			<p>Let \(A_{0}\subseteq A\) be a subset of \(A\). Then:</p>
+			<ol start="5">
+				<li>\(f(A_{0})\subseteq B_{0}\Longleftrightarrow A_{0}\subseteq f^{-1}(B_{0})\)</li>
+				<li>\(A_{0}\subseteq f^{-1}(f(A_{0}))\)</li>
+			</ol>
+			<p>Let \(\{B_{\beta}\}_{\beta\in J}\subseteq P(B)\) be subsets of \(B\). Then:</p>
+			<ol start="7">
+				<li>\(f^{-1}(\bigcup\limits _{\beta\in J}B_{\beta})=\bigcup\limits _{\beta\in J}f^{-1}(B_{\beta})\)</li>
+				<li>\(f^{-1}(\bigcap\limits _{\beta\in J}B_{\beta})=\bigcap\limits _{\beta\in J}f^{-1}(B_{\beta})\)</li>
+			</ol>
+
+			<p class="label">Definition:</p>
+			<p>Let \(A,B\) be sets, let \(f:A\rightarrow B\), and let \(A_{0}\subseteq A\). Then the function \(f\cap(A_{0}\times B)\) is called the restriction of \(f\) to \(A_{0}\), and is denoted \(f\Bigl|_{A_{0}}\) or \(f\restriction A_{0}\).</p>
+
+			<p class="label">Corollary:</p>
+			<p>Let \(A,B\) be sets, let \(f:A\rightarrow B\), and let \(A_{0}\subseteq A,B_{0}\subseteq B\). Then \((f\Bigl|_{A_{0}})^{-1}(B_{0})=A_{0}\cap f^{-1}(B_{0})\).</p>
+
+			<h2>Invertibility</h2>
+			<blockquote>
+				<p>We now want to discuss the two main properties of functions: “one-to-one” and “onto,” which together form a third property called “invertibility.” These properties will form an important basis for the study of sizes of sets, and later for the idea that there are different sizes of infinity.</p>
+			</blockquote>
+
+			<p class="label">Definition:</p>
+			<p>Let \(A,B\) be sets, and let \(f:A\rightarrow B\) be a function. If for every \(\{x,y\}\subseteq A\), \(f(x)=f(y)\) implies \(x=y\), then we say that \(f\) is one-to-one.</p>
+
+			<p class="label">Definition:</p>
+			<p>Let \(A,B\) be sets, and let \(f:A\rightarrow B\). If for every \(b\in B\) there exists \(a\in A\) such that \(f(a)=b\), then we say that \(f\) is onto.</p>
+
+			<p class="label">Claim:</p>
+			<p>Let \(A,B\) be nonempty sets, and let \(f:A\rightarrow B\) be one-to-one. Then there exists an onto function \(g:B\rightarrow A\).</p>
+
+			<p class="label">Proof:</p>
+			<p>Let \(a_{0}\in A\), and let \(g:=\{(b,a):(a,b)\in f\}\cup\left(\left(B\setminus f(A)\right)\times\{a_{0}\}\right)\). Let \(b_{1}\in B\). We split into cases. If \(b_{1}\in f(A)\), then by one-to-one-ness of \(f\) there exists a unique \(a_{1}\) such that \((b_{1},a_{1})\in g\). Otherwise, \(b_{1}\in B\setminus f(A)\), so \((b_{1},a_{0})\in g\). Therefore \(g\) is a function. Let \(a_{1}\in A\). Then \((f(a_{1}),a_{1})\in g\), and therefore \(g\) is onto.</p>
+
+			<p class="label">Claim:</p>
+			<p>Let \(A,B,C,D\) be sets, and let \(f:A\rightarrow B,g:C\rightarrow D\) be one-to-one functions. If \(A\cap C=\emptyset\) and \(B\cap D=\emptyset\), then \(f\cup g:A\cup C\rightarrow B\cup D\) is a one-to-one function.</p>
+
+			<p class="label">Proof:</p>
+			<p>Let \(\{x,y\}\subseteq A\cup C\) satisfy \((f\cup g)(x)=(f\cup g)(y)\). Without loss of generality assume \(x\in A\). Then \((f\cup g)(x)=f(x)\in B\), and therefore \(f(y)\in B\), \(y\in A\), and \((f\cup g)(y)=f(y)\). By one-to-one-ness of \(f\), \(x=y\).</p>
+
+			<p class="label">Claim:</p>
+			<p>Let \(A,B,C,D\) be sets, and let \(f:A\rightarrow B,g:C\rightarrow D\) be onto functions. If \(A\cap C=\emptyset\), then \(f\cup g:A\cup C\rightarrow B\cup D\) is onto.</p>
+
+			<p class="label">Proof:</p>
+			<p>Let \(y\in B\cup D\). Without loss of generality assume \(y\in B\). Since \(f\) is onto, there exists \(x\in A\) such that \(f(x)=y\), and therefore \((f\cup g)(x)=y\).</p>
+
+			<p class="label">Definition:</p>
+			<p>Let \(A,B,C\) be sets, and let \(f:A\rightarrow B,g:B\rightarrow C\). Then the function \(h:A\rightarrow C\) that maps every \(a\in A\) to \(g(f(a))\in C\) is called the composition of \(f\) and \(g\), and is denoted \((g\circ f)\).</p>
+
+			<p class="label">Claim:</p>
+			<p>Let \(A,B,C\) be sets, and let \(f:A\rightarrow B,g:B\rightarrow C\) be one-to-one functions. Then \((g\circ f)\) is one-to-one.</p>
+
+			<p class="label">Proof:</p>
+			<p>Let \(\{x,y\}\subseteq A\) satisfy \((g\circ f)(x)=(g\circ f)(y)\). Then \(g(f(x))=g(f(y))\). Since \(g\) is one-to-one, \(f(x)=f(y)\), and since \(f\) is one-to-one, \(x=y\).</p>
+
+			<p class="label">Claim:</p>
+			<p>Let \(A,B,C\) be sets, and let \(f:A\rightarrow B,g:B\rightarrow C\) be onto functions. Then \((g\circ f)\) is onto.</p>
+
+			<p class="label">Proof:</p>
+			<p>Let \(c\in C\). Since \(g\) is onto, there exists \(b\in B\) such that \(c=g(b)\), and since \(f\) is onto, there exists \(a\in A\) such that \(b=f(a)\). Therefore \(c=g(f(a))=(g\circ f)(a)\).</p>
+
+			<p class="label">Definition:</p>
+			<p>Let \(A,B\) be sets, and let \(f:A\rightarrow B\). Then \(g:B\rightarrow A\) is called the inverse of \(f\) if for every \(a\in A\), \((g\circ f)(a)=a\), and for every \(b\in B\), \((f\circ g)(b)=b\).</p>
+
+			<p class="label">Definition:</p>
+			<p>Let \(A,B\) be sets, and let \(f:A\rightarrow B\) be a function. Then \(f\) is called invertible if it has an inverse function.</p>
+
+			<p class="label">Claim:</p>
+			<p>Let \(A,B\) be sets, and let \(f:A\rightarrow B\). Then \(f\) is invertible if and only if it is one-to-one and onto.</p>
+
+			<p class="label">Proof:</p>
+			<p>Assume that \(f\) is invertible, and let \(g\) be the inverse of \(f\). Let \(b\in B\), and write \(a:=g(b)\in A\). Then \(f(g(b))=b\), so \(f(a)=b\), hence \(f\) is onto. Let \(\{x,y\}\subseteq A\) satisfy \(f(x)=f(y)\). Then \(x=g(f(x))=g(f(y))=y\), and therefore \(f\) is one-to-one.</p>
+			<p>Conversely, assume that \(f\) is one-to-one and onto, and write \(g:=\{(b,a):f(a)=b\}\). Since \(f\) is onto, for every \(b\in B\) there exists \(a\in A\) such that \((b,a)\in g\), and since \(f\) is one-to-one, this \(a\) is unique. Hence \(g\) is a function. Let \(a\in A\). Then there exists a unique \(b\in B\) such that \((a,b)\in f\), and therefore \((b,a)\in g\). Thus \((g\circ f)(a)=a\) and \((f\circ g)(b)=b\).</p>
+
+			<p class="label">Corollaries:</p>
+			<p>Let \(A,B\) be sets, and let \(f:A\rightarrow B\) be one-to-one and onto. Then:</p>
+			<ol>
+				<li>There exists a unique inverse function to \(f\); we denote it by \(f^{-1}\).</li>
+				<li>\(f^{-1}\) is invertible, and \(f\) is its inverse.</li>
+				<li>The image of \(f\) is the inverse image of \(f^{-1}\).</li>
+			</ol>
+
+			<h2>The Recursion Theorem</h2>
+			<blockquote>
+				<p>Many times we will want to define functions recursively, but at first glance it is not clear that we are “allowed” to do this. A proof is required.</p>
+			</blockquote>
+
+			<p class="label">Claim:</p>
+			<p>Let \(A\) be a nonempty set, let \(a_{0}\in A\), let \(n\in\mathbb{N}\) be natural, and let \(g:A\times\mathbb{N}\rightarrow A\) be a function. Then there exists a function \(f_{n}:S(n)\rightarrow A\) satisfying \(f_{n}(0)=a_{0}\), and for every natural \(n_{0}&lt;n\), \(f_{n}(S(n_{0}))=g(f_{n}(n_{0}),n_{0})\).</p>
+
+			<p class="label">Proof:</p>
+			<p>If \(n=0\), then \(f_{n}=\{(0,a_{0})\}\), and we are done. Let \(m\in\mathbb{N}\) be such that there exists a function \(f_{m}:S(m)\rightarrow A\) satisfying \(f_{m}(0)=a_{0}\), and for every natural \(n_{0}&lt;m\), \(f_{m}(S(n_{0}))=g(f_{m}(n_{0}),n_{0})\). Then \(f_{S(m)}:=f_{m}\cup\{(S(m),g(f_{m}(m),m))\}\) is a function satisfying \(f_{S(m)}(0)=a_{0}\), and for every natural \(n_{0}&lt;S(m)\), \(f_{S(m)}(S(n_{0}))=g(f_{S(m)}(n_{0}),n_{0})\). Therefore, by the principle of induction, the claim is true for every \(n\in\mathbb{N}\).</p>
+
+			<p class="label">Claim (The Recursion Theorem):</p>
+			<p>Let \(A\) be a nonempty set, let \(a_{0}\in A\), and let \(g:A\times\mathbb{N}\rightarrow A\) be a function. Then there exists a function \(f:\mathbb{N}\rightarrow A\) satisfying \(f(0)=a_{0}\), and for every natural \(n\in\mathbb{N}\), \(f(S(n))=g(f(n),n)\).</p>
+
+			<p class="label">Proof:</p>
+			<p>For every \(k\in\mathbb{N}\), there exists a function \(f_{k}:S(k)\rightarrow A\) satisfying \(f_{k}(0)=a_{0}\), and for every natural \(n_{0}&lt;k\), \(f_{k}(S(n_{0}))=g(f_{k}(n_{0}),n_{0})\). Write \(f:=\bigcup\limits _{n\in\mathbb{N}}f_{n}\).</p>
+			<p>Let \(k_{0}\in\mathbb{N}\) be such that for all natural \(n\le k_{0}\le k_{1}\), \(f_{k_{0}}(n)=f_{k_{1}}(n)\). Write \(a_{k_{0}}:=f_{k_{0}}(k_{0})\). Then for every \(S(k_{0})\le k_{1}\), \(f_{k_{1}}(S(k_{0}))=g(a_{k_{0}},k_{0})\). Therefore, by the principle of induction, for every \(k_{0}\in\mathbb{N}\) and all natural \(n\le k_{0}\le k_{1}\), \(f_{k_{0}}(n)=f_{k_{1}}(n)\).</p>
+			<p>Thus \(f\) satisfies that for every \(n\in\mathbb{N}\), there exists a unique \(a\in A\) such that \((n,a)\in f\), and hence \(f\) is a function. In addition, \(f(0)=a_{0}\), and for every \(n\in\mathbb{N}\), \(f(S(n))=g(f(n),n)\). This completes the proof.</p>
+
+			<nav class="nav" aria-label="Section navigation">
+				<a href="natural-numbers.html">Previous: The Natural Numbers</a>
+				<a href="cardinalities.html">Next: Cardinalities</a>
+			</nav>
+		</article>
+	</div>
+</body>
+</html>
+

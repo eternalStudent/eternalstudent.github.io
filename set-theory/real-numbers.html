@@ -1,0 +1,170 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="author" content="Noam Weisberg">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta property="og:type" content="article">
+	<meta property="og:title" content="The Real Numbers">
+	<meta property="og:image" content="https://eternalstudent.github.io/profile.png">
+	<meta property="og:site_name" content="eternalStudent">
+	<meta property="og:url" content="https://eternalstudent.github.io/set-theory/real-numbers.html">
+	<link rel="icon" type="image/png" href="../profile.png">
+	<link rel="preconnect" href="https://fonts.gstatic.com">
+	<link href="https://fonts.googleapis.com/css2?family=Spectral&display=swap" rel="stylesheet">
+
+	<script>
+		window.MathJax = {
+			tex: {
+				macros: {
+					nicefrac: ['{}^{#1}\\!/\\!_{#2}', 2]
+				}
+			}
+		};
+	</script>
+	<script type="text/javascript" id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+	<link rel="stylesheet" href="style.css">
+	<title>The Real Numbers</title>
+</head>
+<body>
+	<div class="page-header">
+		<a href="../index.html">
+			<div class="page-header-content">
+				<h1 class="page-header-title">eternalStudent</h1>
+				<img src="../profile.png" alt="">
+			</div>
+		</a>
+	</div>
+	<div class="content">
+		<article>
+			<p class="kicker">Set Theory</p>
+			<h1 class="post-title">The Real Numbers</h1>
+			<p><a class="toc-link" href="index.html">Table of contents</a></p>
+
+			<h2>Gaps and Completions</h2>
+
+			<p class="label">Definition:</p>
+			<p>Let \(X\) be linearly ordered with respect to \(\preccurlyeq\), and let \(\{A,B\}\subseteq P(X)\) be nonempty subsets of \(X\) such that \(A\cup B=X\), \(A\cap B=\emptyset\), and for every \(a\in A\) and every \(b\in B\), \(a\preccurlyeq b\). Then we say that \((A,B)\) is a cut of \(X\) with respect to \(\preccurlyeq\).</p>
+
+			<p class="label">Definition:</p>
+			<p>Let \(X\) be linearly ordered with respect to \(\preccurlyeq\), and let \((A,B)\) be a cut of \(X\) with respect to \(\preccurlyeq\). If \(A\) has no maximal element, we say that \((A,B)\) is a Dedekind cut. If, in addition, \(B\) has no minimal element, we say that \((A,B)\) is a gap with respect to \(\preccurlyeq\).</p>
+
+			<p class="label">Definition:</p>
+			<p>Let \(X\) be linearly ordered with respect to \(\preccurlyeq\). If \(X\) has no gaps with respect to \(\preccurlyeq\), we say that \(X\) is complete with respect to \(\preccurlyeq\).</p>
+
+			<p class="label">Definition:</p>
+			<p>We denote the set of all Dedekind cuts of \(\mathbb{Q}\) by \(\mathbb{R}\), and call it the set of real numbers.</p>
+
+			<p class="label">Definition:</p>
+			<p>Let \(x\in\mathbb{R}\). Then \(x\) is called a real number, or a real for short.</p>
+
+			<p class="label">Definition:</p>
+			<p>\(\le:=\left\{((A,B),(C,D))\in\mathbb{R}\times\mathbb{R}:A\subseteq C\right\}\).</p>
+
+			<p class="label">Corollary:</p>
+			<p>\(\le\) is an order relation on \(\mathbb{R}\).</p>
+
+			<p class="label">Claim:</p>
+			<p>\(\le\) is a total order relation on \(\mathbb{R}\).</p>
+
+			<p class="label">Proof:</p>
+			<p>Let \(\{(A,B),(C,D)\}\subset P(\mathbb{Q})\times P(\mathbb{Q})\) be Dedekind cuts. We split into cases. If \(A\subseteq C\), we are done. Otherwise there exists \(a\in A\) such that \(a\in\mathbb{Q}\setminus C=D\). Let \(c\in C\). Then \(c&lt;a\), hence \(c\in\mathbb{Q}\setminus B=A\). Therefore \(C\subseteq A\).</p>
+
+			<p class="label">Claim:</p>
+			<p>\(\mathbb{R}\) is complete with respect to \(\le\).</p>
+
+			<p class="label">Proof:</p>
+			<p>Let \((S,T)\in P(\mathbb{R})\times P(\mathbb{R})\) be a Dedekind cut of \(\mathbb{R}\). Write \(A_{S}:=\bigcup\{A:(A,B)\in S\}\), and \(B_{S}:=\mathbb{Q}\setminus A_{S}\). Then \((A_{S},B_{S})\in\mathbb{R}\).</p>
+			<p>For every \((A,B)\in S\), \(A\subseteq A_{S}\), so \((A,B)\le(A_{S},B_{S})\). Let \((C,D)\in T\). Then for every \((A,B)\in S\), \(A\subset C\), so \(A_{S}=\bigcup\{A:(A,B)\in S\}\subseteq C\). Therefore \((A_{S},B_{S})\le(C,D)\). Thus \((A_{S},B_{S})\) is the least upper bound of \(S\). Since \(S\) has no maximal element, it follows that \(T=\{x:(A_{S},B_{S})\le x\}\), so \((S,T)\) is not a gap.</p>
+
+			<p class="label">Definition:</p>
+			<p>Let \(q\in\mathbb{Q}\). We write \([q]:=(\{p\in\mathbb{Q}:p&lt;q\},\{p\in\mathbb{Q}:q\le p\})\).</p>
+
+			<p class="label">Corollaries:</p>
+			<p>Let \(\{p,q\}\subset\mathbb{Q}\). Then:</p>
+			<ol>
+				<li>\([q]\in\mathbb{R}\).</li>
+				<li>\(p\le q\Longleftrightarrow[p]\le[q]\).</li>
+			</ol>
+
+			<h2>Supremum and Infimum</h2>
+
+			<p class="label">Definitions:</p>
+			<p>Let \(A\subseteq\mathbb{R}\) be a nonempty subset, and let \(x\in\mathbb{R}\). Then:</p>
+			<ol>
+				<li>If for every \(a\in A\), \(x\le a\), we say that \(x\) is a lower bound of \(A\), and that \(A\) is bounded below.</li>
+				<li>If for every \(a\in A\), \(a\le x\), we say that \(x\) is an upper bound of \(A\), and that \(A\) is bounded above.</li>
+			</ol>
+
+			<p class="label">Definitions:</p>
+			<p>Let \(A\subseteq\mathbb{R}\) be a nonempty subset, and let \(x\in\mathbb{R}\). Then:</p>
+			<ol>
+				<li>If \(x\) is a lower bound of \(A\), and for every lower bound \(y\) of \(A\), \(x\le y\), we say that \(x\) is the infimum of \(A\), and denote it \(\inf A\).</li>
+				<li>If \(x\) is an upper bound of \(A\), and for every upper bound \(y\) of \(A\), \(y\le x\), we say that \(x\) is the supremum of \(A\), and denote it \(\sup A\).</li>
+			</ol>
+
+			<p class="label">Claim:</p>
+			<p>Let \(X\subseteq\mathbb{R}\) be nonempty and bounded above. Then \(X\) has a supremum.</p>
+
+			<p class="label">Proof:</p>
+			<p>Write \(A_{X}:=\bigcup\{A:(A,B)\in X\}\), and \(B_{X}:=\mathbb{Q}\setminus A_{X}\). Then \((A_{X},B_{X})\in\mathbb{R}\). For every \((A,B)\in X\), \(A\subseteq A_{X}\), so \((A,B)\le(A_{X},B_{X})\). Let \((C,D)\in\mathbb{R}\) be such that for every \((A,B)\in X\), \(A\subset C\). Then \(A_{X}=\bigcup\{A:(A,B)\in X\}\subseteq C\). Hence \((A_{X},B_{X})\le(C,D)\), so \((A_{X},B_{X})\) is the least upper bound of \(X\).</p>
+
+			<p class="label">Definition:</p>
+			<p>Let \(A\subseteq\mathbb{R}\) be nonempty. If \(A\) is not bounded above, we write \(\sup A=+\infty\). If \(A\) is not bounded below, we write \(\inf A=-\infty\).</p>
+
+			<p class="label">Definitions:</p>
+			<p>Let \(\{x,y\}\subset\mathbb{R}\). Then:</p>
+			<ol>
+				<li>\(x+y:=\sup\left\{[p+q]:p\in\mathbb{Q},q\in\mathbb{Q},[p]\le x,[q]\le y\right\}\).</li>
+				<li>\(x\cdot y:=\sup\left\{[p\cdot q]:p\in\mathbb{Q},q\in\mathbb{Q},[p]\le x,[q]\le y\right\}\).</li>
+				<li>\(-x:=\sup\{[q]:q\in\mathbb{Q},[q]+x\le[0]\}\).</li>
+				<li>\(|x|:=\begin{cases}-x & x\le[0]\\ x & \text{otherwise}\end{cases}\)</li>
+				<li>If \(x\neq0\), \(x^{-1}:=\sup\{[q]:q\in\mathbb{Q},[q]\cdot x\le[1]\}\).</li>
+				<li>If \(y\neq0\), \(\frac{x}{y}:=x\cdot y^{-1}\).</li>
+				<li>\(\sqrt{x}:=\sup\left\{[q]:[q\cdot q]\le x\right\}\).</li>
+			</ol>
+
+			<p class="label">Corollaries:</p>
+			<p>Let \(\{x,y,z\}\subset\mathbb{R}\). Then:</p>
+			<ol>
+				<li>\(x+y=y+x\).</li>
+				<li>\((x+y)+z=x+(y+z)\), and we may write \(x+y+z\) briefly.</li>
+				<li>\(x+0=x\).</li>
+				<li>\(x-x=0\).</li>
+				<li>\(x\cdot y=y\cdot x\).</li>
+				<li>\((x\cdot y)\cdot z=x\cdot(y\cdot z)\), and we may write \(x\cdot y\cdot z\) briefly.</li>
+				<li>\(x\cdot0=0\).</li>
+				<li>\(x\cdot1=x\).</li>
+				<li>\(x\cdot(-1)=-x\).</li>
+				<li>\((-x)\cdot(-y)=x\cdot y\).</li>
+				<li>\((-x)\cdot y=x\cdot(-y)=-(x\cdot y)\).</li>
+				<li>\(x\cdot(y+z)=x\cdot y+x\cdot z\).</li>
+				<li>\(x&lt;y\Longleftrightarrow x+z&lt;y+z\).</li>
+				<li>If \(z&gt;0\), then \(x&lt;y\Longleftrightarrow x\cdot z&lt;y\cdot z\).</li>
+				<li>If \(z&lt;0\), then \(x&lt;y\Longleftrightarrow y\cdot z&lt;x\cdot z\).</li>
+			</ol>
+
+			<p class="label">Notation:</p>
+			<p>Let \(q\in\mathbb{Q}\) be rational. From now on we will no longer distinguish between \(q\) and \([q]\). For all practical purposes, we assume \(\mathbb{Q}\subset\mathbb{R}\).</p>
+
+			<p class="label">Definitions:</p>
+			<p>Let \(a&lt;b\) be real numbers. Then:</p>
+			<ol>
+				<li>\([a..b]:=\{x\in\mathbb{R}:a\le x\le b\}\)</li>
+				<li>\((a..b]:=\{x\in\mathbb{R}:a&lt;x\le b\}\)</li>
+				<li>\([a..b):=\{x\in\mathbb{R}:a\le x&lt;b\}\)</li>
+				<li>\((a..b):=\{x\in\mathbb{R}:a&lt;x&lt;b\}\)</li>
+				<li>\((-\infty..b]:=\{x\in\mathbb{R}:x\le b\}\)</li>
+				<li>\((-\infty..b):=\{x\in\mathbb{R}:x&lt;b\}\)</li>
+				<li>\([a..+\infty):=\{x\in\mathbb{R}:a\le x\}\)</li>
+				<li>\((a..+\infty):=\{x\in\mathbb{R}:a&lt;x\}\)</li>
+			</ol>
+
+			<nav class="nav" aria-label="Section navigation">
+				<a href="rational-numbers.html">Previous: The Rational Numbers</a>
+				<a href="ordinals.html">Next: Ordinals</a>
+			</nav>
+		</article>
+	</div>
+</body>
+</html>

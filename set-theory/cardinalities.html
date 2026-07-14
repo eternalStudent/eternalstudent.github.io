@@ -1,0 +1,205 @@
+﻿<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="author" content="Noam Weisberg">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta property="og:type" content="article">
+	<meta property="og:title" content="Cardinalities">
+	<meta property="og:image" content="https://eternalstudent.github.io/profile.png">
+	<meta property="og:site_name" content="eternalStudent">
+	<meta property="og:url" content="https://eternalstudent.github.io/set-theory/cardinalities.html">
+	<link rel="icon" type="image/png" href="../profile.png">
+	<link rel="preconnect" href="https://fonts.gstatic.com">
+	<link href="https://fonts.googleapis.com/css2?family=Spectral&display=swap" rel="stylesheet">
+
+	<script>
+		window.MathJax = {
+			tex: {
+				macros: {
+					nicefrac: ['{}^{#1}\\!/\\!_{#2}', 2]
+				}
+			}
+		};
+	</script>
+	<script type="text/javascript" id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+	<link rel="stylesheet" href="style.css">
+	<title>Cardinalities</title>
+</head>
+<body>
+	<div class="page-header">
+		<a href="../index.html">
+			<div class="page-header-content">
+				<h1 class="page-header-title">eternalStudent</h1>
+				<img src="../profile.png" alt="">
+			</div>
+		</a>
+	</div>
+	<div class="content">
+		<article>
+			<p class="kicker">Set Theory</p>
+			<h1 class="post-title">Cardinalities</h1>
+			<p><a class="toc-link" href="index.html">Table of contents</a></p>
+
+			<h2>Cantor-Schroeder-Bernstein</h2>
+			<blockquote>
+				<p>In 1887 Cantor published a theorem that became a milestone in his work on sets and infinities: if there is a one-to-one function from \(A\) to \(B\), and a one-to-one function from \(B\) to \(A\), then there is an invertible function between them. Cantor did not publish a proof of this. In 1897 Schroeder and Bernstein both published proofs independently of one another. The meaning of the theorem is that the existence of one-to-one functions can be used to compare sizes of sets, and that statements such as “the set \(A\) is larger than the set \(B\),” or alternatively “\(A\) has the same number of elements as \(B\),” really do have meaning.</p>
+			</blockquote>
+
+			<p class="label">Notation:</p>
+			<p>Let \(A,B\) be sets. Then:</p>
+			<ol>
+				<li>If there exists a one-to-one \(f:A\rightarrow B\), we write \(|A|\le|B|\).</li>
+				<li>If there exists a one-to-one and onto function \(f:A\rightarrow B\), we write \(|A|=|B|\); otherwise, we write \(|A|\neq|B|\).</li>
+				<li>If \(|A|\le|B|\) and \(|A|\neq|B|\), we write \(|A|&lt;|B|\).</li>
+			</ol>
+
+			<p class="label">Claims:</p>
+			<p>Let \(A,B,C\) be sets. Then:</p>
+			<ol>
+				<li>\(|A|=|A|\).</li>
+				<li>\(A\subseteq B\Longrightarrow|A|\le|B|\).</li>
+				<li>\(|A|=|B|\Longleftrightarrow|B|=|A|\).</li>
+				<li>If \(|A|\le|B|\) and \(|B|\le|C|\), then \(|A|\le|C|\).</li>
+				<li>If \(|A|=|B|\) and \(|B|=|C|\), then \(|A|=|C|\).</li>
+				<li>If \(f:A\rightarrow B\) is one-to-one, then \(|A|=|f(A)|\).</li>
+			</ol>
+
+			<p class="label">Proof:</p>
+			<ol>
+				<li>The identity function \(\text{Id}:A\rightarrow A\), defined by \(f(a):=a\), is one-to-one and onto.</li>
+				<li>The identity function \(\text{Id}:A\rightarrow B\), defined by \(f(a):=a\), is one-to-one.</li>
+				<li>Let \(f:A\rightarrow B\) be one-to-one and onto. Then its inverse \(f^{-1}:B\rightarrow A\) is one-to-one and onto.</li>
+				<li>Let \(f:A\rightarrow B\) be one-to-one, and let \(g:B\rightarrow C\) be one-to-one. Then \((g\circ f):A\rightarrow C\) is one-to-one.</li>
+				<li>Let \(f:A\rightarrow B\) be one-to-one and onto, and let \(g:B\rightarrow C\) be one-to-one and onto. Then \((g\circ f):A\rightarrow C\) is one-to-one and onto.</li>
+				<li>\(f\) is one-to-one and onto its image.</li>
+			</ol>
+
+			<p class="label">Claim (Cantor-Schroeder-Bernstein Theorem):</p>
+			<p>Let \(A,B\) be sets. If \(|A|\le|B|\) and \(|B|\le|A|\), then \(|A|=|B|\).</p>
+
+			<p class="label">Proof:</p>
+			<p>Let \(f:A\rightarrow B\) be one-to-one, and let \(g:B\rightarrow A\) be one-to-one. Then \((g\circ f):A\rightarrow A\) is one-to-one, and \(g(f(A))\subseteq g(B)\subseteq A\).</p>
+			<p>Define \(A_{0}:=A\), and recursively, for every natural \(n\in\mathbb{N}\), define \(A_{S(n)}:=(g\circ f)(A_{n})\). Similarly, define \(B_{0}:=g(B)\), and recursively, for every natural \(n\in\mathbb{N}\), define \(B_{S(n)}:=(g\circ f)(B_{n})\).</p>
+			<p>We get \(A_{1}\subseteq B_{0}\subseteq A_{0}\). Let \(n\in\mathbb{N}\) be natural and suppose \(A_{S(n)}\subseteq B_{n}\subseteq A_{n}\). Then \((g\circ f)(A_{S(n)})\subseteq(g\circ f)(B_{n})\subseteq(g\circ f)(A_{n})\), and hence \(A_{S(S(n))}\subseteq B_{S(n)}\subseteq A_{S(n)}\). By the principle of induction, for every natural \(n\in\mathbb{N}\), \(A_{S(n)}\subseteq B_{n}\subseteq A_{n}\).</p>
+			<p>We can write \(A\) as the following disjoint union:</p>
+			<p>\[
+				A=\bigcup\limits _{n\in\mathbb{N}}\left((A_{n}\setminus B_{n})\cup(B_{n}\setminus A_{S(n)})\right)
+				=\bigcup\limits _{n\in\mathbb{N}}(A_{n}\setminus B_{n})\cup\bigcup\limits _{n\in\mathbb{N}}(B_{n}\setminus A_{S(n)}).
+			\]</p>
+			<p>Write \(C:=\bigcup\limits _{n\in\mathbb{N}}(A_{n}\setminus B_{n})\), and \(D:=A\setminus C\). Then \(D\subseteq B_{0}=g(B)\). The function \(g\) is one-to-one and onto \(B_{0}\), and therefore there exists a one-to-one and onto \(g^{-1}:B_{0}\rightarrow B\).</p>
+			<p>Now define \(h:A\rightarrow B\) by</p>
+			<p>\[
+				h(a):=\begin{cases}
+					f(a) & a\in C\\
+					g^{-1}(a) & a\in D.
+				\end{cases}
+			\]</p>
+			<p>Let \(\{x,y\}\subseteq A\) satisfy \(h(x)=h(y)\). If \(\{x,y\}\subseteq C\), then \(f(x)=f(y)\), and by one-to-one-ness of \(f\), \(x=y\). If \(\{x,y\}\subseteq D\), then \(g^{-1}(x)=g^{-1}(y)\), and by one-to-one-ness of \(g^{-1}\), \(x=y\).</p>
+			<p>Assume for contradiction that \(x\in C\) while \(y\in D\). Then \(f(x)=g^{-1}(y)\), hence \((g\circ f)(x)=y\). But</p>
+			<p>\[
+			\begin{align*}
+				(g\circ f)(C)
+				&=(g\circ f)(\bigcup\limits _{n\in\mathbb{N}}(A_{n}\setminus B_{n}))\\
+				&=\bigcup\limits _{n\in\mathbb{N}}(g\circ f)(A_{n}\setminus B_{n})\\
+				&=\bigcup\limits _{n\in\mathbb{N}}\left((g\circ f)(A_{n})\setminus(g\circ f)(B_{n})\right)\\
+				&=\bigcup\limits _{n\in\mathbb{N}}\left(A_{S(n)}\setminus B_{S(n)}\right)\\
+				&\subseteq C.
+			\end{align*}
+			\]</p>
+			<p>Thus \((g\circ f)(x)\in C\), while \(y\in D=A\setminus C\), a contradiction. Therefore \(h\) is one-to-one.</p>
+			<p>Let \(b\in B\). We split into cases. If \(g(b)\in D\), then \(h(g(b))=g^{-1}(g(b))=b\). Otherwise \(g(b)\in C\), so there exists \(n\in\mathbb{N}\) such that \(g(b)\in A_{n}\setminus B_{n}\). If \(n=0\), then \(g(b)\in A\setminus g(B)\), a contradiction. Therefore there exists \(m\in\mathbb{N}\) such that \(n=S(m)\). Since \(g(b)\in A_{S(m)}=(g\circ f)(A_{m})\), there exists \(a\in A_{m}\) such that \(g(b)=g(f(a))\). By one-to-one-ness of \(g\), \(b=f(a)\).</p>
+			<p>In addition, since \(g(b)=g(f(a))\notin B_{S(m)}=(g\circ f)(B_{m})\), and since \(g\circ f\) is one-to-one, we get \(a\in A_{m}\setminus B_{m}\subseteq C\). Hence \(h(a)=f(a)=b\), so \(h\) is onto \(B\).</p>
+
+			<p class="label">Claim (Cantor's Theorem):</p>
+			<p>Let \(A\) be a set. Then \(|A|&lt;|P(A)|\).</p>
+
+			<p class="label">Proof:</p>
+			<p>The function \(f:A\rightarrow P(A)\) defined by \(f(a)=\{a\}\) is clearly one-to-one, so \(|A|\le |P(A)|\). Let \(f:A\rightarrow P(A)\) be any function, and write \(B:=\{a\in A:a\notin f(a)\}\in P(A)\). Assume for contradiction that there exists \(a_{0}\in A\) such that \(f(a_{0})=B\). We split into cases. If \(a_{0}\in B\), then \(a_{0}\notin f(a_{0})\), a contradiction. Otherwise \(a_{0}\in A\setminus B=\{a\in A:a\in f(a)\}\), so \(a_{0}\in f(a_{0})=B\), again a contradiction.</p>
+
+			<p class="label">Corollary:</p>
+			<p>For every set \(A\), there exists a set \(B\) such that \(|A|&lt;|B|\).</p>
+
+			<p class="label">Claim:</p>
+			<p>Let \(A,B\) be sets such that \(|A|=|B|\). Let \(a_{0}\in A\), and let \(b_{0}\in B\). Then there exists a one-to-one and onto function \(f:A\rightarrow B\) such that \(f(a_{0})=b_{0}\).</p>
+
+			<p class="label">Proof:</p>
+			<p>There exists a one-to-one and onto \(h:A\rightarrow B\). Define \(g:A\rightarrow A\) by</p>
+			<p>\[
+				g(a):=\begin{cases}
+					h^{-1}(b_{0}) & a=a_{0}\\
+					a_{0} & a=h^{-1}(b_{0})\\
+					a & \text{otherwise}.
+				\end{cases}
+			\]</p>
+			<p>It is clear that \(g\) is one-to-one and onto, since it is its own inverse. Therefore \(f:=(h\circ g)\) is one-to-one and onto as a composition of one-to-one and onto functions, and it also satisfies \(f(a_{0})=h(g(a_{0}))=h(h^{-1}(b_{0}))=b_{0}\).</p>
+
+			<h2>Finite Cardinalities</h2>
+			<blockquote>
+				<p>We now show some basic results about sets with a finite number of elements, and we will also see that there really are sets that are not finite.</p>
+			</blockquote>
+
+			<p class="label">Claim:</p>
+			<p>Let \(m\in\mathbb{N}\) be natural. Then for every natural \(n\in\mathbb{N}\) such that \(n&lt;m\), \(|n|&lt;|m|\).</p>
+
+			<p class="label">Proof:</p>
+			<p>If \(m=0\), there is no \(n\in\mathbb{N}\) such that \(n&lt;m\), so the claim holds vacuously. Let \(m_{0}\in\mathbb{N}\) be such that for every \(n&lt;m_{0}\), \(|n|&lt;|m_{0}|\), and let \(n&lt;S(m_{0})\). Since \(n\subseteq m_{0}\), \(|n|\le|S(m_{0})|\). If \(n=0\), then the only function from \(n\) is the empty function, and it is not one-to-one and onto \(S(m_{0})\). Otherwise, there exists \(k\in\mathbb{N}\) such that \(S(k)=n\).</p>
+			<p>Assume for contradiction that \(|S(m_{0})|=|n|\). Then there exists a one-to-one \(f:S(m_{0})\rightarrow n\) such that \(f(m_{0})=k\). We get that \(f\restriction m_{0}\) is a one-to-one and onto function from \(m_{0}\) to \(k&lt;m_{0}\), contradicting the choice of \(m_{0}\). Therefore, by the principle of induction, the claim follows.</p>
+
+			<p class="label">Definition:</p>
+			<p>Let \(A\) be a set. We say that \(A\) is finite if there exists a natural \(n\in\mathbb{N}\) such that \(|A|=|n|\). Otherwise we say that it is infinite. We write \(|A|=n\), and say that \(A\) has \(n\) elements.</p>
+
+			<p class="label">Corollary:</p>
+			<p>Let \(A\) be a set such that \(|A|=0\). Then \(A=\emptyset\).</p>
+
+			<p class="label">Claim:</p>
+			<p>For every finite set \(A\) with \(n\in\mathbb{N}\) elements, and for every subset \(B\subseteq A\), \(B\) is finite.</p>
+
+			<p class="label">Proof:</p>
+			<p>If \(n=0\), then every set \(A\) with \(0\) elements is the empty set, and every subset of the empty set is the empty set, so \(B\) also has \(0\) elements. Let \(n_{0}\in\mathbb{N}\) be natural such that for every set \(A\) with \(n_{0}\) elements, and every \(B\subseteq A\), \(B\) is finite. Let \(A\) be a set with \(S(n_{0})\) elements, and let \(B\subseteq A\) be a subset.</p>
+			<p>If \(B=A\), then \(B\) has \(S(n_{0})\) elements, and the claim holds. Otherwise, there exists \(a\in A\setminus B\), and there exists a function \(f:A\rightarrow S(n_{0})\) such that \(f(a)=n_{0}\). Then \(f\restriction(A\setminus\{a\})\) is a one-to-one function from \(A\setminus\{a\}\) to \(n_{0}\), and therefore \(|A\setminus\{a\}|=n_{0}\). Also \(B\subseteq A\setminus\{a\}\). Hence \(B\) is finite, and by the principle of induction the claim holds for every \(n\in\mathbb{N}\).</p>
+
+			<p class="label">Claim:</p>
+			<p>Let \(A\) be a finite set, and let \(B\subset A\). Then \(|B|&lt;|A|\).</p>
+
+			<p class="label">Proof:</p>
+			<p>Since \(B\subseteq A\), \(|B|\le|A|\). There exist natural numbers \(n,m\) such that \(|A|=n\) and \(|B|=m\), and there exist one-to-one and onto functions \(f:n\rightarrow A\), \(g:B\rightarrow m\). Assume for contradiction that there exists a one-to-one and onto function \(h:A\rightarrow B\). Then \((g\circ h\circ f)\) is a one-to-one and onto function from \(n\) to \(m\), a contradiction.</p>
+
+			<p class="label">Claim:</p>
+			<p>\(\mathbb{N}\) is infinite.</p>
+
+			<p class="label">Proof:</p>
+			<p>Assume for contradiction that \(\mathbb{N}\) is finite. Define \(f:\mathbb{N}\rightarrow\mathbb{N}\setminus\{0\}\) by \(f(n):=S(n)\). The function \(f\) is one-to-one and onto from \(\mathbb{N}\) to \(\mathbb{N}\setminus\{0\}\subset\mathbb{N}\), so \(|\mathbb{N}|=|\mathbb{N}\setminus\{0\}|\), contradicting the previous claim.</p>
+
+			<p class="label">Claim:</p>
+			<p>Let \(A\) be a finite set, let \(B\) be a set, and let \(f:A\rightarrow B\) be a function. Then \(f(A)\) is a finite set, and \(|f(A)|\le|A|\).</p>
+
+			<p class="label">Proof:</p>
+			<p>Since \(A\) is finite, there exists a natural \(n\in\mathbb{N}\) and a one-to-one and onto function \(g:A\rightarrow n\). Define a function \(h:f(A)\rightarrow A\) by</p>
+			<p>\[
+				h(b):=g^{-1}\left(\min\left\{ g(a):a\in f^{-1}(\{b\})\right\}\right).
+			\]</p>
+			<p>Let \(\{b_{0},b_{1}\}\subseteq f(A)\) satisfy \(h(b_{0})=h(b_{1})\). Then</p>
+			<p>\[
+				\min\left\{ g(a):a\in f^{-1}(\{b_{0}\})\right\}
+				=
+				\min\left\{ g(a):a\in f^{-1}(\{b_{1}\})\right\}.
+			\]</p>
+			<p>Therefore</p>
+			<p>\[
+				\left\{ g(a):a\in f^{-1}(\{b_{0}\})\right\}
+				\cap
+				\left\{ g(a):a\in f^{-1}(\{b_{1}\})\right\}
+				\neq\emptyset.
+			\]</p>
+			<p>Hence \(f^{-1}(\{b_{0}\})\cap f^{-1}(\{b_{1}\})\neq\emptyset\). Let \(a_{0}\in f^{-1}(\{b_{0}\})\cap f^{-1}(\{b_{1}\})\). Then \(f(a_{0})=b_{0}\), and similarly \(f(a_{0})=b_{1}\). Thus \(b_{0}=b_{1}\), so \(h\) is one-to-one. Therefore \(|f(A)|\le|A|\), and in particular \(f(A)\) is finite.</p>
+
+			<nav class="nav" aria-label="Section navigation">
+				<a href="functions.html">Previous: Functions</a>
+				<a href="arithmetic-of-natural-numbers.html">Next: Arithmetic of the Natural Numbers</a>
+			</nav>
+		</article>
+	</div>
+</body>
+</html>
+

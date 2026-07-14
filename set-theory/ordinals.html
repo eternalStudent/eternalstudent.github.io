@@ -1,0 +1,229 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="author" content="Noam Weisberg">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta property="og:type" content="article">
+	<meta property="og:title" content="Ordinals">
+	<meta property="og:image" content="https://eternalstudent.github.io/profile.png">
+	<meta property="og:site_name" content="eternalStudent">
+	<meta property="og:url" content="https://eternalstudent.github.io/set-theory/ordinals.html">
+	<link rel="icon" type="image/png" href="../profile.png">
+	<link rel="preconnect" href="https://fonts.gstatic.com">
+	<link href="https://fonts.googleapis.com/css2?family=Spectral&display=swap" rel="stylesheet">
+
+	<script>
+		window.MathJax = {
+			tex: {
+				macros: {
+					nicefrac: ['{}^{#1}\\!/\\!_{#2}', 2]
+				}
+			}
+		};
+	</script>
+	<script type="text/javascript" id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+	<link rel="stylesheet" href="style.css">
+	<title>Ordinals</title>
+</head>
+<body>
+	<div class="page-header">
+		<a href="../index.html">
+			<div class="page-header-content">
+				<h1 class="page-header-title">eternalStudent</h1>
+				<img src="../profile.png" alt="">
+			</div>
+		</a>
+	</div>
+	<div class="content">
+		<article>
+			<p class="kicker">Set Theory</p>
+			<h1 class="post-title">Ordinals</h1>
+			<p><a class="toc-link" href="index.html">Table of contents</a></p>
+
+			<h2>Isomorphisms and Initial Segments of Well-Ordered Sets</h2>
+
+			<p class="label">Notation:</p>
+			<p>Let \(A\) be a well-ordered set with \(\preccurlyeq_{A}\). We denote
+			\[
+				\prec_{A}:=\{(a_{0},a_{1})\in A\times A:a_{0}\preccurlyeq_{A}a_{1}\text{ and }a_{0}\neq a_{1}\}.
+			\]</p>
+
+			<p class="label">Definition:</p>
+			<p>Let \(A,B\) be well-ordered sets with \(\preccurlyeq_{A},\preccurlyeq_{B}\), respectively. If there exists a one-to-one and onto function \(f:A\rightarrow B\) such that for every \(\{a_{0},a_{1}\}\subseteq A\), \(a_{0}\preccurlyeq_{A}a_{1}\) if and only if \(f(a_{0})\preccurlyeq_{B}f(a_{1})\), then we say that \(A\) and \(B\) are isomorphic, write \(A\simeq B\), and call \(f\) an isomorphism.</p>
+
+			<p class="label">Corollary:</p>
+			<p>Isomorphism of well-ordered sets is an equivalence relation.</p>
+
+			<p class="label">Claim:</p>
+			<p>Let \(A\) be a well-ordered set with \(\preccurlyeq\), let \(B\subseteq A\) be isomorphic to \(A\), and let \(f:A\rightarrow B\) be the isomorphism between them. Then for every \(a\in A\), \(a\preccurlyeq f(a)\).</p>
+
+			<p class="label">Proof:</p>
+			<p>Write \(X:=\{a\in A:f(a)\prec a\}\), and assume for contradiction that \(X\neq\emptyset\). Then there exists \(b:=\min X\). We have \(f(b)\prec b\), and also \(f(f(b))\prec f(b)\), so \(f(b)\in X\), contradicting the minimality of \(b\).</p>
+
+			<p class="label">Definition:</p>
+			<p>Let \(A\) be a well-ordered set with \(\preccurlyeq\), and let \(A_{0}\subset A\). We say that \(A_{0}\) is an initial segment of \(A\) if there exists \(a_{0}\in A\) such that
+			\[
+				A_{0}=\{a\in A:a\prec a_{0}\}.
+			\]
+			We denote this initial segment by \(A[a_{0}]=A_{0}\).</p>
+
+			<p class="label">Claims:</p>
+			<p>Let \(A\) be a well-ordered set with \(\preccurlyeq\). Then:</p>
+			<ol>
+				<li>For every initial segment \(B\) of \(A\), \(A\) and \(B\) are not isomorphic.</li>
+				<li>There is only one isomorphism from \(A\) to itself.</li>
+				<li>For every well-ordered \(B\) isomorphic to \(A\), there is only one isomorphism between \(A\) and \(B\).</li>
+			</ol>
+
+			<p class="label">Proofs:</p>
+			<ol>
+				<li>Let \(a\in A\), and assume for contradiction that there exists an isomorphism \(f:A\rightarrow A[a]\). Then \(a\preccurlyeq f(a)\in A[a]\), contradicting the definition of \(A[a]\).</li>
+				<li>Let \(f:A\rightarrow A\) be an isomorphism. Then \(f\) is invertible, and \(f^{-1}\) is also an isomorphism. Hence, for every \(a\in A\), \(a\preccurlyeq f(a)\) and \(a\preccurlyeq f^{-1}(a)\). Therefore \(f^{-1}(a)\preccurlyeq f^{-1}(f(a))=a\), and so \(a=f(a)\). Thus \(f\) is the identity function.</li>
+				<li>Let \(f,g:A\rightarrow B\) be isomorphisms. Then \(f^{-1}\circ g:A\rightarrow A\) is an isomorphism, so it is the identity function, and therefore \(f=g\).</li>
+			</ol>
+
+			<p class="label">Claims:</p>
+			<p>Let \(A\) be a well-ordered set with \(\preccurlyeq_{A}\), and let \(a_{0}\in A\). Then:</p>
+			<ol>
+				<li>If \(a_{1}\in A\) and \(A[a_{0}]\simeq A[a_{1}]\), then \(a_{0}=a_{1}\).</li>
+				<li>Let \(B\) be a well-ordered set isomorphic to \(A\), with \(\preccurlyeq_{B}\), and denote the isomorphism between them by \(g\). Then \(g\bigl|_{A[a_{1}]}\) is an isomorphism between \(A[a_{1}]\) and \(B[g(a_{1})]\).</li>
+				<li>Let \(B\) be a well-ordered set isomorphic to \(A\), with \(\preccurlyeq_{B}\), denote the isomorphism between them by \(g\), and let \(b_{1}\in B\). Then \(g\bigl|_{A[g^{-1}(b_{1})]}\) is an isomorphism between \(A[g^{-1}(b_{1})]\) and \(B[b_{1}]\).</li>
+			</ol>
+
+			<p class="label">Proofs:</p>
+			<ol>
+				<li>Assume for contradiction that \(a_{0}\neq a_{1}\), and without loss of generality that \(a_{0}\prec_{A}a_{1}\). Then \(A[a_{0}]\subset A[a_{1}]\), meaning \(A[a_{0}]\) is an initial segment of \(A[a_{1}]\), so they are not isomorphic, a contradiction.</li>
+				<li>One-to-one-ness and preservation of order are preserved under restriction. We show that the restriction is onto. For every \(a_{0}\in A[a_{1}]\), \(a_{0}\prec_{A}a_{1}\), so \(g(a_{0})\prec_{B}g(a_{1})\). Hence \(g(a_{0})\in B[g(a_{1})]\), and \(g(A[a_{1}])\subseteq B[g(a_{1})]\). Conversely, for every \(b_{0}\in B[g(a_{1})]\), \(b_{0}\prec_{B}g(a_{1})\), so \(g^{-1}(b_{0})\prec_{A}a_{1}\). Hence \(g^{-1}(b_{0})\in A[a_{1}]\), and \(b_{0}\in g(A[a_{1}])\). Therefore \(B[g(a_{1})]\subseteq g(A[a_{1}])\), as required.</li>
+				<li>By the previous claim, \(g^{-1}\bigl|_{B[b_{1}]}\) is an isomorphism between \(B[b_{1}]\) and \(A[g^{-1}(b_{1})]\). Hence, by invertibility, \(g\bigl|_{A[g^{-1}(b_{1})]}\) is an isomorphism between \(A[g^{-1}(b_{1})]\) and \(B[b_{1}]\).</li>
+			</ol>
+
+			<p class="label">Claim:</p>
+			<p>Let \(A,B\) be well-ordered sets with \(\preccurlyeq_{A},\preccurlyeq_{B}\), respectively, and denote the strict order relations by \(\prec_{A},\prec_{B}\). Then exactly one of the following claims holds:</p>
+			<ol>
+				<li>\(A\) and \(B\) are isomorphic.</li>
+				<li>\(A\) is isomorphic to an initial segment of \(B\).</li>
+				<li>\(B\) is isomorphic to an initial segment of \(A\).</li>
+			</ol>
+
+			<p class="label">Proof:</p>
+			<p>Write
+			\[
+				f:=\left\{(a,b)\in A\times B:A[a]\simeq B[b]\right\}
+			\]
+			and
+			\[
+				A_{0}:=\{a\in A:\text{ there exists }b\in B\text{ such that }(a,b)\in f\}.
+			\]
+			Notice that \((\min A,\min B)\in f\neq\emptyset\), and therefore \(\emptyset\neq A_{0}\subseteq A\). Let \(a_{1}\in A_{0}\), and let \(\{b_{1},b_{2}\}\subseteq B\) be such that \((a_{1},b_{2})\in f\) and \((a_{1},b_{1})\in f\). Then \(B[b_{2}]\simeq A[a_{1}]\simeq B[b_{1}]\), so \(b_{2}=b_{1}\). Thus \(f:A_{0}\rightarrow B\) is a function, and by symmetry it is also one-to-one.</p>
+			<p>Let \(g\) be the isomorphism \(A[a_{1}]\simeq B[b_{1}]\). For every \(a_{0}\prec_{A}a_{1}\), \(g\bigl|_{A[a_{0}]}\) is an isomorphism between \(A[a_{0}]\) and \(B[g(a_{0})]\). Thus \(A[a_{0}]\simeq B[g(a_{0})]\), so \(a_{0}\in A_{0}\), and \(A_{0}\) is either all of \(A\) or an initial segment of \(A\). Now write \(b_{0}:=f(a_{0})\). Since \(f\) is one-to-one, \(b_{0}\neq b_{1}\). Assume for contradiction that \(b_{1}\prec_{B}b_{0}\). Then \(A[a_{1}]\simeq B[b_{1}]\subset B[b_{0}]\). For every \(x\in A[a_{1}]\), \(g(x)\in B[b_{1}]\), and in particular \(g(x)\in B[b_{0}]\). Hence \(x\in A[a_{0}]\), so \(A[a_{1}]\subseteq A[a_{0}]\), contradicting \(a_{0}\prec_{A}a_{1}\). Therefore \(f(a_{0})\prec_{B}f(a_{1})\), and \(f\) preserves order. Thus \(f\) is an isomorphism between \(A_{0}\subseteq A\) and \(f(A_{0})\subseteq B\).</p>
+			<p>For every \(b_{0}'\prec_{B}b_{1}\), \(g\bigl|_{A[g^{-1}(b_{0}')]}\) is an isomorphism between \(A[g^{-1}(b_{0}')]\) and \(B[b_{0}']\). Thus \(A[g^{-1}(b_{0}')]\simeq B[b_{0}']\), and \(b_{0}'\in f(A_{0})\). Hence \(f(A_{0})\) is either all of \(B\) or an initial segment of \(B\).</p>
+			<p>Assume for contradiction that \(A_{0}\) is an initial segment of \(A\) and \(f(A_{0})\) is an initial segment of \(B\). Then there exist \((a',b')\in A\times B\) such that \(A_{0}=A[a']\) and \(f(A_{0})=B[b']\). Hence \(A[a']\simeq B[b']\), and therefore \(f(a')=b'\), a contradiction. If \(A=A_{0}\) and \(B=f(A_{0})\), then \(A\) and \(B\) are isomorphic. If \(A=A_{0}\) but \(f(A_{0})\) is an initial segment of \(B\), then \(A\) is isomorphic to an initial segment of \(B\). If \(A_{0}\) is an initial segment of \(A\) while \(B=f(A_{0})\), then \(B\) is isomorphic to an initial segment of \(A\).</p>
+
+			<h2>Canonical Representatives of Well-Ordered Sets</h2>
+
+			<p class="label">Definition:</p>
+			<p>Let \(\alpha\) be a set. If \(\alpha\) is transitive and is well-ordered by \(\in_{\alpha}\), then \(\alpha\) is called an ordinal. We denote the class of all ordinals by \(\mathcal{O}\).</p>
+
+			<p class="label">Corollaries:</p>
+			<ol>
+				<li>For every \(n\in\mathbb{N}\), \(n\) is an ordinal.</li>
+				<li>\(\mathbb{N}\) is an ordinal.</li>
+				<li>If \(\alpha\in\mathcal{O}\) and \(\beta\in\mathcal{O}\), then \(\alpha\cap\beta\in\mathcal{O}\).</li>
+			</ol>
+
+			<p class="label">Notation:</p>
+			<p>\(\omega:=\mathbb{N}\).</p>
+
+			<p class="label">Claims:</p>
+			<p>Let \(\alpha\) be an ordinal. Then:</p>
+			<ol>
+				<li>\(S(\alpha)\) is an ordinal.</li>
+				<li>For every \(\beta\in\alpha\), \(\beta\) is an ordinal.</li>
+				<li>If \(\beta\) is an ordinal such that \(\beta\subset\alpha\), then \(\beta\in\alpha\).</li>
+			</ol>
+
+			<p class="label">Proofs:</p>
+			<ol>
+				<li>Let \(\beta\in S(\alpha)=\alpha\cup\{\alpha\}\). We split into cases. If \(\beta\in\alpha\), then \(\beta\subset\alpha\), and in particular \(\beta\subset S(\alpha)\). Otherwise \(\beta=\alpha\), and therefore \(\beta\subset S(\alpha)\). Hence \(S(\alpha)\) is transitive. Since \(\alpha\in S(\alpha)\), it is easy to see that \(S(\alpha)\) is well-ordered by \(\in_{S(\alpha)}\).</li>
+				<li>Let \(\beta\in\alpha\). Since \(\beta\subset\alpha\), it follows that \(\beta\) is well-ordered by \(\in_{\alpha}\), and therefore it is well-ordered by \(\in_{\beta}\). If \(\beta=\emptyset\), then \(\beta=0\in\mathbb{N}\), so \(\beta\) is an ordinal. Otherwise, let \(\gamma\in\beta\). Since \(\beta\subset\alpha\), it follows that \(\gamma\in\alpha\), and therefore \(\gamma\subset\alpha\). If \(\gamma=\emptyset\), then \(\gamma\subset\beta\). Otherwise, let \(\delta\in\gamma\). Then \(\delta\in\alpha\). We have \(\{\delta,\gamma,\beta\}\subseteq\alpha\) and \(\delta\in\gamma\in\beta\), so \(\delta\in\beta\). Hence \(\gamma\subset\beta\), and \(\beta\) is an ordinal.</li>
+				<li>Write \(\gamma:=\min(\alpha\setminus\beta)\). Assume for contradiction that there exists \(\delta\in\gamma\setminus\beta\). Then \(\delta\in\gamma\in\alpha\), so \(\delta\in\alpha\setminus\beta\), contradicting the minimality of \(\gamma\). Hence \(\gamma\subseteq\beta\). Let \(\delta\in\beta\). If \(\gamma\in\delta\in\beta\), or \(\gamma=\delta\), then \(\gamma\in\beta\), a contradiction. Otherwise \(\delta\in\gamma\). Therefore \(\beta\subseteq\gamma\), so \(\beta=\gamma\in\alpha\).</li>
+			</ol>
+
+			<p class="label">Corollary:</p>
+			<p>Let \(\alpha\neq\emptyset\) be an ordinal. Then \(\emptyset\in\alpha\).</p>
+
+			<p class="label">Corollary (Burali-Forti Paradox):</p>
+			<p>From the axiom of foundation it follows that for every \(X\), \(X\notin X\). Therefore the class of all ordinals \(\mathcal{O}\) is not a set, and also for every \(\alpha\in\mathcal{O}\), \(\alpha\notin\alpha\).</p>
+
+			<p class="label">Claims:</p>
+			<p>Let \(\alpha,\beta,\gamma\) be ordinals. Then:</p>
+			<ol>
+				<li>If \(\alpha\in\beta\) and \(\beta\in\gamma\), then \(\alpha\in\gamma\).</li>
+				<li>\(\alpha\in\beta\), or \(\alpha=\beta\), or \(\beta\in\alpha\).</li>
+			</ol>
+
+			<p class="label">Proofs:</p>
+			<ol>
+				<li>Since \(\alpha\in\beta\), \(\alpha\subset\beta\). Since \(\beta\in\gamma\), \(\beta\subset\gamma\). Thus \(\alpha\subset\beta\subset\gamma\), and therefore \(\alpha\subset\gamma\), so \(\alpha\in\gamma\).</li>
+				<li>We split into cases. If \(\alpha=\beta\), we are done. Otherwise \(\emptyset\in\alpha\cap\beta\neq\emptyset\). If \(\beta\subset\alpha\), then \(\beta\in\alpha\), and we are done. If \(\alpha\subset\beta\), then \(\alpha\in\beta\). The set \(\alpha\cap\beta\) is an ordinal. Assume for contradiction that \(\alpha\cap\beta\subset\alpha\) and \(\alpha\cap\beta\subset\beta\). Then \(\alpha\cap\beta\in\alpha\cap\beta\), a contradiction.</li>
+			</ol>
+
+			<p class="label">Corollary:</p>
+			<p>Let \(\alpha,\beta\) be ordinals. Then \(\alpha\subseteq\beta\) or \(\beta\subseteq\alpha\).</p>
+
+			<p class="label">Notation:</p>
+			<p>Let \(\alpha,\beta\) be ordinals such that \(\beta\in\alpha\). We also write \(\beta&lt;\alpha\).</p>
+
+			<p class="label">Claim:</p>
+			<p>Let \(\alpha\) be a finite ordinal. Then \(\alpha\in\mathbb{N}\).</p>
+
+			<p class="label">Proof:</p>
+			<p>Assume for contradiction that \(\alpha\notin\mathbb{N}\). Then \(\mathbb{N}\subseteq\alpha\), meaning that \(\alpha\) has an infinite subset, contradicting that it is finite.</p>
+
+			<p class="label">Claim (Ordinals Are Representatives of the Well-Ordered Sets):</p>
+			<p>Let \(A\) be a well-ordered set. Then there exists a unique ordinal \(\alpha\) such that \(A\) is isomorphic to \(\alpha\).</p>
+
+			<p class="label">Proof:</p>
+			<p>Write
+			\[
+				A_{0}:=\{a\in A:\text{ there exists }\beta\in\mathcal{O}\text{ such that }A[a]\simeq\beta\}.
+			\]
+			By the axiom of replacement there exists a set
+			\[
+				B:=\{\beta\in\mathcal{O}:a\in A_{0}\text{ and }A[a]\simeq\beta\}.
+			\]
+			Since \(B\) is a family of ordinals, it is well-ordered by \(\in_{B}\). For every \(\beta_{1}\in B\), there exists \(a_{1}\in A_{0}\) such that \(A[a_{1}]\simeq\beta_{1}\). Denote the isomorphism between them by \(g\). Then for every \(\gamma\in\beta_{1}\), \(g\bigl|_{A[g^{-1}(\gamma)]}\) is an isomorphism between \(A[g^{-1}(\gamma)]\) and \(\beta_{1}[\gamma]=\gamma\). Hence \(A[g^{-1}(\gamma)]\simeq\gamma\), so \(\gamma\in B\). Thus \(B\) is also transitive, and therefore it is an ordinal.</p>
+			<p>For every \(a_{0}\prec_{A}a_{1}\), \(g\bigl|_{A[a_{0}]}\) is an isomorphism between \(A[a_{0}]\) and \(B[g(a_{0})]=g(a_{0})\in\mathcal{O}\). Hence \(a_{0}\in A_{0}\), so \(A_{0}\) is either all of \(A\) or an initial segment of \(A\).</p>
+			<p>Assume for contradiction that \(\beta_{1}\in g(a_{0})\). Then \(A[a_{1}]\simeq\beta_{1}\subset g(a_{0})\). For every \(x\in A[a_{1}]\), \(g(x)\in\beta_{1}\), and in particular \(g(x)\in g(a_{0})\). Hence \(x\in A[a_{0}]\), so \(A[a_{1}]\subseteq A[a_{0}]\), contradicting \(a_{0}\prec_{A}a_{1}\). The function
+			\[
+				f:=\{(a,\beta)\in A_{0}\times B:A[a]\simeq\beta\}
+			\]
+			preserves order and is an isomorphism between \(A_{0}\) and \(B\).</p>
+			<p>Assume for contradiction that \(A_{0}\) is an initial segment of \(A\), and that there exists \(a'\in A\) such that \(A_{0}=A[a']\). Then \(A[a']\simeq B\in\mathcal{O}\), so \(a'\in A_{0}\), a contradiction. Hence \(A=A_{0}\), and \(A\simeq B\). Uniqueness follows from the fact that two isomorphic ordinals must be equal.</p>
+
+			<p class="label">Definition:</p>
+			<p>Let \(A\) be a well-ordered set with \(\preccurlyeq\), and let \(\alpha\in\mathcal{O}\) be the unique ordinal isomorphic to \(A\). We denote \(\operatorname{Otp}(A,\preccurlyeq)=\alpha\).</p>
+
+			<p class="label">Claim:</p>
+			<p>There exists \(\alpha\in\mathcal{O}\) such that \(|\omega|&lt;|\alpha|\).</p>
+
+			<p class="label">Proof:</p>
+			<p>By the axiom of replacement there exists a set
+			\[
+				Y:=\{\alpha\in\mathcal{O}:\preccurlyeq\in P(\omega\times\omega)\text{ is a well-ordering and }\operatorname{Otp}(\omega,\preccurlyeq)=\alpha\}.
+			\]
+			Assume for contradiction that for every \(\alpha\in\mathcal{O}\) satisfying \(\omega\le\alpha\), we have \(|\omega|=|\alpha|\). Then there exists a one-to-one and onto function \(f:\omega\rightarrow\alpha\). From the one-to-one-ness and onto-ness of \(f\), and from the well-order on \(\alpha\), we get that
+			\[
+				\{(n,m)\in\omega\times\omega:f(n)\le f(m)\}
+			\]
+			is a well-ordering on \(\omega\), and therefore \(\alpha\in Y\). By the axiom of union, \(Y\cup\omega\) is a set, but \(Y\cup\omega=\mathcal{O}\), a contradiction.</p>
+
+			<nav class="nav" aria-label="Section navigation">
+				<a href="real-numbers.html">Previous: The Real Numbers</a>
+				<a href="axiom-of-choice.html">Next: The Axiom of Choice</a>
+			</nav>
+		</article>
+	</div>
+</body>
+</html>

@@ -1,0 +1,286 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="author" content="Noam Weisberg">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta property="og:type" content="article">
+	<meta property="og:title" content="Arithmetic of the Natural Numbers">
+	<meta property="og:image" content="https://eternalstudent.github.io/profile.png">
+	<meta property="og:site_name" content="eternalStudent">
+	<meta property="og:url" content="https://eternalstudent.github.io/set-theory/arithmetic-of-natural-numbers.html">
+	<link rel="icon" type="image/png" href="../profile.png">
+	<link rel="preconnect" href="https://fonts.gstatic.com">
+	<link href="https://fonts.googleapis.com/css2?family=Spectral&display=swap" rel="stylesheet">
+
+	<script>
+		window.MathJax = {
+			tex: {
+				macros: {
+					nicefrac: ['{}^{#1}\\!/\\!_{#2}', 2]
+				}
+			}
+		};
+	</script>
+	<script type="text/javascript" id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+	<link rel="stylesheet" href="style.css">
+	<title>Arithmetic of the Natural Numbers</title>
+</head>
+<body>
+	<div class="page-header">
+		<a href="../index.html">
+			<div class="page-header-content">
+				<h1 class="page-header-title">eternalStudent</h1>
+				<img src="../profile.png" alt="">
+			</div>
+		</a>
+	</div>
+	<div class="content">
+		<article>
+			<p class="kicker">Set Theory</p>
+			<h1 class="post-title">Arithmetic of the Natural Numbers</h1>
+			<p><a class="toc-link" href="index.html">Table of contents</a></p>
+
+			<h2>Addition</h2>
+			<blockquote>
+				<p>Once we have a way to count elements in finite sets, the definition of addition becomes clear. Take a set with \(m\) elements and a disjoint set with \(n\) elements, and the size of their union will be the sum. We first verify that the definition does not depend on the choice of representatives.</p>
+			</blockquote>
+
+			<p class="label">Claim:</p>
+			<p>Let \(n\in\mathbb{N}\) be natural, let \(A\) be a set with \(S(n)\) elements, and let \(a\in A\). Then \(|A\setminus\{a\}|=n\).</p>
+
+			<p class="label">Proof:</p>
+			<p>There exists a function \(f:A\rightarrow S(n)\) such that \(f(a)=n\). Then \(f\upharpoonright(A\setminus\{a\})\) is a one-to-one and onto function to \(n\).</p>
+
+			<p class="label">Claim:</p>
+			<p>Let \(n\in\mathbb{N}\) be natural, let \(A\) be a set with \(n\) elements, and let \(b\notin A\). Then \(|A\cup\{b\}|=S(n)\).</p>
+
+			<p class="label">Proof:</p>
+			<p>There exists a one-to-one and onto function \(f:A\rightarrow n\). Then \(f\cup\{(b,n)\}:A\cup\{b\}\rightarrow S(n)\) is a union of one-to-one and onto functions with disjoint domains and disjoint images, hence it is one-to-one and onto. Therefore \(|A\cup\{b\}|=S(n)\).</p>
+
+			<p class="label">Claim:</p>
+			<p>Let \(n\in\mathbb{N}\) be natural, and let \(A\) be a set with \(n\) elements. Then for every natural \(m\in\mathbb{N}\), there exists \(k\in\mathbb{N}\) such that for every set \(B\) with \(m\) elements satisfying \(A\cap B=\emptyset\), we have \(|A\cup B|=k\).</p>
+
+			<p class="label">Proof:</p>
+			<p>If \(m=0\), every set \(B\) with \(m\) elements satisfies \(B=\emptyset\), hence \(A\cap B=\emptyset\) and \(|A\cup B|=|A|=n\). Let \(m_{0}\in\mathbb{N}\) be such that there exists \(k_{0}\in\mathbb{N}\) such that for every set \(B\) with \(m_{0}\) elements satisfying \(A\cap B=\emptyset\), \(|A\cup B|=k_{0}\).</p>
+			<p>Let \(B_{0}\) be a set with \(S(m_{0})\) elements such that \(A\cap B_{0}=\emptyset\), and let \(b\in B_{0}\). Then \(|B_{0}\setminus\{b\}|=m_{0}\). Since \(B_{0}\setminus\{b\}\subset B_{0}\), we also have \(A\cap(B_{0}\setminus\{b\})=\emptyset\), and therefore \(|A\cup(B_{0}\setminus\{b\})|=k_{0}\). Hence, by the previous claim, \(|A\cup B_{0}|=|(A\cup(B_{0}\setminus\{b\}))\cup\{b\}|=S(k_{0})\). By the principle of induction, the claim is true for every natural \(m\in\mathbb{N}\).</p>
+
+			<p class="label">Definition:</p>
+			<p>Let \(\{n,m\}\subset\mathbb{N}\) be natural numbers. We denote by \(m+n\) the unique \(k\in\mathbb{N}\) such that for every pair of disjoint sets \(A,B\) satisfying \(|A|=n\) and \(|B|=m\), \(|A\cup B|=k\). We call \(k\) the sum of \(n\) and \(m\).</p>
+
+			<p class="label">Corollaries:</p>
+			<p>Let \(\{n,m,k\}\subset\mathbb{N}\) be natural numbers. Then:</p>
+			<ol>
+				<li>\(m+n=n+m\)</li>
+				<li>\(S(n)=n+1\)</li>
+				<li>\(n+0=n\)</li>
+				<li>\((n+m)+k=n+(m+k)\), and we may write \(n+m+k\) briefly.</li>
+			</ol>
+
+			<p class="label">Claim:</p>
+			<p>Let \(m\in\mathbb{N}\) be natural. Then for every \(n\in\mathbb{N}\), \(m\le m+n\), and in addition, if \(n\neq0\), then \(m&lt;m+n\).</p>
+
+			<p class="label">Proof:</p>
+			<p>If \(n=0\), then \(m+n=m\). Let \(n_{0}\in\mathbb{N}\) be such that \(m\le m+n_{0}\). Then \(m+n_{0}&lt;S(m+n_{0})=m+n_{0}+1\), and by transitivity \(m\le m+n_{0}&lt;m+n_{0}+1\). Hence \(m&lt;m+n_{0}+1\), and by the principle of induction the claim holds for every natural \(n\in\mathbb{N}\).</p>
+
+			<p class="label">Claim:</p>
+			<p>Let \(\{n,m\}\subset\mathbb{N}\). Then \(n\le m\) if and only if there exists \(k\in\mathbb{N}\) such that \(n+k=m\). In addition, if \(k\neq0\), then \(n&lt;m\).</p>
+
+			<p class="label">Proof:</p>
+			<p>Assume \(n\le m\). Then \(m\setminus n\subseteq m\), so there exists \(k\in\mathbb{N}\) such that \(|m\setminus n|=k\). Also \((m\setminus n)\cap n=\emptyset\), hence \(|n\cup(m\setminus n)|=m\), and therefore \(n+k=m\). If \(m=n\), then \(m\setminus n=\emptyset\), so \(k=0\).</p>
+			<p>Conversely, assume that there exists \(k\in\mathbb{N}\) such that \(n+k=m\). By the previous claim, \(n\le n+k=m\), and therefore \(n\le m\). If \(k\neq0\), then \(n&lt;n+k=m\), and therefore \(n&lt;m\).</p>
+
+			<p class="label">Claim:</p>
+			<p>Let \(\{n,m,k\}\subset\mathbb{N}\) satisfy \(n\le m\). Then \(n+k\le m+k\). If in addition \(n&lt;m\), then \(n+k&lt;m+k\).</p>
+
+			<p class="label">Proof:</p>
+			<p>If \(k=0\), then \(n+k=n\le m=m+k\), and if \(n&lt;m\), then \(n+k&lt;m+k\), as desired. Let \(x\in n\cup\{n\}\). Then \(x\in n\) or \(x=n\). If \(x\in n\), then \(x\in m\), and in particular \(x\in m\cup\{m\}\). Otherwise \(x=n\), and since \(n\in m\) or \(n=m\), we get \(x\in m\) or \(x=m\), hence \(x\in m\cup\{m\}\). Therefore \(n+1\le m+1\). If in addition \(n&lt;m\), meaning \(n\neq m\), then \(n+1\le m\), hence \(n+1&lt;m+1\). By induction, the claim holds for every \(k\in\mathbb{N}\).</p>
+
+			<p class="label">Claim:</p>
+			<p>Let \(\{n,m,k\}\subset\mathbb{N}\) satisfy \(n+k\le m+k\). Then \(n\le m\). If in addition \(n+k&lt;m+k\), then \(n&lt;m\).</p>
+
+			<p class="label">Proof:</p>
+			<p>If \(k=0\), the claim is clear. Assume \(n+1\le m+1\). Then \(n\cup\{n\}\subseteq m\cup\{m\}\). Since \(n\in n\cup\{n\}\), we get \(n\in m\cup\{m\}\), so \(n\in m\) or \(n=m\), hence \(n\le m\). If in addition \(n+1&lt;m+1\), then \(n+1\neq m+1\), hence \(n\neq m\), and therefore \(n&lt;m\). By induction, the claim holds for every \(k\in\mathbb{N}\).</p>
+
+			<p class="label">Claim:</p>
+			<p>Let \(\{n_{0},m_{0},n_{1},m_{1}\}\subset\mathbb{N}\) satisfy \(n_{0}\le m_{0}\) and \(n_{1}\le m_{1}\). Then \(n_{0}+n_{1}\le m_{0}+m_{1}\).</p>
+
+			<p class="label">Proof:</p>
+			<p>Since \(n_{0}\le m_{0}\), we get \(n_{0}+n_{1}\le m_{0}+n_{1}\). Since \(n_{1}\le m_{1}\), there exists \(k\in\mathbb{N}\) such that \(n_{1}+k=m_{1}\). Therefore \(n_{0}+n_{1}\le m_{0}+n_{1}\le m_{0}+n_{1}+k=m_{0}+m_{1}\), as desired.</p>
+
+			<p class="label">Notation:</p>
+			<p>Let \(\{n_{i}\}_{i\in m+1}\subset\mathbb{N}\) be a finite set of natural numbers. We denote \(n_{0}+n_{1}+\cdots+n_{m}\) by \(\sum\limits _{i\in m+1}n_{i}\), or \(\sum\limits _{i=0}^{m}n_{i}\), or \(\sum\limits _{i&lt;m+1}n_{i}\). We define the empty sum \(\sum\limits _{i&lt;0}n_{i}:=0\).</p>
+
+			<h2>Multiplication</h2>
+			<blockquote>
+				<p>Multiplication is almost as natural as addition; this time, instead of a union, we will use a Cartesian product.</p>
+			</blockquote>
+
+			<p class="label">Claim:</p>
+			<p>Let \(n\in\mathbb{N}\) be natural, let \(A\) be a set with \(n\) elements, and let \(b\) be arbitrary. Then \(|A\times\{b\}|=n\).</p>
+
+			<p class="label">Proof:</p>
+			<p>Define \(f:A\rightarrow A\times\{b\}\) by \(f(a):=(a,b)\). It is easy to see that this function is one-to-one and onto.</p>
+
+			<p class="label">Claim:</p>
+			<p>Let \(n\in\mathbb{N}\) be natural, and let \(A\) be a set with \(n\) elements. Then for every natural \(m\in\mathbb{N}\), there exists a natural \(k\in\mathbb{N}\) such that for every set \(B\) with \(m\) elements, \(|A\times B|=k\).</p>
+
+			<p class="label">Proof:</p>
+			<p>If \(m=0\), every set \(B\) with \(m\) elements satisfies \(B=\emptyset\), hence \(|A\times B|=|\emptyset|=0\). Let \(m_{0}\in\mathbb{N}\) be such that there exists \(k_{0}\in\mathbb{N}\) such that for every set \(B\) with \(m_{0}\) elements, \(|A\times B|=k_{0}\). Let \(B_{0}\) be a set with \(m_{0}+1\) elements, and let \(b\in B_{0}\). Then \(|B_{0}\setminus\{b\}|=m_{0}\), and</p>
+			<p>\[
+			\begin{align*}
+				A\times B_{0}
+				&=A\times((B_{0}\setminus\{b\})\cup\{b\})\\
+				&=(A\times(B_{0}\setminus\{b\}))\cup(A\times\{b\}).
+			\end{align*}
+			\]</p>
+			<p>Since \((A\times(B_{0}\setminus\{b\}))\cap(A\times\{b\})=\emptyset\), by the choice of \(m_{0}\) we get \(|(A\times(B_{0}\setminus\{b\}))\cup(A\times\{b\})|=k_{0}+n\).</p>
+
+			<p class="label">Definition:</p>
+			<p>Let \(\{n,m\}\subset\mathbb{N}\) be natural numbers. We denote by \(n\cdot m\), or by \(nm\), the unique \(k\in\mathbb{N}\) such that for every set \(A\) with \(n\) elements and every set \(B\) with \(m\) elements, \(|A\times B|=k\). We call \(k\) the product of \(n\) and \(m\).</p>
+
+			<p class="label">Corollaries:</p>
+			<p>Let \(\{n,m,k\}\subset\mathbb{N}\). Then:</p>
+			<ol>
+				<li>\(n\cdot m=m\cdot n\).</li>
+				<li>\(n\cdot0=0\).</li>
+				<li>\(n\cdot1=n\).</li>
+				<li>\((n\cdot m)\cdot k=n\cdot(m\cdot k)\), and we may write \(n\cdot m\cdot k\) briefly.</li>
+				<li>\(n\cdot(m+k)=n\cdot m+n\cdot k\).</li>
+			</ol>
+
+			<p class="label">Corollary:</p>
+			<p>Let \(\{m,n\}\subset\mathbb{N}\) be natural numbers, and let \(\{n_{i}\}_{i&lt;m}\subset\mathbb{N}\) be natural numbers. Then \(n\cdot\sum\limits _{i&lt;m}n_{i}=\sum\limits _{i&lt;m}(n\cdot n_{i})\).</p>
+
+			<p class="label">Corollaries:</p>
+			<p>Let \(n\in\mathbb{N}\). Then:</p>
+			<ol>
+				<li>For every \(m\in\mathbb{N}\), \(\sum\limits _{i&lt;m}n=\overset{m\text{ times}}{\overbrace{n+n+\cdots+n}}=m\cdot n\).</li>
+				<li>If \(n&gt;2\), then \(n+n&lt;n\cdot n\).</li>
+				<li>For every \(m&gt;1\), \(n&lt;n\cdot m\).</li>
+			</ol>
+
+			<p class="label">Claim:</p>
+			<p>Let \(k\in\mathbb{N}\). Then for all natural \(n\le m\), \(n\cdot k\le m\cdot k\).</p>
+
+			<p class="label">Proof:</p>
+			<p>If \(k=0\), then for all natural \(\{n,m\}\subset\mathbb{N}\), \(0=n\cdot k\le m\cdot k=0\). Let \(k_{0}\in\mathbb{N}\) be such that for all natural \(n\le m\), \(n\cdot k_{0}\le m\cdot k_{0}\). There exists \(\ell\in\mathbb{N}\) such that \(m=n+\ell\). Then \(n\cdot k_{0}+n\le m\cdot k_{0}+n\le m\cdot k_{0}+n+\ell=m\cdot k_{0}+m\). Hence \(n\cdot(k_{0}+1)\le m\cdot(k_{0}+1)\). Therefore, by the principle of induction, for every \(k\in\mathbb{N}\) and all natural \(n\le m\), \(n\cdot k\le m\cdot k\).</p>
+
+			<p class="label">Claim:</p>
+			<p>Let \(k\in\mathbb{N}\setminus\{0\}\), and let \(\{n,m\}\subset\mathbb{N}\) be natural numbers satisfying \(n\cdot k\le m\cdot k\). Then \(n\le m\).</p>
+
+			<p class="label">Proof:</p>
+			<p>Assume for contradiction that \(m&lt;n\). Then there exists \(\ell&gt;0\) such that \(n=m+\ell\). Hence \((m+\ell)\cdot k=m\cdot k+\ell\cdot k\le m\cdot k\), so \(\ell\cdot k\le0\). Since \(0\) is the minimal natural number and \(k\neq0\), we get \(\ell=0\), contradicting the assumption.</p>
+
+			<h2>Exponentiation</h2>
+			<blockquote>
+				<p>We now want to define exponentiation, and we do this using the set of all functions from one set to another.</p>
+			</blockquote>
+
+			<p class="label">Definition:</p>
+			<p>Let \(A,B\) be sets. We denote \(B^{A}:=\left\{ f\in P(A\times B):f:A\rightarrow B\right\}\).</p>
+
+			<p class="label">Claim:</p>
+			<p>Let \(n\in\mathbb{N}\) be natural, and let \(A\) be a set with \(n\) elements. Then for every natural \(m\in\mathbb{N}\), there exists a natural \(k\in\mathbb{N}\) such that for every set \(B\) with \(m\) elements, \(|A^{B}|=k\).</p>
+
+			<p class="label">Proof:</p>
+			<p>If \(m=0\), every set \(B\) with \(m\) elements satisfies \(B=\emptyset\), and therefore \(A^{B}=\{\emptyset\}\), so \(|A^{B}|=1\). Let \(m_{0}\in\mathbb{N}\) be natural such that there exists \(k_{0}\in\mathbb{N}\) such that for every set \(B\) with \(m_{0}\) elements, \(|A^{B}|=k_{0}\). Let \(B_{0}\) be a set with \(m_{0}+1\) elements, and let \(b\in B_{0}\). Then \(|B_{0}\setminus\{b\}|=m_{0}\), so \(|A^{B_{0}\setminus\{b\}}\times A|=k_{0}\cdot n\).</p>
+			<p>Define \(g:A^{B_{0}\setminus\{b\}}\times A\rightarrow A^{B_{0}}\) by \(g(f,a):=f\cup\{(b,a)\}\). Then the function \(h:A^{B_{0}}\rightarrow A^{B_{0}\setminus\{b\}}\times A\) defined by \(h(f):=(f\upharpoonright(B_{0}\setminus\{b\}),f(b))\) is its inverse. Hence \(g\) is one-to-one and onto, and \(|A^{B_{0}}|=|A^{B_{0}\setminus\{b\}}\times A|=k_{0}\cdot n\). By the principle of induction, the claim holds for every natural \(m\in\mathbb{N}\).</p>
+
+			<p class="label">Definition:</p>
+			<p>Let \(\{n,m\}\subset\mathbb{N}\) be natural numbers. We denote by \(m^{n}\) the unique \(k\in\mathbb{N}\) such that for every set \(A\) with \(n\) elements and every set \(B\) with \(m\) elements, \(|B^{A}|=k\). We call \(k\) the power of \(m\) by \(n\).</p>
+
+			<p class="label">Definition:</p>
+			<p>Let \(\{A_{\alpha}\}_{\alpha\in I}\) be nonempty sets, and write \(A:=\bigcup\limits _{\alpha\in I}A_{\alpha}\). Then \(\prod\limits _{\alpha\in I}A_{\alpha}:=\left\{ f\in A^{I}:\text{for all }\alpha\in I\text{, }f(\alpha)\in A_{\alpha}\right\}\).</p>
+
+			<p class="label">Definition:</p>
+			<p>Let \(m\in\mathbb{N}\) be natural, and let \(\{n_{i}\}_{i&lt;m+1}\subset\mathbb{N}\) be natural numbers. Then we denote \(\prod\limits _{i&lt;m+1}n_{i}:=n_{0}\cdot n_{1}\cdots n_{m}\), and define the empty product \(\prod\limits _{i&lt;0}n_{i}:=1\).</p>
+
+			<p class="label">Claim:</p>
+			<p>Let \(n\in\mathbb{N}\), and let \(\{A_{i}\}_{i&lt;n}\) be finite sets. Then \(|\prod\limits _{i&lt;n}A_{i}|=\prod\limits _{i&lt;n}|A_{i}|\).</p>
+
+			<p class="label">Proof:</p>
+			<p>If \(n=0\), then \(\prod\limits _{i&lt;n}A_{i}=\{\emptyset\}\), and also \(\prod\limits _{i&lt;n}|A_{i}|=1\). Therefore \(|\prod\limits _{i&lt;n}A_{i}|=\prod\limits _{i&lt;n}|A_{i}|\).</p>
+			<p>Let \(n_{0}\in\mathbb{N}\) be such that for every collection \(\{A_{i}\}_{i&lt;n_{0}}\) of finite sets, \(|\prod\limits _{i&lt;n_{0}}A_{i}|=\prod\limits _{i&lt;n_{0}}|A_{i}|\). Let \(\{B_{i}\}_{i&lt;n_{0}+1}\) be finite sets. Then \(|\prod\limits _{i&lt;n_{0}}B_{i}|=\prod\limits _{i&lt;n_{0}}|B_{i}|\).</p>
+			<p>Define a function \(g:\left(\prod\limits _{i&lt;n_{0}}B_{i}\right)\times B_{n_{0}}\rightarrow\prod\limits _{i&lt;n_{0}+1}B_{i}\) by \(g(f,b):=f\cup\{(n_{0},b)\}\). Then the function \(h:\prod\limits _{i&lt;n_{0}+1}B_{i}\rightarrow\left(\prod\limits _{i&lt;n_{0}}B_{i}\right)\times B_{n_{0}}\) defined by \(h(f):=(f\upharpoonright\prod\limits _{i&lt;n_{0}}B_{i},f(n_{0}))\) is its inverse. Hence \(g\) is one-to-one and onto, and</p>
+			<p>\[
+				|\prod\limits _{i&lt;n_{0}+1}B_{i}|
+				=|\left(\prod\limits _{i&lt;n_{0}}B_{i}\right)\times B_{n_{0}}|
+				=\left(\prod\limits _{i&lt;n_{0}}|B_{i}|\right)\cdot|B_{n_{0}}|
+				=\prod\limits _{i&lt;n_{0}+1}|B_{i}|.
+			\]</p>
+			<p>Therefore, by the principle of induction, the claim holds for every \(n\in\mathbb{N}\).</p>
+
+			<p class="label">Corollaries:</p>
+			<p>Let \(\{n,m\}\subset\mathbb{N}\) be natural numbers. Then:</p>
+			<ol>
+				<li>\(n^{0}=1\).</li>
+				<li>\(n^{1}=n\).</li>
+				<li>\(n\neq0\Longrightarrow0^{n}=0\).</li>
+				<li>\(1^{n}=1\).</li>
+				<li>\(n^{m+1}=n^{m}\cdot n\).</li>
+			</ol>
+
+			<p class="label">Claims:</p>
+			<p>Let \(\{n,m,k\}\subset\mathbb{N}\) be natural numbers. Then:</p>
+			<ol>
+				<li>\(n^{m}\cdot n^{k}=n^{m+k}\).</li>
+				<li>\((n^{m})^{k}=n^{m\cdot k}\)</li>
+				<li>\((n\cdot m)^{k}=n^{k}\cdot m^{k}\).</li>
+			</ol>
+
+			<p class="label">Proof:</p>
+			<p>Let \(A,B,C\) be sets with \(n,m,k\) elements respectively.</p>
+			<ol>
+				<li>Assume \(B\cap C=\emptyset\), and define \(h:A^{B}\times A^{C}\rightarrow A^{B\cup C}\) by \(h(f,g):=f\cup g\). This is a one-to-one and onto function, hence \(|A^{B}\times A^{C}|=|A^{B\cup C}|\).</li>
+				<li>Define \(h:(A^{B})^{C}\rightarrow A^{B\times C}\) by \((h(f))(b,c):=(f(c))(b)\). This is a one-to-one and onto function, hence \(|(A^{B})^{C}|=|A^{B\times C}|\).</li>
+				<li>Define \(h:A^{C}\times B^{C}\rightarrow(A\times B)^{C}\) by \((h(f,g))(c):=(f(c),g(c))\). This is a one-to-one and onto function, hence \(|A^{C}\times B^{C}|=|(A\times B)^{C}|\).</li>
+			</ol>
+
+			<p class="label">Claim:</p>
+			<p>Let \(A\) be a finite set with \(n\) elements. Then \(|P(A)|=2^{n}\).</p>
+
+			<p class="label">Proof:</p>
+			<p>Define \(f:P(A)\rightarrow2^{A}\) by</p>
+			<p>\[
+				f(A_{0})(a):=\begin{cases}
+					1 & a\in A_{0}\\
+					0 & \text{otherwise}.
+				\end{cases}
+			\]</p>
+			<p>Define \(g:2^{A}\rightarrow P(A)\) by \(g(h):=\left\{ a:h(a)=1\right\}\). Let \(A_{0}\in P(A)\). Then</p>
+			<p>\[
+			\begin{align*}
+				(g\circ f)(A_{0})
+				&=g(a\mapsto\begin{cases}
+					1 & a\in A_{0}\\
+					0 & \text{otherwise}
+				\end{cases})\\
+				&=\left\{ a:a\in A_{0}\right\}=A_{0}.
+			\end{align*}
+			\]</p>
+			<p>Let \(h\in2^{A}\). Then</p>
+			<p>\[
+			\begin{align*}
+				(f\circ g)(h)
+				&=f(\left\{ a:h(a)=1\right\})\\
+				&=a\mapsto\begin{cases}
+					1 & h(a)=1\\
+					0 & h(a)=0
+				\end{cases}
+				=h.
+			\end{align*}
+			\]</p>
+			<p>Thus \(f,g\) are inverses of one another, hence they are one-to-one and onto. Therefore \(|P(A)|=|2^{A}|=2^{n}\).</p>
+
+			<p class="label">Order of Arithmetic Operations:</p>
+			<p>Let \(\{n,m,k\}\subset\mathbb{N}\setminus\{0\}\) be natural numbers. When we write \(n+m\cdot k\), we mean \(n+(m\cdot k)\). Also, \(n\cdot m^{k}\) is equivalent to \(n\cdot(m^{k})\), and in particular \(n+m^{k}\) means \(n+(m^{k})\).</p>
+
+			<nav class="nav" aria-label="Section navigation">
+				<a href="cardinalities.html">Previous: Cardinalities</a>
+				<a href="integers.html">Next: The Integers</a>
+			</nav>
+		</article>
+	</div>
+</body>
+</html>

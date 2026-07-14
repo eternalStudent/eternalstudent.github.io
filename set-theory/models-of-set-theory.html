@@ -1,0 +1,153 @@
+﻿<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="author" content="Noam Weisberg">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta property="og:type" content="article">
+	<meta property="og:title" content="Models of Set Theory">
+	<meta property="og:image" content="https://eternalstudent.github.io/profile.png">
+	<meta property="og:site_name" content="eternalStudent">
+	<meta property="og:url" content="https://eternalstudent.github.io/set-theory/models-of-set-theory.html">
+	<link rel="icon" type="image/png" href="../profile.png">
+	<link rel="preconnect" href="https://fonts.gstatic.com">
+	<link href="https://fonts.googleapis.com/css2?family=Spectral&display=swap" rel="stylesheet">
+
+	<script>
+		window.MathJax = {
+			tex: {
+				macros: {
+					nicefrac: ['{}^{#1}\\!/\\!_{#2}', 2]
+				}
+			}
+		};
+	</script>
+	<script type="text/javascript" id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+	<link rel="stylesheet" href="style.css">
+	<title>Models of Set Theory</title>
+</head>
+<body>
+	<div class="page-header">
+		<a href="../index.html">
+			<div class="page-header-content">
+				<h1 class="page-header-title">eternalStudent</h1>
+				<img src="../profile.png" alt="">
+			</div>
+		</a>
+	</div>
+	<div class="content">
+		<article>
+			<p class="kicker">Set Theory</p>
+			<h1 class="post-title">Models of Set Theory</h1>
+			<p><a class="toc-link" href="index.html">Table of contents</a></p>
+
+			<h2>Basic Concepts in Logic</h2>
+			<blockquote>
+				<p>The main problem with starting mathematics from the beginning is that there is no beginning. In order to start with set theory, one has to know some basic logic, and in order to understand the basic logic, one has to know some basic set theory. This creates a “strange loop.” To break the loop and still find a starting point, I will assume an intuitive understanding of concepts such as “statement,” “truth,” and “identity.” I will wave my hands a little about models, axioms, elements, and rules of inference, all so that I have a basis from which to start speaking in mathematical language.</p>
+			</blockquote>
+
+			<p class="label">Definition:</p>
+			<p>Let \(\varphi(a)\) be a verbal statement about \(a\). Then \(\varphi\) is called a property of \(a\) if the statement \(\varphi(a)\) is true.</p>
+
+			<p class="label">Definition:</p>
+			<p>Let \(\varphi\) be a property. The collection of all \(a\)'s for which the statement \(\varphi(a)\) is true is called a class, and is denoted \(\left\{ a:\varphi(a)\right\}\).</p>
+
+			<p class="label">Notation:</p>
+			<p>Let \(\varphi\) be a property, and write \(A:=\left\{ a:\varphi(a)\right\}\). Let \(a\) be given. If \(\varphi(a)\) is true, we write \(a\in A\); otherwise, we write \(a\notin A\).</p>
+
+			<p class="label">Notation:</p>
+			<p>Let \(a,b\) be given. If they are identical we write \(a=b\); otherwise, \(a\neq b\).</p>
+
+			<h2>The Axioms</h2>
+			<blockquote>
+				<p>With the discovery of paradoxes in Cantor's naive set theory, a movement began among mathematicians and logicians to find a more rigorous foundation for mathematics. In 1908 Ernst Zermelo proposed the first axiom system, and later Abraham Fraenkel formulated corrections to it. Together this axiom system is called Zermelo-Fraenkel, and is sometimes denoted \(\text{ZF}\).</p>
+			</blockquote>
+
+			<p>Let \({\cal M}\) be a collection of classes. Then \({\cal M}\) is called a model of set theory if the following axioms hold:</p>
+
+			<p class="axiom">1. Axiom of Existence:</p>
+			<p>There exists \(E\in{\cal M}\) such that for every \(x\in{\cal M}\), \(x\notin E\). We call such a class empty.</p>
+			<ol>
+				<li>For every empty \(E\in{\cal M}\), \(E\subseteq A\).</li>
+				<li>\(A\subseteq A\).</li>
+				<li>If \(A\subseteq B\) and \(B\subseteq C\), then \(A\subseteq C\), and we also write \(A\subseteq B\subseteq C\).</li>
+			</ol>
+
+			<p class="axiom">2. Axiom of Extensionality:</p>
+			<p>Let \(A\in{\cal M},B\in{\cal M}\). Then \(A=B\) if and only if \(A\subseteq B\) and \(B\subseteq A\).</p>
+			<ol>
+				<li>\(\{a\}:=\{x:x=a\}\)</li>
+				<li>\(\{a,b\}:=\{x:x=a\text{ or }x=b\}\)</li>
+				<li>\(\{A,B\}=\{B,A\}\).</li>
+				<li>\(\{A,A\}=\{A\}\).</li>
+			</ol>
+
+			<p class="axiom">3. Axiom of Pairing:</p>
+			<p>Let \(A\in{\cal M},B\in{\cal M}\). Then there exists \(C\in{\cal M}\) such that \(A\in C\) and \(B\in C\).</p>
+
+			<p class="axiom">4. Axiom of Separation:</p>
+			<p>Let \(A\in{\cal M}\), and let \(\varphi\) be a property. Then \(\{a\in A:\varphi(a)\}\in{\cal M}\).</p>
+			<ol>
+				<li>\(\{A,B\}\in{\cal M}\)</li>
+				<li>\(\{A\}\in{\cal M}\)</li>
+				<li>\(\bigcup{\cal A}:=\{a:\text{exists }A\in{\cal A}\text{ s.t. }a\in A\}\). We also write \(\bigcup\limits _{A\in{\cal A}}A\).</li>
+				<li>For \({\cal A}\neq\emptyset\), define \(\bigcap{\cal A}:=\{a:\text{for all }A\in{\cal A}\text{ s.t. }a\in A\}\). We also write \(\bigcap\limits _{A\in{\cal A}}A\).</li>
+			</ol>
+
+			<p class="axiom">5. Axiom of Union:</p>
+			<p>Let \(A\in{\cal M}\). Then \(\bigcup A\in{\cal M}\).</p>
+			<ol>
+				<li>\(A\neq\emptyset\Longrightarrow\bigcap A\in{\cal M}\).</li>
+				<li>\(A\cup B\in{\cal M}\).</li>
+				<li>\(A\cap B\in{\cal M}\).</li>
+				<li>\(A\setminus B\in{\cal M}\).</li>
+				<li>\(A\triangle B\in{\cal M}\).</li>
+				<li>Commutativity.</li>
+				<li>Associativity.</li>
+				<li>Distributivity.</li>
+				<li>De Morgan's laws.</li>
+			</ol>
+
+			<p class="axiom">6. Axiom of Power Set:</p>
+			<p>Let \(A\in{\cal M}\). Then there exists \(C\in{\cal M}\) such that for every \(B\in{\cal M}\), \(B\in C\) if and only if \(B\subseteq A\). We denote it by \(P(A)\), and call it the power set of \(A\).</p>
+			<ol>
+				<li>\(\emptyset\in P(A)\).</li>
+				<li>\(A\in P(A)\).</li>
+				<li>\(\{\emptyset,A\}\subseteq P(A)\).</li>
+				<li>\(\{\emptyset,\{A\}\}=P(\{A\})\).</li>
+			</ol>
+
+			<p class="axiom">7. Axiom of Foundation:</p>
+			<p>Let \(A\neq\emptyset\). Then there exists \(B\in A\) such that \(A\cap B=\emptyset\).</p>
+			<ol>
+				<li>\(A\notin A\).</li>
+				<li>\(A\notin B\) or \(B\notin A\).</li>
+				<li>\(A\in\mathcal{M}\), hence \(\{A\}\in\mathcal{M}\), and therefore by the axiom of foundation \(A\cap\{A\}=\emptyset\). Hence \(A\notin A\).</li>
+				<li>\(A\in\mathcal{M},B\in\mathcal{M}\), hence \(\{A,B\}\in\mathcal{M}\), and therefore by the axiom of separation \(A\cap\{A,B\}=\emptyset\) or \(B\cap\{A,B\}=\emptyset\). Hence \(A\notin B\) or \(B\notin A\).</li>
+			</ol>
+
+			<p class="axiom">8. Axiom of Infinity:</p>
+			<p>There exists \(I\in{\cal M}\) such that \(\emptyset\in I\), and for every \(x\in I\), \(x\cup\{x\}\in I\).</p>
+
+			<p class="axiom">9. Axiom of Replacement:</p>
+			<p>Let \(A\in{\cal M}\). Then for every property \(\varphi\) such that for every \(a\in A\) there exists a unique \(b\in{\cal M}\) for which the statement \(\varphi(a,b)\) is true, we have \(\{b:a\in A\text{ and }\varphi(a,b)\}\in{\cal M}\).</p>
+
+			<p class="label">Definition:</p>
+			<p>Let \({\cal M}\) be a model of set theory, and let \(A\in{\cal M}\). Then \(A\) is called a set or a family.</p>
+
+			<p class="label">Definition:</p>
+			<p>Let \(A\) be a set, and let \(B\subseteq A\) be a set. Then \(B\) is called a subset of \(A\).</p>
+
+			<p class="label">Definition:</p>
+			<p>Let \({\cal F}\) be a set such that for every pair of distinct sets \(\{A,B\}\subseteq{\cal F}\), \(A\cap B=\emptyset\). Then we say that \({\cal F}\) is a family of pairwise disjoint sets.</p>
+
+			<nav class="nav" aria-label="Section navigation">
+				<a href="index.html">Previous: Table of contents</a>
+				<a href="natural-numbers.html">Next: The Natural Numbers</a>
+			</nav>
+		</article>
+	</div>
+</body>
+</html>
+
+

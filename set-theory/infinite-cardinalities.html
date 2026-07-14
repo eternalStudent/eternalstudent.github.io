@@ -1,0 +1,316 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="author" content="Noam Weisberg">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta property="og:type" content="article">
+	<meta property="og:title" content="Infinite Cardinalities">
+	<meta property="og:image" content="https://eternalstudent.github.io/profile.png">
+	<meta property="og:site_name" content="eternalStudent">
+	<meta property="og:url" content="https://eternalstudent.github.io/set-theory/infinite-cardinalities.html">
+	<link rel="icon" type="image/png" href="../profile.png">
+	<link rel="preconnect" href="https://fonts.gstatic.com">
+	<link href="https://fonts.googleapis.com/css2?family=Spectral&display=swap" rel="stylesheet">
+
+	<script>
+		window.MathJax = {
+			tex: {
+				macros: {
+					nicefrac: ['{}^{#1}\\!/\\!_{#2}', 2]
+				}
+			}
+		};
+	</script>
+	<script type="text/javascript" id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+	<link rel="stylesheet" href="style.css">
+	<title>Infinite Cardinalities</title>
+</head>
+<body>
+	<div class="page-header">
+		<a href="../index.html">
+			<div class="page-header-content">
+				<h1 class="page-header-title">eternalStudent</h1>
+				<img src="../profile.png" alt="">
+			</div>
+		</a>
+	</div>
+	<div class="content">
+		<article>
+			<p class="kicker">Set Theory</p>
+			<h1 class="post-title">Infinite Cardinalities</h1>
+			<p><a class="toc-link" href="index.html">Table of contents</a></p>
+
+			<h2>Countable Sets</h2>
+
+			<p class="label">Definition:</p>
+			<p>Let \(A\) be a set. If \(|A|\le|\mathbb{N}|\), then we say that \(A\) is at most countable, and sometimes simply countable, and write \(|A|\le\aleph_{0}\). Otherwise, we say that \(A\) is uncountable, and write \(|A|&gt;\aleph_{0}\). If \(|A|=|\mathbb{N}|\), we also write \(|A|=\aleph_{0}\).</p>
+
+			<p class="label">Claim:</p>
+			<p>Let \(A\subseteq\mathbb{N}\) be infinite. Then \(|A|=\aleph_{0}\).</p>
+
+			<p class="label">Proof:</p>
+			<p>Define \(A_{0}:=A\) and \(a_{0}:=\min A\). Recursively, for every \(n\in\mathbb{N}\setminus\{0\}\), define \(A_{n}:=A_{n-1}\setminus\{a_{n-1}\}\) and \(a_{n}:=\min A_{n}\). Since \(A\) is infinite, this process can continue indefinitely. Define \(f:\mathbb{N}\rightarrow A\) by \(f(n):=a_{n}\). This function is one-to-one by the way its values were constructed, and therefore \(|\mathbb{N}|\le|A|\). Since \(A\subseteq\mathbb{N}\), we also have \(|A|\le|\mathbb{N}|\). Hence, by the Cantor-Bernstein theorem, \(|A|=|\mathbb{N}|\), as required.</p>
+
+			<p class="label">Claim:</p>
+			<p>Let \(A\) be a set such that \(|A|&lt;\aleph_{0}\). Then \(A\) is finite.</p>
+
+			<p class="label">Proof:</p>
+			<p>Let \(f:A\rightarrow\mathbb{N}\) be one-to-one. Then \(|A|=|f(A)|\), and \(f(A)\subseteq\mathbb{N}\). Assume for contradiction that \(A\) is infinite. Then \(f(A)\) is infinite, so since \(f(A)\subseteq\mathbb{N}\), we get \(|f(A)|=\aleph_{0}\). Hence \(|A|=\aleph_{0}\), a contradiction.</p>
+
+			<p class="label">Claim:</p>
+			<p>Let \(A,B\) be countable sets. Then \(A\cup B\) is countable.</p>
+
+			<p class="label">Proof:</p>
+			<p>There exist one-to-one functions \(f:A\rightarrow\mathbb{N}\) and \(g:B\rightarrow\mathbb{N}\). Define \(h:A\cup B\rightarrow\mathbb{N}\) by
+			\[
+				h(a):=\begin{cases}
+					2f(a) & a\in A\\
+					2g(a)+1 & \text{otherwise}.
+				\end{cases}
+			\]
+			Let \(\{a,b\}\subseteq A\cup B\) be such that \(h(a)=h(b)\). We split into cases. If \(h(a)\) is even, then \(h(b)\) is also even, so \(\{a,b\}\subseteq A\). Thus \(2f(a)=h(a)=h(b)=2f(b)\), and by one-to-one-ness of \(f\), \(a=b\). Otherwise \(h(a)\) is odd, and \(h(b)\) is also odd, so \(\{a,b\}\subseteq B\setminus A\). Hence \(2g(a)+1=h(a)=h(b)=2g(b)+1\), and by one-to-one-ness of \(g\), \(a=b\). Therefore \(h\) is one-to-one, and \(|A\cup B|\le\aleph_{0}\).</p>
+
+			<p class="label">Claim:</p>
+			<p>Let \(A,B\) be countable sets. Then \(A\times B\) is countable.</p>
+
+			<p class="label">Proof:</p>
+			<p>Let \(f:A\rightarrow\mathbb{N}\) and \(g:B\rightarrow\mathbb{N}\) be one-to-one functions, and define \(h:A\times B\rightarrow\mathbb{N}\) by
+			\[
+				h(a,b):=2^{f(a)}\cdot3^{g(b)}.
+			\]
+			Let \((a_{0},b_{0}),(a_{1},b_{1})\in A\times B\) be such that \(h(a_{0},b_{0})=h(a_{1},b_{1})\). Then
+			\[
+				2^{f(a_{0})}\cdot3^{g(b_{0})}=2^{f(a_{1})}\cdot3^{g(b_{1})}.
+			\]
+			By the fundamental theorem of arithmetic, \(f(a_{0})=f(a_{1})\) and \(g(b_{0})=g(b_{1})\). By one-to-one-ness of \(f\) and \(g\), \(a_{0}=a_{1}\) and \(b_{0}=b_{1}\), so \((a_{0},b_{0})=(a_{1},b_{1})\). Therefore \(h\) is one-to-one.</p>
+
+			<p class="label">Claims:</p>
+			<ol>
+				<li>\(|\mathbb{Z}|=\aleph_{0}\).</li>
+				<li>\(|\mathbb{Q}|=\aleph_{0}\).</li>
+			</ol>
+
+			<p class="label">Proofs:</p>
+			<ol>
+				<li>Define \(f:\mathbb{Z}\rightarrow\mathbb{N}\) by
+				\[
+					f(z):=\begin{cases}
+						2z & 0\le z\\
+						-2z-1 & z&lt;0.
+					\end{cases}
+				\]
+				The function \(f\) has an inverse
+				\[
+					g(n):=\begin{cases}
+						n/2 & 2\mid n\\
+						(-n-1)/2 & \text{otherwise}.
+					\end{cases}
+				\]
+				Therefore \(f\) is, in particular, one-to-one.</li>
+				<li>Let \(f:\mathbb{Q}\rightarrow\mathbb{Z}\times\mathbb{N}\) be the passage from rational numbers to canonical representation: if \(f(q)=(a,b)\), then \(q=\frac{a}{b}\), and \(b\nmid a\). Since \(\mathbb{Z}\) is countable and the Cartesian product of countable sets is countable, there exists a one-to-one function \(g:\mathbb{Z}\times\mathbb{N}\rightarrow\mathbb{N}\). Thus \(g\circ f:\mathbb{Q}\rightarrow\mathbb{N}\) is a composition of one-to-one functions, and is therefore one-to-one.</li>
+			</ol>
+
+			<p class="label">Claim:</p>
+			<p>Let \(\{A_{n}\}_{n\in\mathbb{N}}\) be countable sets. Then \(\bigcup_{n\in\mathbb{N}}A_{n}\) is countable.</p>
+
+			<p class="label">Proof:</p>
+			<p>Write \(A:=\bigcup_{n\in\mathbb{N}}A_{n}\), and for every \(n\in\mathbb{N}\), choose a one-to-one function \(f_{n}:A_{n}\rightarrow\mathbb{N}\). For every \(a\in A\), define \(n_{a}:=\min\{n\in\mathbb{N}:a\in A_{n}\}\), and define \(g:A\rightarrow\mathbb{N}\times\mathbb{N}\) by \(g(a):=(n_{a},f_{n_{a}}(a))\). By one-to-one-ness of \(\{f_{n}\}_{n\in\mathbb{N}}\), \(g\) is one-to-one. Since \(\mathbb{N}\times\mathbb{N}\) is countable, there exists a one-to-one function \(h:\mathbb{N}\times\mathbb{N}\rightarrow\mathbb{N}\). Thus \(h\circ g\) is one-to-one, and \(A\) is countable.</p>
+
+			<h2>Uncountable Sets</h2>
+
+			<p class="label">Claims:</p>
+			<ol>
+				<li>\(|2^{\mathbb{N}}|=|P(\mathbb{N})|\).</li>
+				<li>\(|[0..1]|=|2^{\mathbb{N}}|\).</li>
+				<li>\(|(0..1)|=|[0..1]|\).</li>
+				<li>\(|\mathbb{R}|=|(0..1)|\).</li>
+			</ol>
+
+			<p class="label">Proofs:</p>
+			<ol>
+				<li>Define \(f:2^{\mathbb{N}}\rightarrow P(\mathbb{N})\) by \(f(a):=\{n\in\mathbb{N}:a(n)=1\}\). This is an invertible function, and its inverse is
+				\[
+					f^{-1}(N)(n)=\begin{cases}
+						1 & n\in N\\
+						0 & \text{otherwise}.
+					\end{cases}
+				\]</li>
+				<li>(Draft proof.) Define \(f:[0..1]\rightarrow2^{\mathbb{N}}\) by
+				\[
+					f(x)(n):=\begin{cases}
+						0 & x&lt;\sum_{k=0}^{n-1}\frac{f(x)(k)}{2^{k+1}}+\frac{1}{2^{n+1}}\\
+						1 & \text{otherwise}.
+					\end{cases}
+				\]
+				Then \(f\) is one-to-one, so \(|[0..1]|\le|2^{\mathbb{N}}|\). In addition, the function \(g:2^{\mathbb{N}}\rightarrow[0..1]\) defined by
+				\[
+					g(a):=\sup\left\{\sum_{k=0}^{n}\frac{2a(k)}{3^{k+1}}:n\in\mathbb{N}\right\}
+				\]
+				is also one-to-one, so \(|2^{\mathbb{N}}|\le|[0..1]|\). By Cantor-Bernstein, \(|[0..1]|=|2^{\mathbb{N}}|\).</li>
+				<li>(Draft proof.) Define \(f:[0..1]\rightarrow(0..1)\) by
+				\[
+					f(x):=\begin{cases}
+						\frac{1}{2} & x=0\\
+						\frac{1}{2^{n+2}} & \text{there exists }n\in\mathbb{N}\text{ such that }x=\frac{1}{2^{n}}\\
+						x & \text{otherwise}.
+					\end{cases}
+				\]
+				It is easy to be convinced that this is an invertible function.</li>
+				<li>(Draft proof.) Define \(f:\mathbb{R}\rightarrow(0..1)\) by
+				\[
+					f(x):=\begin{cases}
+						\frac{1}{2+x} & x\ge0\\[6pt]
+						\frac{1-x}{2-x} & x&lt;0.
+					\end{cases}
+				\]
+				It is easy to be convinced that this is an invertible function.</li>
+			</ol>
+
+			<p class="label">Corollary:</p>
+			<p>\(|\mathbb{R}|&gt;\aleph_{0}\).</p>
+
+			<h2>Cardinals</h2>
+
+			<p class="label">Definition:</p>
+			<p>Let \(\alpha\in\mathcal{O}\) be such that for every \(\beta&lt;\alpha\), \(|\alpha|\neq|\beta|\). Then \(\alpha\) is called a cardinal.</p>
+
+			<p class="label">Corollaries:</p>
+			<ol>
+				<li>For every \(n&lt;\omega\), \(n\) is a cardinal.</li>
+				<li>\(\omega\) is a cardinal.</li>
+				<li>\(S(\omega)\) is not a cardinal.</li>
+			</ol>
+
+			<p class="label">Claim:</p>
+			<p>Let \(\alpha\) be an infinite ordinal. Then \(S(\alpha)\) is not a cardinal.</p>
+
+			<p class="label">Proof:</p>
+			<p>Since \(\alpha\) is an infinite ordinal, \(\omega\subseteq\alpha\). Since \(\alpha\subseteq S(\alpha)\), we have \(|\alpha|\le|S(\alpha)|\). Define \(f:S(\alpha)\to\alpha\) by
+			\[
+				f(x):=\begin{cases}
+					S(x) & x\in\omega\\
+					0 & x=\alpha\\
+					x & x\in\alpha\setminus\omega.
+				\end{cases}
+			\]
+			The image of \(\{\alpha\}\) is \(\{0\}\). The image of all of \(\omega\) is \(\omega\setminus\{0\}\). The image of all of \(\alpha\setminus\omega\) is \(\alpha\setminus\omega\). These three images are pairwise disjoint, and on each of them the definition is one-to-one. Therefore \(f\) is one-to-one. Hence \(|S(\alpha)|\le|\alpha|\). By Cantor-Bernstein, \(|S(\alpha)|=|\alpha|\). Since \(\alpha&lt;S(\alpha)\) and \(|\alpha|=|S(\alpha)|\), it follows from the definition of cardinal that \(S(\alpha)\) is not a cardinal.</p>
+
+			<p class="label">Claim:</p>
+			<p>Let \(A\) be a set. Then there exists a cardinal \(\kappa\) such that \(|A|=|\kappa|\).</p>
+
+			<p class="label">Proof:</p>
+			<p>By the well-ordering theorem, \(A\) has a well-ordering relation. By the claim that ordinals are representatives of the well-ordered sets, there exists an ordinal \(\alpha\) such that \(|A|=|\alpha|\). Consider the set
+			\[
+				C:=\{\beta\in\alpha\cup\{\alpha\}:|\beta|=|\alpha|\}.
+			\]
+			The set \(C\) is nonempty, since \(\alpha\in C\). Therefore, since \(\alpha\cup\{\alpha\}\) is an ordinal, \(C\) has a minimal element. Denote it by \(\kappa\).</p>
+			<p>Then \(|\kappa|=|\alpha|=|A|\). Also, if \(\gamma&lt;\kappa\), then \(\gamma\notin C\), and therefore \(|\gamma|\neq|\alpha|\). Since \(|\kappa|=|\alpha|\), we get \(|\gamma|\neq|\kappa|\). Thus \(\kappa\) is a cardinal, and \(|A|=|\kappa|\).</p>
+
+			<p class="label">Notation:</p>
+			<p>Let \(A\) be a set, and let \(\kappa\) be a cardinal such that \(|A|=|\kappa|\). We also write \(|A|=\kappa\).</p>
+
+			<p class="label">Claim:</p>
+			<p>Let \(A,B,C,D\) be sets, and let \(\kappa,\lambda\) be cardinals such that \(|A|=|C|=\kappa\) and \(|B|=|D|=\lambda\). Then:</p>
+			<ol>
+				<li>\(|A\times\{0\}\cup B\times\{1\}|=|C\times\{0\}\cup D\times\{1\}|\).</li>
+				<li>\(|A\times B|=|C\times D|\).</li>
+			</ol>
+
+			<p class="label">Proof:</p>
+			<p>There exist invertible functions \(f:A\to C\) and \(g:B\to D\).</p>
+			<ol>
+				<li>Define \(h:A\times\{0\}\cup B\times\{1\}\to C\times\{0\}\cup D\times\{1\}\) by
+				\[
+					h(x,i):=\begin{cases}
+						(f(x),0) & i=0\\
+						(g(x),1) & i=1.
+					\end{cases}
+				\]
+				This is an invertible function, and its inverse is
+				\[
+					h^{-1}(y,i):=\begin{cases}
+						(f^{-1}(y),0) & i=0\\
+						(g^{-1}(y),1) & i=1.
+					\end{cases}
+				\]
+				Therefore \(|A\times\{0\}\cup B\times\{1\}|=|C\times\{0\}\cup D\times\{1\}|\).</li>
+				<li>Define \(p:A\times B\to C\times D\) by \(p(a,b):=(f(a),g(b))\). This is an invertible function, and its inverse is \(p^{-1}(c,d):=(f^{-1}(c),g^{-1}(d))\). Therefore \(|A\times B|=|C\times D|\).</li>
+			</ol>
+
+			<p class="label">Notation:</p>
+			<p>Let \(A,B\) be sets, and let \(\kappa,\lambda\) be cardinals such that \(|A|=\kappa\) and \(|B|=\lambda\). We denote:</p>
+			<ol>
+				<li>\(\kappa+\lambda:=|A\times\{0\}\cup B\times\{1\}|\).</li>
+				<li>\(\kappa\cdot\lambda:=|A\times B|\).</li>
+			</ol>
+
+			<p class="label">Claim (Monotonicity):</p>
+			<p>Let \(\kappa,\lambda,\mu,\nu\) be cardinals such that \(\kappa\le\lambda\) and \(\mu\le\nu\). Then:</p>
+			<ol>
+				<li>\(\kappa+\mu\le\lambda+\nu\).</li>
+				<li>\(\kappa\cdot\mu\le\lambda\cdot\nu\).</li>
+			</ol>
+
+			<p class="label">Proof:</p>
+			<p>Assume that \(\kappa\le\lambda\) and \(\mu\le\nu\). By the definition of the order on cardinals, there are sets with \(|A|=\kappa, |B|=\lambda, |C|=\mu, |D|=\nu\), and one-to-one functions \(f:A\to B\) and \(g:C\to D\).</p>
+			<ol>
+				<li>Define \(h:A\times\{0\}\cup C\times\{1\}\to B\times\{0\}\cup D\times\{1\}\) by
+				\[
+					h(x,i):=\begin{cases}
+						(f(x),0) & i=0\\
+						(g(x),1) & i=1.
+					\end{cases}
+				\]
+				Let \(h(x,i)=h(y,j)\). We split into cases. If \(i=0\), then the left-hand side belongs to \(B\times\{0\}\), so the right-hand side also belongs to \(B\times\{0\}\), and hence \(j=0\). Therefore \((f(x),0)=(f(y),0)\), so \(f(x)=f(y)\). By one-to-one-ness of \(f\), \(x=y\). By symmetry, the same is true for \(i=1\). Therefore \(h\) is one-to-one, and \(\kappa+\mu\le\lambda+\nu\).</li>
+				<li>Define \(p:A\times C\to B\times D\) by \(p(a,c):=(f(a),g(c))\). We split into cases. If \(p(a,c)=p(a',c')\), then \((f(a),g(c))=(f(a'),g(c'))\). Therefore \(f(a)=f(a')\) and \(g(c)=g(c')\). By one-to-one-ness of \(f\) and \(g\), \(a=a'\) and \(c=c'\). Hence \((a,c)=(a',c')\). Thus \(p\) is one-to-one, and \(\kappa\cdot\mu\le\lambda\cdot\nu\).</li>
+			</ol>
+
+			<p class="label">Claim:</p>
+			<p>Let \(\kappa\) be an infinite cardinal. Then \(\kappa=\kappa\cdot\kappa\).</p>
+
+			<p class="label">Proof:</p>
+			<p>The function \(\kappa\to\kappa\times\kappa\) defined by \(\alpha\mapsto(\alpha,0)\) is one-to-one, so \(\kappa\le\kappa\cdot\kappa\). Assume for contradiction that there exists an infinite cardinal \(\kappa\) such that \(\kappa&lt;\kappa\cdot\kappa\). Since cardinals are ordinals, if there are infinite cardinals satisfying this property, there is a minimal one among them. Let \(\kappa_{0}\) be the minimal infinite cardinal with this property.</p>
+			<p>Define an order relation on \(\kappa_{0}\times\kappa_{0}\). For \((\alpha,\beta)\in\kappa_{0}\times\kappa_{0}\), define \((\alpha,\beta)\preccurlyeq(\gamma,\delta)\) if and only if one of the following holds:</p>
+			<ol>
+				<li>\(\max(\alpha,\beta)&lt;\max(\gamma,\delta)\),</li>
+				<li>\(\max(\alpha,\beta)=\max(\gamma,\delta)\) and \(\alpha&lt;\gamma\),</li>
+				<li>\(\alpha=\gamma\), \(\beta\le\delta\), and \(\max(\alpha,\beta)=\max(\gamma,\delta)\).</li>
+			</ol>
+			<p>This is a well-order on \(\kappa_{0}\times\kappa_{0}\). Since \(\kappa_{0}\times\kappa_{0}\) with \(\preccurlyeq\) is a well-ordered set, and since ordinals are representatives of the well-ordered sets, there exists an ordinal \(\theta\) such that \(\kappa_{0}\times\kappa_{0}\simeq\theta\). Hence \(|\theta|=|\kappa_{0}\times\kappa_{0}|=\kappa_{0}\cdot\kappa_{0}\).</p>
+			<p>Let \(\xi&lt;\theta\). By the order isomorphism between \(\theta\) and \(\kappa_{0}\times\kappa_{0}\), the element \(\xi\) corresponds to some pair \((\alpha,\beta)\in\kappa_{0}\times\kappa_{0}\). Write \(\eta:=\max\{\alpha,\beta\}\). All elements preceding \((\alpha,\beta)\) in the order \(\preccurlyeq\) are contained in \(S(\eta)\times S(\eta)\). Therefore \(|\xi|\le|S(\eta)\times S(\eta)|\).</p>
+			<p>Now \(S(\eta)&lt;\kappa_{0}\), so since \(\kappa_{0}\) is a cardinal, \(|S(\eta)|&lt;\kappa_{0}\). We split into cases. If \(S(\eta)\) is finite, then \(S(\eta)\times S(\eta)\) is finite as well, and therefore \(|S(\eta)\times S(\eta)|&lt;\kappa_{0}\). Otherwise, \(S(\eta)\) is infinite. Let \(\lambda\) be a cardinal such that \(|S(\eta)|=\lambda\). Then \(\lambda&lt;\kappa_{0}\), so by the minimality of \(\kappa_{0}\), \(\lambda\cdot\lambda=\lambda\). Hence \(|S(\eta)\times S(\eta)|=\lambda\cdot\lambda=\lambda&lt;\kappa_{0}\). In both cases we get \(|\xi|&lt;\kappa_{0}\).</p>
+			<p>Thus, for every \(\xi&lt;\theta\), \(|\xi|&lt;\kappa_{0}\). If \(\kappa_{0}&lt;\theta\), then in particular for \(\xi=\kappa_{0}\), we get \(|\kappa_{0}|&lt;\kappa_{0}\), contradicting that \(\kappa_{0}\) is a cardinal. Therefore \(\theta\le\kappa_{0}\). Hence \(\kappa_{0}\cdot\kappa_{0}=|\theta|\le\kappa_{0}\). For every \(\kappa\), \(\kappa\le\kappa\cdot\kappa\), and we have \(\kappa_{0}\cdot\kappa_{0}\le\kappa_{0}\). By Cantor-Bernstein, \(\kappa_{0}\cdot\kappa_{0}=\kappa_{0}\), contradicting the choice of \(\kappa_{0}\). Therefore, for every infinite cardinal \(\kappa\), \(\kappa\cdot\kappa=\kappa\).</p>
+
+			<p class="label">Claim:</p>
+			<p>For every cardinal \(\kappa\), \(\kappa+\kappa=2\cdot\kappa\).</p>
+
+			<p class="label">Proof:</p>
+			<p>By the definition of addition of cardinals, \(\kappa+\kappa=|\kappa\times\{0\}\cup\kappa\times\{1\}|\). Define \(f:\kappa\times\{0\}\cup\kappa\times\{1\}\to2\times\kappa\) by \(f(\alpha,i):=(i,\alpha)\). This is an invertible function, and its inverse is \(f^{-1}(i,\alpha)=(\alpha,i)\). Therefore \(\kappa+\kappa=|2\times\kappa|=2\cdot\kappa\).</p>
+
+			<p class="label">Claim:</p>
+			<p>Let \(\kappa\) be an infinite cardinal. Then \(\kappa=\kappa+\kappa\).</p>
+
+			<p class="label">Proof:</p>
+			<p>\(\kappa+\kappa=2\cdot\kappa\le\kappa\cdot\kappa=\kappa\).</p>
+
+			<p class="label">Claim:</p>
+			<p>Let \(\kappa,\lambda\) be cardinals, at least one of them infinite. Then \(\kappa+\lambda=\max(\kappa,\lambda)\).</p>
+
+			<p class="label">Proof:</p>
+			<p>Assume without loss of generality that \(\kappa\le\lambda\). Since at least one of \(\kappa,\lambda\) is infinite, and since \(\kappa\le\lambda\), \(\lambda\) is infinite. On one hand, there exists a one-to-one function \(\lambda\to\kappa+\lambda\) into the second copy, and therefore \(\lambda\le\kappa+\lambda\). On the other hand, by monotonicity of addition and since \(\kappa\le\lambda\), we get \(\kappa+\lambda\le\lambda+\lambda\). By the previous corollary, since \(\lambda\) is an infinite cardinal, \(\lambda+\lambda=\lambda\). Therefore \(\kappa+\lambda\le\lambda\). By Cantor-Bernstein, \(\kappa+\lambda=\lambda\). Since \(\kappa\le\lambda\), \(\max(\kappa,\lambda)=\lambda\), and hence \(\kappa+\lambda=\max(\kappa,\lambda)\).</p>
+
+			<p class="label">Claim:</p>
+			<p>Let \(\kappa,\lambda\) be nonzero cardinals, at least one of them infinite. Then \(\kappa\cdot\lambda=\max(\kappa,\lambda)\).</p>
+
+			<p class="label">Proof:</p>
+			<p>Assume without loss of generality that \(\kappa\le\lambda\). Since at least one of \(\kappa,\lambda\) is infinite, and since \(\kappa\le\lambda\), \(\lambda\) is infinite. On one hand, since \(\kappa\neq0\), there exists \(a\in\kappa\). Therefore there exists a one-to-one function \(\lambda\to\kappa\cdot\lambda\), defined by \(x\mapsto(a,x)\). Hence \(\lambda\le\kappa\cdot\lambda\). On the other hand, by monotonicity of multiplication and since \(\kappa\le\lambda\), we get \(\kappa\cdot\lambda\le\lambda\cdot\lambda\). Since \(\lambda\) is an infinite cardinal, \(\lambda\cdot\lambda=\lambda\). Therefore \(\kappa\cdot\lambda\le\lambda\). By Cantor-Bernstein, \(\kappa\cdot\lambda=\lambda\). Since \(\kappa\le\lambda\), \(\max(\kappa,\lambda)=\lambda\), and therefore \(\kappa\cdot\lambda=\max(\kappa,\lambda)\).</p>
+
+			<nav class="nav" aria-label="Section navigation">
+				<a href="axiom-of-choice.html">Previous: The Axiom of Choice</a>
+				<span class="source-note">End of Set Theory</span>
+			</nav>
+		</article>
+	</div>
+</body>
+</html>

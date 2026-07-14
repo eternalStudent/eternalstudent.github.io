@@ -1,0 +1,205 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="author" content="Noam Weisberg">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta property="og:type" content="article">
+	<meta property="og:title" content="The Axiom of Choice">
+	<meta property="og:image" content="https://eternalstudent.github.io/profile.png">
+	<meta property="og:site_name" content="eternalStudent">
+	<meta property="og:url" content="https://eternalstudent.github.io/set-theory/axiom-of-choice.html">
+	<link rel="icon" type="image/png" href="../profile.png">
+	<link rel="preconnect" href="https://fonts.gstatic.com">
+	<link href="https://fonts.googleapis.com/css2?family=Spectral&display=swap" rel="stylesheet">
+
+	<script>
+		window.MathJax = {
+			tex: {
+				macros: {
+					nicefrac: ['{}^{#1}\\!/\\!_{#2}', 2]
+				}
+			}
+		};
+	</script>
+	<script type="text/javascript" id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+	<link rel="stylesheet" href="style.css">
+	<title>The Axiom of Choice</title>
+</head>
+<body>
+	<div class="page-header">
+		<a href="../index.html">
+			<div class="page-header-content">
+				<h1 class="page-header-title">eternalStudent</h1>
+				<img src="../profile.png" alt="">
+			</div>
+		</a>
+	</div>
+	<div class="content">
+		<article>
+			<p class="kicker">Set Theory</p>
+			<h1 class="post-title">The Axiom of Choice</h1>
+			<p><a class="toc-link" href="index.html">Table of contents</a></p>
+
+			<h2>Weak Forms of the Axiom of Choice</h2>
+
+			<p class="label">Definition:</p>
+			<p>Let \(\mathcal{F}\) be a set. A function \(f:\mathcal{F}\rightarrow\bigcup\mathcal{F}\) such that for every \(A\in\mathcal{F}\setminus\{\emptyset\}\), \(f(A)\in A\), is called a choice function for \(\mathcal{F}\).</p>
+
+			<p class="label">Claim:</p>
+			<p>Let \(\mathcal{F}\) be a finite set. Then \(\mathcal{F}\) has a choice function.</p>
+
+			<p class="label">Proof:</p>
+			<p>If \(\mathcal{F}=\emptyset\), then \(f:=\emptyset\) is a choice function for \(\mathcal{F}\). Let \(n_{0}\in\mathbb{N}\) be such that every set with \(n_{0}\) elements has a choice function. Let \(\mathcal{F}_{0}\) be a set with \(n_{0}+1\) elements, and let \(A\in\mathcal{F}_{0}\). The set \(\mathcal{F}_{0}\setminus\{A\}\) has \(n_{0}\) elements, and therefore it has a choice function \(f_{0}\). If \(A=\emptyset\), then \(f_{0}\cup\{(A,\emptyset)\}\) is a choice function for \(\mathcal{F}_{0}\). Otherwise, let \(a\in A\), and \(f_{0}\cup\{(A,a)\}\) is a choice function for \(\mathcal{F}_{0}\). Hence, by the principle of induction, for every \(n\in\mathbb{N}\), every set \(\mathcal{F}\) with \(n\) elements has a choice function.</p>
+
+			<p class="label">Claim (Dependent Choice):</p>
+			<p>Let \(A\) be a set such that \(P(A)\) has a choice function, and let \(\prec\subseteq A\times A\) be a relation such that for every \(a\in A\), there exists \(b\in A\) such that \(a\prec b\). Then there exists a function \(f:\mathbb{N}\rightarrow A\) such that for every \(n\in\mathbb{N}\), \(f(n)\prec f(n+1)\).</p>
+
+			<p class="label">Proof:</p>
+			<p>Let \(g:P(A)\rightarrow\bigcup P(A)\) be a choice function for \(P(A)\). For every \(a\in A\), write \(A_{a}:=\{b\in A:a\prec b\}\), and let \(a_{0}\in A\). Define \(f:\mathbb{N}\rightarrow A\) by
+			\[
+				f(n):=\begin{cases}
+					a_{0} & n=0\\
+					g(A_{f(n-1)}) & \text{otherwise}.
+				\end{cases}
+			\]</p>
+
+			<p class="label">Claim (Countable Choice):</p>
+			<p>Assume that for every set \(A\) with a relation \(\prec\subseteq A\times A\), if for every \(a\in A\) there exists \(b\in A\) such that \(a\prec b\), then there exists a function \(f:\mathbb{N}\rightarrow A\) such that for every \(n\in\mathbb{N}\), \(f(n)\prec f(n+1)\). Then every countable set \(\mathcal{F}\) has a choice function.</p>
+
+			<p class="label">Proof:</p>
+			<p>Let \(\mathcal{F}\) be countable. Then there exists a one-to-one and onto function \(F:\mathbb{N}\rightarrow\mathcal{F}\setminus\{\emptyset\}\). Let
+			\[
+				A:=\{(n,x)\in\mathbb{N}\times\bigcup\mathcal{F}:x\in F(n)\}.
+			\]
+			Write
+			\[
+				\prec:=\{((n,x),(m,y))\in A\times A:(x,y)\in F(n)\times F(m)\text{ and }m=n+1\}.
+			\]
+			Then for every \((n,x)\in A\), there exists \((m,y)\in A\) such that \((n,x)\prec(m,y)\). Hence there exists a function \(z:\mathbb{N}\rightarrow A\) such that for every \(n\in\mathbb{N}\), \(z(n)\prec z(n+1)\).</p>
+			<p>For simplicity, if \(z(n)=(m,x)\), write \(\pi(z(n))=x\). In particular, \(z(0)\prec z(1)\), so there exists \(n_{0}\in\mathbb{N}\) such that \(\pi(z(0))\in F(n_{0})\) and \(\pi(z(1))\in F(n_{0}+1)\). By induction, for every \(k\in\mathbb{N}\),
+			\[
+				\pi(z(k))\in F(n_{0}+k).
+			\]
+			Define \(\mathcal{F}_{0}:=\{F(i):i&lt;n_{0}\}\). Since \(\mathcal{F}_{0}\) is finite, it has a choice function \(h\). Define \(f:\mathcal{F}\setminus\{\emptyset\}\rightarrow\bigcup\mathcal{F}\) by
+			\[
+				f(A):=\begin{cases}
+					h(A) & F^{-1}(A)&lt;n_{0}\\
+					\pi(z(F^{-1}(A)-n_{0})) & \text{otherwise}.
+				\end{cases}
+			\]
+			Then \(f(A)\in A\) for every \(A\in\mathcal{F}\setminus\{\emptyset\}\), and therefore \(f\) is a choice function for \(\mathcal{F}\).</p>
+
+			<h2>Equivalent Forms of the Axiom of Choice</h2>
+
+			<p class="label">Claim:</p>
+			<p>If every family of pairwise disjoint sets has a choice function, then every set has a choice function.</p>
+
+			<p class="label">Proof:</p>
+			<p>Assume that every family of pairwise disjoint sets has a choice function. Let \(\mathcal{F}\) be a set. If \(\mathcal{F}\) is finite, then it has a choice function and we are done. Otherwise, define
+			\[
+				\mathcal{F}':=\left\{\{(a,A):a\in A\}:A\in\mathcal{F}\right\}.
+			\]
+			Let \(\{A,B\}\subseteq\mathcal{F}'\) be distinct, and assume for contradiction that there exists \((a_{0},A_{0})\in A\cap B\). Then there exists \(A_{0}\in\mathcal{F}\) such that \(A=\{(a,A_{0}):a\in A_{0}\}=B\), contradicting that \(A,B\) are distinct. Hence \(\mathcal{F}'\) is a family of pairwise disjoint sets, and it has a choice function \(g:\mathcal{F}'\rightarrow\bigcup\mathcal{F}'\). Define \(h:\bigcup\mathcal{F}'\rightarrow\bigcup\mathcal{F}\) by \(h(a,A):=a\). Then \(f:=h\circ g\) is a choice function for \(\mathcal{F}\).</p>
+
+			<p class="label">Claim:</p>
+			<p>For all sets \(A,B\), if there exists an onto function \(f:A\rightarrow B\), then there exists a one-to-one function \(g:B\rightarrow A\), if and only if every set has a choice function.</p>
+
+			<p class="label">Proof:</p>
+			<p>Assume that every set has a choice function. Let \(A,B\) be sets, and let \(f:A\rightarrow B\) be onto. Define
+			\[
+				\mathcal{F}:=\{f^{-1}(\{b\}):b\in B\}.
+			\]
+			Let \(h\) be a choice function for \(\mathcal{F}\). Then \(g:B\rightarrow A\), defined by \(g(b):=h(f^{-1}(\{b\}))\), is one-to-one.</p>
+			<p>Conversely, let \(B\) be a family of pairwise disjoint sets. If \(B\) is finite, then it has a choice function and we are done. Otherwise, define \(A:=\bigcup B\), and define \(f:A\rightarrow B\) by
+			\[
+				f:=\{(a,b)\in A\times B:a\in b\}.
+			\]
+			This is an onto function. Assume that there exists a one-to-one function \(g:B\rightarrow A\). Then \(g\) is a choice function for \(B\). Since every family of pairwise disjoint sets has a choice function, every set has a choice function.</p>
+
+			<p class="label">Claim (The Principle of Transfinite Induction):</p>
+			<p>Let \(\alpha\in\mathcal{O}\), and let \(\varphi\) be a property. If:</p>
+			<ul>
+				<li>for every ordinal \(\beta&lt;\alpha\), if for every \(\gamma&lt;\beta\), \(\varphi(\gamma)\) holds, then \(\varphi(\beta)\) holds,</li>
+			</ul>
+			<p>then for every \(\beta&lt;\alpha\), \(\varphi(\beta)\) holds.</p>
+
+			<p class="label">Proof:</p>
+			<p>Assume that for every ordinal \(\beta&lt;\alpha\), if for every \(\gamma&lt;\beta\), \(\varphi(\gamma)\) holds, then \(\varphi(\beta)\) holds. Write \(A:=\{\beta&lt;\alpha:\text{not }\varphi(\beta)\}\), and assume for contradiction that \(A\neq\emptyset\). Then \(A\) has a minimum \(\delta:=\min A\). Therefore, for every \(\gamma&lt;\delta\), \(\varphi(\gamma)\) holds, and hence \(\varphi(\delta)\), a contradiction.</p>
+
+			<p class="label">Claim (The Theorem of Transfinite Recursion):</p>
+			<p>Let \(A\) be a nonempty set, let \(\alpha\in\mathcal{O}\) be an ordinal, and let \(\varphi\) be a property such that for every \(\beta&lt;\alpha\) and every sequence \(\{a_{\gamma}\}_{\gamma&lt;\beta}\in A^{\beta}\), there exists a unique \(a_{\beta}\) for which the statement \(\varphi(\{a_{\gamma}\}_{\gamma&lt;\beta},a_{\beta})\) is true. Then there exists a unique function \(f:\alpha\rightarrow A\) such that for every \(\beta&lt;\alpha\), \(f(\beta)=a_{\beta}\).</p>
+
+			<p class="label">Proof:</p>
+			<p>Let \(\beta&lt;\alpha\) be an ordinal, and assume that for every \(\gamma&lt;\beta\), there exists a unique function \(f_{\gamma}:\gamma\rightarrow A\) such that for every \(\delta&lt;\gamma\), \(f_{\gamma}(\delta)=a_{\delta}\). Then for every \(\beta&lt;\alpha\), the function
+			\[
+				f_{\beta}:=\bigcup_{\gamma&lt;\beta}f_{\gamma}:\beta\rightarrow A
+			\]
+			satisfies that for every \(\gamma&lt;\beta\), \(f_{\beta}(\gamma)=a_{\gamma}\). Hence, by the principle of transfinite induction, there exists a function \(f:\alpha\rightarrow A\) such that for every \(\beta&lt;\alpha\), \(f(\beta)=a_{\beta}\).</p>
+
+			<p class="label">Claim:</p>
+			<p>Let \(A\) be a nonempty set, and let \(b\notin A\). For every ordinal \(\alpha\in\mathcal{O}\), let \(a_{\alpha}\in A\cup\{b\}\) satisfy: \(a_{\alpha}=b\) if \(b\in\{a_{\beta}\}_{\beta&lt;\alpha}\), and otherwise \(a_{\alpha}\in A\cup\{b\}\setminus\{a_{\beta}\}_{\beta&lt;\alpha}\). Then there exists a minimal ordinal \(\kappa\in\mathcal{O}\) such that \(a_{\kappa}=b\).</p>
+
+			<p class="label">Proof:</p>
+			<p>For every \(\alpha\in\mathcal{O}\), if there exists \(a\in A\) such that \(a_{\alpha}=a\), then it is unique. Thus the class \(\{\alpha:\alpha\in\mathcal{O},a\in A,a_{\alpha}=a\}\) is a set by the axiom of replacement, and therefore it does not contain all ordinals. In particular, the set \(\{\alpha:\alpha\in\mathcal{O},a_{\alpha}=b\}\) is nonempty and has a minimum.</p>
+
+			<p class="label">Claim (The Well-Ordering Theorem):</p>
+			<p>Every set has a well-ordering relation if and only if every set has a choice function.</p>
+
+			<p class="label">Proof:</p>
+			<p>Let \(A\) be a nonempty set.</p>
+			<p>Assume that every \(B\in A\) is well-ordered. Define \(g:A\setminus\{\emptyset\}\rightarrow\bigcup A\) by \(g(B):=\min B\). Then for every \(B\in A\setminus\{\emptyset\}\), \(g(B)\in B\).</p>
+			<p>Now assume that \(P(A)\) has a choice function \(g:P(A)\setminus\{\emptyset\}\rightarrow A\), and define \(h:P(A)\rightarrow P(A)\) by
+			\[
+				h(a):=\begin{cases}
+					\emptyset & a=\emptyset\\
+					\{g(a)\} & \text{otherwise}.
+				\end{cases}
+			\]
+			Define \(A_{0}:=A\), and for every \(\alpha\in\mathcal{O}\), define recursively
+			\[
+				A_{\alpha}:=A\setminus\bigcup_{\beta&lt;\alpha}h(A_{\beta}).
+			\]
+			Let \(\alpha\in\mathcal{O}\) be an ordinal such that for every \(\beta&lt;\alpha\), \(A_{\beta}\neq\emptyset\). By the theorem of transfinite recursion, there exists a function \(f_{\alpha}:A\rightarrow\alpha\) such that \(f_{\alpha}(\beta)=g(A_{\beta})\). Let \(\beta_{0}&lt;\beta_{1}&lt;\alpha\). Then \(g(A_{\beta_{0}})\in A_{\beta_{0}}\), and also \(g(A_{\beta_{0}})\in\bigcup_{\beta&lt;\beta_{1}}\{g(A_{\beta})\}\). Hence \(g(A_{\beta_{0}})\notin A\setminus\bigcup_{\beta&lt;\beta_{1}}h(A_{\beta})=A_{\beta_{1}}\). Since \(g(A_{\beta_{1}})\in A_{\beta_{1}}\), we get \(f_{\alpha}(\beta_{0})=g(A_{\beta_{0}})\neq g(A_{\beta_{1}})=f_{\alpha}(\beta_{1})\), and therefore \(f_{\alpha}\) is one-to-one. By the claim above, there exists a minimal ordinal \(\kappa\in\mathcal{O}\) such that \(A_{\kappa}=\emptyset\). Then the function \(f_{\kappa}:A\rightarrow\kappa\) is one-to-one and onto, and the order \(\{(a,b)\in A\times A:f_{\kappa}(a)\le f_{\kappa}(b)\}\) is a well-ordering.</p>
+
+			<p class="label">Definition:</p>
+			<p>Let \(A\) be ordered with respect to \(\preccurlyeq\). A subset \(B\subseteq A\) is called a chain if it is linearly ordered with respect to \(\preccurlyeq\).</p>
+
+			<p class="label">Claim (Zorn's Lemma Implies the Axiom of Choice):</p>
+			<p>If every nonempty ordered set in which every nonempty chain has an upper bound has a maximal element, then every set has a choice function.</p>
+
+			<p class="label">Proof:</p>
+			<p>Assume that every nonempty ordered set in which every nonempty chain has an upper bound has a maximal element. Let \(A\) be a set, and write
+			\[
+				F:=\{f:B\rightarrow\bigcup A:B\subseteq A\setminus\{\emptyset\}\text{ and }f(b)\in b\}.
+			\]
+			Notice that \(\emptyset\in F\), so \(F\neq\emptyset\). Let \(C\subseteq F\) be a chain with respect to \(\subseteq\), and write \(D:=\bigcup_{f\in C}f^{-1}(\bigcup A)\), and \(g:=\bigcup C\). Then \(g:D\rightarrow\bigcup A\) belongs to \(F\), and for every \(f\in C\), \(f\subseteq g\). By the assumption, \(F\) has a maximal element; denote it by \(h\). Assume for contradiction that there exists \(x\in(A\setminus\{\emptyset\})\setminus h^{-1}(\bigcup A)\), and let \(y\in x\). Then \(h\cup\{(x,y)\}\in F\), contradicting the maximality of \(h\). Hence \(h\) is a choice function on \(A\).</p>
+
+			<p class="label">Claim (The Axiom of Choice Implies Zorn's Lemma):</p>
+			<p>If every set has a choice function, then every nonempty ordered set in which every nonempty chain has an upper bound has a maximal element.</p>
+
+			<p class="label">Proof:</p>
+			<p>Let \(A\) be a nonempty set ordered by \(\preccurlyeq\), such that every nonempty chain in \(A\) has an upper bound, and let \(g:P(A)\setminus\{\emptyset\}\rightarrow A\) be a choice function. For every nonempty chain \(C\subseteq A\), define
+			\[
+				\operatorname{Upp}(C):=\{a\in A\setminus C:\text{for all }c\in C,\ c\prec a\}.
+			\]
+			Write \(a_{0}:=g(A)\), let \(b\notin A\), and for every ordinal \(\alpha\in\mathcal{O}\), write
+			\[
+				a_{\alpha}:=\begin{cases}
+					b & \operatorname{Upp}(\{a_{\beta}\}_{\beta&lt;\alpha})=\emptyset\\
+					g(\operatorname{Upp}(\{a_{\beta}\}_{\beta&lt;\alpha})) & \text{otherwise}.
+				\end{cases}
+			\]
+			Then there exists a minimal ordinal \(\kappa\in\mathcal{O}\) such that \(a_{\kappa}=b\). Thus \(\operatorname{Upp}(\{a_{\beta}\}_{\beta&lt;\kappa})=\emptyset\). Hence \(\{a_{\beta}\}_{\beta&lt;\kappa}\) is a chain with an upper bound contained in it, and therefore it has a maximal element \(m\). If we assume for contradiction that there exists another element \(a\in A\) such that \(m\prec a\), then \(a\in\operatorname{Upp}(\{a_{\beta}\}_{\beta&lt;\kappa})\), a contradiction. Therefore \(m\) is a maximal element of \(A\).</p>
+
+			<p class="label">Definition:</p>
+			<p>Let \(\mathcal{M}\) be a model of set theory. If it satisfies that every set in it has a choice function, then it is called a model of set theory with choice.</p>
+
+			<nav class="nav" aria-label="Section navigation">
+				<a href="ordinals.html">Previous: Ordinals</a>
+				<a href="infinite-cardinalities.html">Next: Infinite Cardinalities</a>
+			</nav>
+		</article>
+	</div>
+</body>
+</html>

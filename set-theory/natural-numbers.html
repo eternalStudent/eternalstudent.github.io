@@ -1,0 +1,230 @@
+﻿<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="author" content="Noam Weisberg">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta property="og:type" content="article">
+	<meta property="og:title" content="The Natural Numbers">
+	<meta property="og:image" content="https://eternalstudent.github.io/profile.png">
+	<meta property="og:site_name" content="eternalStudent">
+	<meta property="og:url" content="https://eternalstudent.github.io/set-theory/natural-numbers.html">
+	<link rel="icon" type="image/png" href="../profile.png">
+	<link rel="preconnect" href="https://fonts.gstatic.com">
+	<link href="https://fonts.googleapis.com/css2?family=Spectral&display=swap" rel="stylesheet">
+
+	<script>
+		window.MathJax = {
+			tex: {
+				macros: {
+					nicefrac: ['{}^{#1}\\!/\\!_{#2}', 2]
+				}
+			}
+		};
+	</script>
+	<script type="text/javascript" id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+	<link rel="stylesheet" href="style.css">
+	<title>The Natural Numbers</title>
+</head>
+<body>
+	<div class="page-header">
+		<a href="../index.html">
+			<div class="page-header-content">
+				<h1 class="page-header-title">eternalStudent</h1>
+				<img src="../profile.png" alt="">
+			</div>
+		</a>
+	</div>
+	<div class="content">
+		<article>
+			<p class="kicker">Set Theory</p>
+			<h1 class="post-title">The Natural Numbers</h1>
+			<p><a class="toc-link" href="index.html">Table of contents</a></p>
+
+			<h2>The Axiom of Infinity</h2>
+			<blockquote>
+				<p>The natural numbers are the mathematical object that most connects the world of mathematics to the real world. No matter how we define an axiom system, if \(2\) does not come immediately after \(1\), then our system is wrong in some sense. There are several things that we simply expect to be true about numbers, just by observing the way reality works. The role of this part is to formalize all those assumptions that we usually make without devoting thought to them. We will begin all this by defining what it means to be “the next number.”</p>
+			</blockquote>
+
+			<p class="label">Definition:</p>
+			<p>Let \(n\) be a set. Then the set \(n\cup\{n\}\) is called the successor of \(n\), and is denoted \(S(n)\) or \(n^{+}\).</p>
+
+			<p class="label">Definition:</p>
+			<p>Let \(A\) be a set. Then \(A\) is called inductive if \(\emptyset\in A\), and for every \(x\in A\), \(S(x)\in A\).</p>
+
+			<p class="label">Definition:</p>
+			<p>Let \(A,B\) be sets. Then \(B\) is called an inductive subset of \(A\) if it is a subset of \(A\) and is also an inductive set.</p>
+
+			<p class="label">Claim:</p>
+			<p>For every inductive set \(I\), write \(N_{I}:=\{n\in I:\text{for every }J\subseteq I\text{ s.t. }J\text{ is inductive, }n\in J\}\). Let \(I_{0},I_{1}\) be inductive sets. Then \(N_{I_{0}}=N_{I_{1}}\).</p>
+
+			<p class="label">Proof:</p>
+			<p>Write \(I:= I_{0}\cap I_{1}\). Since \(\emptyset\in I_{0}\) and \(\emptyset\in I_{1}\), we get \(\emptyset\in I\). Let \(x\in I\). Then \(x\in I_{0}\), hence \(S(x)\in I_{0}\), and \(x\in I_{1}\), hence \(S(x)\in I_{1}\). Therefore \(S(x)\in I\), so \(I\) is an inductive set. Hence \(I\) is an inductive subset of \(I_{0}\).</p>
+			<p>Let \(n\in N_{I_{0}}\). Since \(I\) is an inductive subset of \(I_{0}\), we get \(n\in I\), and therefore \(N_{I_{0}}\subseteq I\subseteq I_{1}\). Hence \(N_{I_{0}}\) is a subset of \(I_{1}\).</p>
+			<p>For every inductive \(J_{0}\subseteq I_{0}\), \(\emptyset\in J_{0}\), and therefore \(\emptyset\in N_{I_{0}}\). Let \(n\in N_{I_{0}}\). Then \(n\in I_{0}\), hence \(S(n)\in I_{0}\). For every inductive subset \(J_{0}\subseteq I_{0}\), \(n\in J_{0}\), hence \(S(n)\in J_{0}\). Thus \(S(n)\in N_{I_{0}}\). Therefore \(N_{I_{0}}\) is an inductive subset of \(I_{1}\), and hence \(N_{I_{1}}\subseteq N_{I_{0}}\). By symmetry, \(N_{I_{0}}=N_{I_{1}}\).</p>
+
+			<p class="label">Definition:</p>
+			<p>The set whose existence was proved above is denoted \(\mathbb{N}\), and is called the set of natural numbers, or the naturals for short.</p>
+
+			<p class="label">Definition:</p>
+			<p>Let \(n\in\mathbb{N}\). Then \(n\) is called a natural number, or a natural for short.</p>
+
+			<p class="label">Definitions:</p>
+			<ol>
+				<li>\(0:=\emptyset\).</li>
+				<li>\(1:= S(0)\).</li>
+				<li>\(2:= S(1)\).</li>
+				<li>\(3:= S(2)\).</li>
+			</ol>
+
+			<p class="label">Claim (Principle of Induction):</p>
+			<p>Let \(\varphi\) be a property such that \(\varphi(0)\), and such that for every natural \(n_{0}\in\mathbb{N}\), if \(\varphi(n_{0})\), then \(\varphi(n_{0}^{+})\). Then for every \(n\in\mathbb{N}\), \(\varphi(n)\).</p>
+
+			<p class="label">Proof:</p>
+			<p>Write \(A:=\{n\in\mathbb{N}:\varphi(n)\}\). By definition, \(0\in A\), and for every \(n_{0}\in A\), \(S(n_{0})\in A\). Therefore \(\mathbb{N}\subseteq A\). Since \(A\subseteq\mathbb{N}\), we get \(A=\mathbb{N}\), as desired.</p>
+
+			<p class="label">Definition:</p>
+			<p>Let \(A\) be a set. Then \(A\) is called transitive if for every \(a\in A\), \(a\subset A\).</p>
+
+			<p class="label">Claim:</p>
+			<p>Let \(n\in\mathbb{N}\) be natural. Then \(n\) is transitive.</p>
+
+			<p class="label">Proof:</p>
+			<p>If \(n=0\), the claim holds vacuously. Let \(n_{0}\in\mathbb{N}\) be transitive, and let \(m\in S(n_{0})=n_{0}\cup\{n_{0}\}\). Then \(m\in n_{0}\) or \(m=n_{0}\). If \(m\in n_{0}\), then \(m\subset n_{0}\), and in particular \(m\subset n_{0}\cup\{n_{0}\}=S(n_{0})\). If \(m=n_{0}\), then \(m=n_{0}\subset n_{0}\cup\{n_{0}\}\). Hence \(S(n_{0})\) is transitive, and by the principle of induction all natural numbers are transitive.</p>
+
+			<p class="label">Claim:</p>
+			<p>\(\mathbb{N}\) is transitive.</p>
+
+			<p class="label">Proof:</p>
+			<p>Write \(N:=\{n\in\mathbb{N}:n\subset\mathbb{N}\}\). By definition \(0\in\mathbb{N}\), and of course \(\emptyset\subset\mathbb{N}\), so \(0\in N\). Let \(n\in N\). Then \(n\subset\mathbb{N}\), and also \(\{n\}\subset N\subseteq\mathbb{N}\), so \(n\cup\{n\}\subset\mathbb{N}\). Thus \(S(n)\subset\mathbb{N}\), and hence \(S(n)\in N\). By the principle of induction, \(N=\mathbb{N}\).</p>
+
+			<h2>Order on the Naturals</h2>
+			<blockquote>
+				<p>In order to continue dealing with numbers and the relations between them, we first have to understand what a relation is. For that we need a way to express an “ordered pair,” like a set with two elements, one of which is defined to be “the first.”</p>
+			</blockquote>
+
+			<p class="label">Definition:</p>
+			<p>Let \(a,b\) be sets. Then the set \(\{\{a\},\{a,b\}\}\) is called an ordered pair, and is denoted \((a,b)\). In addition, for every property \(\varphi\), we write briefly \(\{(a,b):\varphi(a,b)\}:=\{x:\text{ exists }a\text{ and exists }b\text{ s.t. }x=(a,b)\text{ and }\varphi(a,b)\}\).</p>
+
+			<p class="label">Definition:</p>
+			<p>Let \(A,B\) be sets. Then the class \(\{(a,b):a\in A\text{ and }b\in B\}\) is called the Cartesian product of \(A\) and \(B\), and is denoted \(A\times B\).</p>
+
+			<p class="label">Claim:</p>
+			<p>Let \(A,B\) be sets. Then \(A\times B\) is a set.</p>
+
+			<p class="label">Proof:</p>
+			<p>By the axiom of union, \(A\cup B\) is a set, and by the axiom of power set, \(P(P(A\cup B))\) is a set. Therefore, by the axiom of separation, \(\{x\in P(P(A\cup B)):\text{ exists }a\in A\text{ and exists }b\in B\text{ s.t. }x=(a,b)\}\) is a set.</p>
+
+			<p class="label">Corollaries:</p>
+			<p>Let \(A,{\cal B}\) be sets. Then:</p>
+			<ol>
+				<li>\(A\times\bigcup{\cal B}=\bigcup\limits _{B\in{\cal B}}\left(A\times B\right)\)</li>
+				<li>\(\bigcup{\cal B}\times A=\bigcup\limits _{B\in{\cal B}}\left(B\times A\right)\)</li>
+			</ol>
+
+			<p class="label">Corollaries:</p>
+			<p>Let \(A,B,C\) be sets. Then:</p>
+			<ol>
+				<li>\(A\times(B\cup C)=(A\times B)\cup(A\times C)\)</li>
+				<li>\((A\cup B)\times C=(A\times C)\cup(B\times C)\)</li>
+			</ol>
+
+			<p class="label">Definition:</p>
+			<p>Let \(A,B\) be sets. Then \(R\subseteq A\times B\) is called a binary relation between \(A\) and \(B\). If \((a,b)\in R\), we also write \(aRb\) briefly.</p>
+
+			<p class="label">Definitions:</p>
+			<p>Let \(A\) be a set, and let \(R\subseteq A\times A\) be a binary relation. Then:</p>
+			<ol>
+				<li>\(R\) is called reflexive if for every \(a\in A\), \(aRa\).</li>
+				<li>\(R\) is called symmetric if whenever \(aRb\), also \(bRa\).</li>
+				<li>\(R\) is called antisymmetric if for every \(a\in A\) and every \(b\in A\), if \(aRb\) and \(bRa\), then \(a=b\).</li>
+				<li>\(R\) is called transitive if for every \(a\in A\), \(b\in A\), and \(c\in A\), if \(aRb\) and \(bRc\), then also \(aRc\).</li>
+			</ol>
+
+			<p class="label">Definition:</p>
+			<p>Let \(A\) be a set, and let \(\preccurlyeq\subseteq A\times A\) be a reflexive, antisymmetric, and transitive binary relation. Then it is called an order relation, and \(A\) is called an ordered set with respect to \(\preccurlyeq\).</p>
+
+			<p class="label">Corollary:</p>
+			<p>Let \(A\) be a set. Then \(A\) is ordered with respect to \(\{(a,b)\in A\times A:a\subseteq b\}\).</p>
+
+			<p class="label">Definitions:</p>
+			<ol>
+				<li>\(\le:=\{(n,m)\in\mathbb{N}\times\mathbb{N}:n\in m\text{ or }n=m\}\).</li>
+				<li>\(&lt;:=\{(n,m)\in\mathbb{N}\times\mathbb{N}:n\in m\}\).</li>
+			</ol>
+
+			<p class="label">Corollary:</p>
+			<p>Let \(\{m,n\}\subset\mathbb{N}\). Then \(m\in S(n)\) if and only if \(m\le n\).</p>
+
+			<p class="label">Claim:</p>
+			<p>\(\mathbb{N}\) is an ordered set with respect to \(\le\).</p>
+
+			<p class="label">Proof:</p>
+			<p>Reflexivity is clear, and antisymmetry follows directly from the axiom of foundation. We prove transitivity. Let \(k\le m\) be natural numbers. If \(m\le0\), it follows that \(m=0\), so also \(k=0\), and in particular \(k\le0\).</p>
+			<p>Let \(n_{0}\in\mathbb{N}\) be such that if \(m\le n_{0}\), then \(k\le n_{0}\). Assume \(m\le S(n_{0})\). Then \(m=S(n_{0})\) or \(m\le n_{0}\). If \(m=S(n_{0})\), then \(k\le m=S(n_{0})\). Otherwise \(m\le n_{0}\), so \(k\le n_{0}\), hence \(k\in S(n_{0})\), and in particular \(k\le S(n_{0})\). Therefore, by the principle of induction, for every \(n\in\mathbb{N}\), if \(m\le n\), then \(k\le n\).</p>
+
+			<p class="label">Claim:</p>
+			<p>For every \(n\in\mathbb{N}\), \(0\le n\).</p>
+
+			<p class="label">Proof:</p>
+			<p>For \(n=0\), the claim holds trivially. Let \(n\in\mathbb{N}\) be such that \(0\in n\) or \(n=0\). If \(n=0\), then \(0\in\{0\}=S(0)=S(n)\). Otherwise \(0\in n\), and in particular \(0\in n\cup\{n\}=S(n)\). Thus the claim follows by the principle of induction.</p>
+
+			<p class="label">Claim:</p>
+			<p>Let \(n\in\mathbb{N}\) be natural. Then for every \(m\in n\), \(S(m)\le n\).</p>
+
+			<p class="label">Proof:</p>
+			<p>For \(n=0\), the claim holds vacuously. Let \(n_{0}\in\mathbb{N}\) be such that for every \(m\in n_{0}\), \(S(m)\le n_{0}\). Assume \(m\in S(n_{0})\). Then \(m\le n_{0}\). If \(m=n_{0}\), then \(S(m)=S(n_{0})\), and in particular \(S(m)\le S(n_{0})\). Otherwise \(m\in n_{0}\), and by the choice of \(n_{0}\), \(S(m)\le n_{0}\), hence in particular \(S(m)\le S(n_{0})\). By the principle of induction, the claim is true for every \(n\in\mathbb{N}\).</p>
+
+			<p class="label">Definition:</p>
+			<p>Let \(A\) be a set ordered by \(\preccurlyeq\). If for every \(\{a,b\}\subseteq A\), \(a\preccurlyeq b\) or \(b\preccurlyeq a\), then \(\preccurlyeq\) is called a total order on \(A\), and \(A\) is called linearly ordered with respect to \(\preccurlyeq\).</p>
+
+			<p class="label">Claim:</p>
+			<p>\(\mathbb{N}\) is linearly ordered with respect to \(\le\).</p>
+
+			<p class="label">Proof:</p>
+			<p>Let \(m\in\mathbb{N}\) be natural. \(0\) satisfies \(0\le m\). Let \(n_{0}\in\mathbb{N}\) be such that \(n_{0}\le m\) or \(m\le n_{0}\). If \(m=n_{0}\), then \(m\in S(m)=S(n_{0})\). If \(m\in n_{0}\), then in particular \(m\in n_{0}\cup\{n_{0}\}=S(n_{0})\). If \(n_{0}\in m\), then by the previous claim \(S(n_{0})=m\) or \(S(n_{0})\in m\). Therefore the claim follows by the principle of induction.</p>
+
+			<p class="label">Definitions:</p>
+			<p>Let \(A\) be a set ordered with respect to \(\preccurlyeq\), let \(A_{0}\subseteq A\), and let \(a\in A_{0}\). Then:</p>
+			<ol>
+				<li>If for every \(b\in A_{0}\), \(a\preccurlyeq b\), we say that \(a\) is a minimal element of \(A_{0}\) with respect to \(\preccurlyeq\), and denote it by \(\min A_{0}\).</li>
+				<li>If for every \(b\in A_{0}\), \(b\preccurlyeq a\), we say that \(a\) is a maximal element of \(A_{0}\) with respect to \(\preccurlyeq\), and denote it by \(\max A_{0}\).</li>
+			</ol>
+
+			<p class="label">Claim:</p>
+			<p>Let \(A\) be linearly ordered with respect to \(\preccurlyeq\), and let \(A_{0}\subseteq A\). Then \(A_{0}\) has at most one minimal element.</p>
+
+			<p class="label">Proof:</p>
+			<p>Assume that minimal elements of \(A_{0}\) exist, and denote two of them by \(a\) and \(b\). From the minimality of \(a\), \(a\preccurlyeq b\). From the minimality of \(b\), \(b\preccurlyeq a\). Therefore by antisymmetry, \(a=b\).</p>
+
+			<p class="label">Corollary:</p>
+			<p>\(\min\mathbb{N}=0\).</p>
+
+			<p class="label">Definition:</p>
+			<p>Let \(A\) be a linearly ordered set with respect to \(\preccurlyeq\). If every nonempty subset \(A_{0}\subseteq A\) has a minimal element with respect to \(\preccurlyeq\), then \(\preccurlyeq\) is called a well-order on \(A\), and \(A\) is called well-ordered with respect to \(\preccurlyeq\).</p>
+
+			<p class="label">Claim:</p>
+			<p>\(\mathbb{N}\) is well-ordered with respect to \(\le\).</p>
+
+			<p class="label">Proof:</p>
+			<p>Let \(N\subseteq\mathbb{N}\) be a subset of the naturals such that for every \(n\in N\), there exists \(m\in N\) with \(m&lt;n\). If \(0\in N\), then there exists \(m\in N\setminus\{0\}\) such that \(m\in0=\emptyset\), a contradiction. Hence \(0\in\mathbb{N}\setminus N\).</p>
+			<p>Let \(n\in\mathbb{N}\setminus N\) be such that for every \(m&lt;n\), \(m\in\mathbb{N}\setminus N\). If \(S(n)\in N\), then there exists \(m\in N\setminus\{S(n)\}\) such that \(m&lt;S(n)\), meaning \(m\le n\), contradicting the choice of \(n\). Therefore \(S(n)\in\mathbb{N}\setminus N\), and for every \(m&lt;S(n)\), \(m\in\mathbb{N}\setminus N\). By the principle of induction, \(\mathbb{N}\setminus N=\mathbb{N}\), and hence \(N=\emptyset\).</p>
+
+			<p class="label">Claim:</p>
+			<p>Let \(n,m\) be natural numbers such that \(n\subset m\). Then \(n\in m\).</p>
+
+			<p class="label">Proof:</p>
+			<p>Write \(N:= m\setminus n\). This is a nonempty subset of the naturals, so there exists \(n_{0}\in N\) such that for every \(m\in N\), \(n_{0}\le m\). We show that \(n_{0}=n\). If there were \(k\in n_{0}\setminus n\), then in particular \(k\in m\setminus n\), and also \(k\in n_{0}\), contradicting the choice of \(n_{0}\). Hence \(n_{0}\subseteq n\).</p>
+			<p>On the other hand, if there were \(k\in n\setminus n_{0}\), then by linearity \(n_{0}=k\) or \(n_{0}\in k\). But then by transitivity we would get \(n_{0}\subseteq k\subset n\setminus n_{0}\), a contradiction. Therefore \(n=n_{0}\), and in particular \(n\in m\).</p>
+
+			<nav class="nav" aria-label="Section navigation">
+				<a href="models-of-set-theory.html">Previous: Models of Set Theory</a>
+				<a href="functions.html">Next: Functions</a>
+			</nav>
+		</article>
+	</div>
+</body>
+</html>
+
+
+

@@ -1,0 +1,222 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="author" content="Noam Weisberg">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta property="og:type" content="article">
+	<meta property="og:title" content="The Rational Numbers">
+	<meta property="og:image" content="https://eternalstudent.github.io/profile.png">
+	<meta property="og:site_name" content="eternalStudent">
+	<meta property="og:url" content="https://eternalstudent.github.io/set-theory/rational-numbers.html">
+	<link rel="icon" type="image/png" href="../profile.png">
+	<link rel="preconnect" href="https://fonts.gstatic.com">
+	<link href="https://fonts.googleapis.com/css2?family=Spectral&display=swap" rel="stylesheet">
+
+	<script>
+		window.MathJax = {
+			tex: {
+				macros: {
+					nicefrac: ['{}^{#1}\\!/\\!_{#2}', 2]
+				}
+			}
+		};
+	</script>
+	<script type="text/javascript" id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+	<link rel="stylesheet" href="style.css">
+	<title>The Rational Numbers</title>
+</head>
+<body>
+	<div class="page-header">
+		<a href="../index.html">
+			<div class="page-header-content">
+				<h1 class="page-header-title">eternalStudent</h1>
+				<img src="../profile.png" alt="">
+			</div>
+		</a>
+	</div>
+	<div class="content">
+		<article>
+			<p class="kicker">Set Theory</p>
+			<h1 class="post-title">The Rational Numbers</h1>
+			<p><a class="toc-link" href="index.html">Table of contents</a></p>
+
+			<p class="label">Definitions:</p>
+			<p>Let \(\{(x_{0},y_{0}),(x_{1},y_{1})\}\subset\mathbb{Z}\times(\mathbb{Z}\setminus\{0\})\). Define:</p>
+			<ol>
+				<li>\((x_{0},y_{0})+(x_{1},y_{1}):=(x_{0}\cdot y_{1}+x_{1}y_{0},y_{0}\cdot y_{1})\).</li>
+				<li>\((x_{0},y_{0})\cdot(x_{1},y_{1}):=(x_{0}\cdot x_{1},y_{0}\cdot y_{1})\).</li>
+				<li>If \(x_{0}\neq0\), then \((x_{0},y_{0})^{-1}:=(y_{0},x_{0})\).</li>
+			</ol>
+
+			<p class="label">Claim:</p>
+			<p>The relation \(\backsimeq:=\left\{ ((x_{0},y_{0}),(x_{1},y_{1})):x_{0}\cdot y_{1}=y_{0}\cdot x_{1}\right\}\) is an equivalence relation on \(\mathbb{Z}\times(\mathbb{Z}\setminus\{0\})\).</p>
+
+			<p class="label">Proof:</p>
+			<p>Let \(\left\{(x_{0},y_{0}),(x_{1},y_{1}),(x_{2},y_{2})\right\}\subset\mathbb{Z}\times(\mathbb{Z}\setminus\{0\})\).</p>
+			<ul>
+				<li>Reflexivity: \(x_{0}\cdot y_{0}=y_{0}\cdot x_{0}\).</li>
+				<li>Symmetry: \(x_{0}\cdot y_{1}=y_{0}\cdot x_{1}\Longleftrightarrow x_{1}\cdot y_{0}=y_{1}\cdot x_{0}\).</li>
+				<li>Transitivity: if \(x_{0}\cdot y_{1}=y_{0}\cdot x_{1}\) and \(x_{1}\cdot y_{2}=y_{1}\cdot x_{2}\), then
+				\[
+				\begin{align*}
+					x_{0}\cdot y_{1}\cdot x_{1}\cdot y_{2}
+					&=y_{0}\cdot x_{1}\cdot y_{1}\cdot x_{2}\\
+					x_{0}\cdot y_{2}&=y_{0}\cdot x_{2}.
+				\end{align*}
+				\]</li>
+			</ul>
+
+			<p class="label">Claims:</p>
+			<p>Let \(\{p,q\}\subset\mathbb{Z}\times(\mathbb{Z}\setminus\{0\})\), and let \(a\backsimeq p,b\backsimeq q\). Then:</p>
+			<ol>
+				<li>\(a+b\backsimeq p+q\).</li>
+				<li>\(a\cdot b\backsimeq p\cdot q\).</li>
+			</ol>
+
+			<p class="label">Proofs:</p>
+			<p>Write \(p=(p_{0},p_{1}),q=(q_{0},q_{1}),a=(a_{0},a_{1}),b=(b_{0},b_{1})\). We are given that</p>
+			<p>\[
+			\begin{align*}
+				a_{0}p_{1}&=p_{0}a_{1}\\
+				b_{0}q_{1}&=q_{0}b_{1}.
+			\end{align*}
+			\]</p>
+			<ol>
+				<li>
+				\[
+				\begin{align*}
+					\left(a_{0}b_{1}+a_{1}b_{0}\right)p_{1}q_{1}
+					&=a_{0}b_{1}p_{1}q_{1}+a_{1}b_{0}p_{1}q_{1}\\
+					&=(a_{0}p_{1})b_{1}q_{1}+(b_{0}q_{1})a_{1}p_{1}\\
+					&=(a_{1}p_{0})b_{1}q_{1}+(b_{1}q_{0})a_{1}p_{1}\\
+					&=\left(p_{0}q_{1}+p_{1}q_{0}\right)a_{1}b_{1}.
+				\end{align*}
+				\]
+				Therefore \(\frac{a_{0}b_{1}+a_{1}b_{0}}{a_{1}b_{1}}\backsimeq\frac{p_{0}q_{1}+p_{1}q_{0}}{p_{1}q_{1}}\), and hence \(a+b\backsimeq p+q\).</li>
+				<li>Trivial.</li>
+			</ol>
+
+			<p class="label">Definition:</p>
+			<p>We denote the set \((\mathbb{Z}\times(\mathbb{Z}\setminus\{0\}))/\backsimeq\) by \(\mathbb{Q}\), and call it the rational numbers, or the rationals for short. We denote the class \([(x,y)]_{\backsimeq}\) by \(\frac{x}{y}\) or by \(\nicefrac{x}{y}\).</p>
+
+			<p class="label">Definition:</p>
+			<p>Let \(q\in\mathbb{Q}\). Then \(q\) is called a rational number, or a rational for short.</p>
+
+			<p class="label">Definitions:</p>
+			<p>Let \(\{\frac{x_{0}}{y_{0}},\frac{x_{1}}{y_{1}}\}\subset\mathbb{Q}\) be rational numbers. Then:</p>
+			<ol>
+				<li>\(\frac{x_{0}}{y_{0}}+\frac{x_{1}}{y_{1}}:=\frac{x_{0}y_{1}+x_{1}y_{0}}{y_{0}y_{1}}\).</li>
+				<li>\(\frac{x_{0}}{y_{0}}\cdot\frac{x_{1}}{y_{1}}:=\frac{x_{0}x_{1}}{y_{0}y_{1}}\).</li>
+				<li>\(-\frac{x_{0}}{y_{0}}:=\frac{-x_{0}}{y_{0}}\).</li>
+			</ol>
+
+			<p class="label">Corollaries:</p>
+			<p>Let \(\frac{x}{y}\in\mathbb{Q}\), and let \(z\in\mathbb{Z}\setminus\{0\}\). Then:</p>
+			<ol>
+				<li>\(\frac{x}{y}=\frac{z\cdot x}{z\cdot y}\).</li>
+				<li>\(-\frac{x}{y}=\frac{-x}{y}=\frac{x}{-y}\).</li>
+				<li>\(\frac{x}{y}=\frac{-x}{-y}\).</li>
+			</ol>
+
+			<p class="label">Corollary:</p>
+			<p>Let \(\{x,y\}\subset\mathbb{Z}\setminus\{0\}\). Then \(\frac{0}{x}=\frac{0}{y}\).</p>
+
+			<p class="label">Corollary:</p>
+			<p>Let \(q\in\mathbb{Q}\). Then there exists \(x\in\mathbb{Z}\) and \(n\in\mathbb{N}\setminus\{0\}\) such that \(\frac{x}{n}=q\).</p>
+
+			<p class="label">Corollaries:</p>
+			<p>Let \(\{x,y,z\}\subset\mathbb{Q}\). Then:</p>
+			<ol>
+				<li>\(x+y=y+x\).</li>
+				<li>\((x+y)+z=x+(y+z)\), and we may write \(x+y+z\) briefly.</li>
+				<li>\(x+0=x\).</li>
+				<li>\(x-x=0\).</li>
+				<li>\(x\cdot y=y\cdot x\).</li>
+				<li>\((x\cdot y)\cdot z=x\cdot(y\cdot z)\), and we may write \(x\cdot y\cdot z\) briefly.</li>
+				<li>\(x\cdot0=0\).</li>
+				<li>\(x\cdot1=x\).</li>
+				<li>\(x\cdot(-1)=-x\).</li>
+				<li>\((-x)\cdot(-y)=x\cdot y\).</li>
+				<li>\((-x)\cdot y=x\cdot(-y)=-(x\cdot y)\).</li>
+				<li>\(x\cdot(y+z)=x\cdot y+x\cdot z\).</li>
+			</ol>
+
+			<p class="label">Definition:</p>
+			<p>\(\le:=\left\{(\frac{x_{0}}{y_{0}},\frac{x_{1}}{y_{1}})\in\mathbb{Q}\times\mathbb{Q}:(x_{0}\cdot y_{1}-x_{1}\cdot y_{0})(y_{0}\cdot y_{1})\le0\right\}\).</p>
+
+			<p class="label">Claim:</p>
+			<p>\(\le\) is a total order relation on the rationals.</p>
+
+			<p class="label">Proof:</p>
+			<p>Let \(\{\frac{x_{0}}{y_{0}},\frac{x_{1}}{y_{1}},\frac{x_{2}}{y_{2}}\}\subset\mathbb{Q}\).</p>
+			<ul>
+				<li>Reflexivity: \((x_{0}\cdot y_{0}-x_{0}\cdot y_{0})(y_{0}\cdot y_{0})=0\le0\).</li>
+				<li>Antisymmetry: assume \((x_{0}\cdot y_{1}-x_{1}\cdot y_{0})(y_{0}\cdot y_{1})\le0\) and \((-x_{0}\cdot y_{1}+x_{1}\cdot y_{0})(y_{0}\cdot y_{1})\le0\). Then \(-(x_{0}\cdot y_{1}-x_{1}\cdot y_{0})(y_{0}\cdot y_{1})\le0\), so \((x_{0}\cdot y_{1}-x_{1}\cdot y_{0})(y_{0}\cdot y_{1})=0\). Hence \(x_{0}\cdot y_{1}=x_{1}\cdot y_{0}\), so \(\frac{x_{0}}{y_{0}}=\frac{x_{1}}{y_{1}}\).</li>
+				<li>Transitivity: assume \((x_{0}\cdot y_{1}-x_{1}\cdot y_{0})(y_{0}\cdot y_{1})\le0\) and \((x_{1}\cdot y_{2}-x_{2}\cdot y_{1})(y_{1}\cdot y_{2})\le0\). Then
+				\[
+				\begin{align*}
+					(x_{0}\cdot y_{1}\cdot y_{2}-x_{1}\cdot y_{0}\cdot y_{2}
+					+x_{1}\cdot y_{0}\cdot y_{2}-x_{2}\cdot y_{0}\cdot y_{1})
+					(y_{0}\cdot y_{1}\cdot y_{2})&\le0\\
+					(x_{0}\cdot y_{2}-x_{2}\cdot y_{0})(y_{0}\cdot y_{2})&\le0.
+				\end{align*}
+				\]
+				Hence \(\frac{x_{0}}{y_{0}}\le\frac{x_{2}}{y_{2}}\).</li>
+				<li>Totality: if \((x_{0}\cdot y_{1}-x_{1}\cdot y_{0})(y_{0}\cdot y_{1})\le0\), then \(\frac{x_{0}}{y_{0}}\le\frac{x_{1}}{y_{1}}\). Otherwise \(0&lt;(x_{0}\cdot y_{1}-x_{1}\cdot y_{0})(y_{0}\cdot y_{1})\), hence \((-x_{0}\cdot y_{1}+x_{1}\cdot y_{0})(y_{0}\cdot y_{1})&lt;0\), so \(\frac{x_{1}}{y_{1}}&lt;\frac{x_{0}}{y_{0}}\).</li>
+			</ul>
+
+			<p class="label">Definition:</p>
+			<p>Let \(\{p,q\}\subset\mathbb{Q}\). If \(p\le q\) and \(p\neq q\), we write \(p&lt;q\).</p>
+
+			<p class="label">Corollaries:</p>
+			<p>Let \(\{x,y\}\subset\mathbb{Z}\). Then:</p>
+			<ol>
+				<li>\(\frac{x}{1}+\frac{y}{1}=\frac{x+y}{1}\).</li>
+				<li>\(\frac{x}{1}\cdot\frac{y}{1}=\frac{x\cdot y}{1}\).</li>
+				<li>\(x\le y\Longleftrightarrow\frac{x}{1}\le\frac{y}{1}\).</li>
+			</ol>
+
+			<p class="label">Corollary:</p>
+			<p>Let \(q\in\mathbb{Q}\) with \(0&lt;q\). Then there exist \(\{m,n\}\subset\mathbb{N}\setminus\{0\}\) such that \(\frac{m}{n}=q\).</p>
+
+			<p class="label">Claims:</p>
+			<p>Let \(\{x,y,z\}\subset\mathbb{Q}\). Then:</p>
+			<ol>
+				<li>\(x&lt;y\Longleftrightarrow x+z&lt;y+z\).</li>
+				<li>If \(z&gt;0\), then \(x&lt;y\Longleftrightarrow x\cdot z&lt;y\cdot z\).</li>
+				<li>If \(z&lt;0\), then \(x&lt;y\Longleftrightarrow y\cdot z&lt;x\cdot z\).</li>
+			</ol>
+
+			<p class="label">Proof:</p>
+			<p>Let \(x=\frac{a}{b},y=\frac{c}{d},z=\frac{e}{f}\), where \(b,d,f&gt;0\). By definition of the order, \(x&lt;y\Longleftrightarrow ad&lt;cb\).</p>
+			<ol>
+				<li>\(x+z=\frac{af+eb}{bf}\), and \(y+z=\frac{cf+ed}{df}\). Therefore \(x+z&lt;y+z\Longleftrightarrow(af+eb)df&lt;(cf+ed)bf\), that is, \(adf^{2}+ebdf&lt;cbf^{2}+edbf\). Since \(ebdf=edbf\), we get \(adf^{2}&lt;cbf^{2}\). Since \(f^{2}&gt;0\), this is equivalent to \(ad&lt;cb\), and therefore \(x+z&lt;y+z\Longleftrightarrow x&lt;y\).</li>
+				<li>Assume \(z&gt;0\). Since \(f&gt;0\), \(e&gt;0\). Thus \(xz=\frac{ae}{bf}\) and \(yz=\frac{ce}{df}\). Hence \(xz&lt;yz\Longleftrightarrow aedf&lt;cebf\), that is, \(ad\cdot ef&lt;cb\cdot ef\). Since \(ef&gt;0\), we get \(ad&lt;cb\), and therefore \(xz&lt;yz\Longleftrightarrow x&lt;y\).</li>
+				<li>Assume \(z&lt;0\). Since \(f&gt;0\), \(ef&lt;0\), so \(e&lt;0\). As before, \(yz&lt;xz\Longleftrightarrow cebf&lt;aedf\), that is, \(cb\cdot ef&lt;ad\cdot ef\). Since \(ef&lt;0\), multiplying by \(ef\) reverses the inequality, so this is equivalent to \(ad&lt;cb\). Therefore \(yz&lt;xz\Longleftrightarrow x&lt;y\).</li>
+			</ol>
+
+			<p class="label">Notation:</p>
+			<p>Let \(x\in\mathbb{Z}\) be an integer. From now on we will no longer distinguish between \(x\) and \(\frac{x}{1}\). For all practical purposes, we assume \(\mathbb{Z}\subset\mathbb{Q}\).</p>
+
+			<p class="label">Claim:</p>
+			<p>Let \(\{x,y\}\subset\mathbb{Z}\setminus\{0\}\), write \(n:=\gcd(x,y)\), and let \(\{a,b\}\subset\mathbb{Z}\setminus\{0\}\) satisfy \(an=x\) and \(bn=y\). Then \(\gcd(a,b)=1\).</p>
+
+			<p class="label">Proof:</p>
+			<p>Write \(m:=\gcd(a,b)\). Then there exist \(\{p,q\}\subset\mathbb{Z}\setminus\{0\}\) such that \(pm=a\) and \(qm=b\). Hence \(pmn=x\) and \(qmn=y\). Since \(mn\mid x\) and \(mn\mid y\), by the definition of \(\gcd\), \(mn\mid n\). Therefore \(mn\le n\), and hence \(m=1\).</p>
+
+			<p class="label">Corollaries (Canonical Representation of the Rationals):</p>
+			<p>Let \(q\in\mathbb{Q}\).</p>
+			<ol>
+				<li>If \(0&lt;q\), then there exist unique \(\{m,n\}\subset\mathbb{N}\setminus\{0\}\) such that \(\gcd(m,n)=1\) and \(\frac{m}{n}=q\).</li>
+				<li>If \(q&lt;0\), then there exist unique \(\{m,n\}\subset\mathbb{N}\setminus\{0\}\) such that \(\gcd(m,n)=1\) and \(-\frac{m}{n}=q\).</li>
+			</ol>
+
+			<nav class="nav" aria-label="Section navigation">
+				<a href="integers.html">Previous: The Integers</a>
+				<a href="real-numbers.html">Next: The Real Numbers</a>
+			</nav>
+		</article>
+	</div>
+</body>
+</html>
