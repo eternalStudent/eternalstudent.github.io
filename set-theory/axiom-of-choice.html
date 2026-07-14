@@ -44,19 +44,19 @@
 			<h2>Weak Forms of the Axiom of Choice</h2>
 
 			<p class="label">Definition:</p>
-			<p>Let \(\mathcal{F}\) be a set. A function \(f:\mathcal{F}\rightarrow\bigcup\mathcal{F}\) such that for every \(A\in\mathcal{F}\setminus\{\emptyset\}\), \(f(A)\in A\), is called a choice function for \(\mathcal{F}\).</p>
+			<p>Let \(\mathcal{F}\) be a set. A function \(f:\mathcal{F}\setminus\{\emptyset\}\rightarrow\bigcup\mathcal{F}\) such that for every \(A\in\mathcal{F}\setminus\{\emptyset\}\), \(f(A)\in A\), is called a choice function for \(\mathcal{F}\).</p>
 
 			<p class="label">Claim:</p>
 			<p>Let \(\mathcal{F}\) be a finite set. Then \(\mathcal{F}\) has a choice function.</p>
 
 			<p class="label">Proof:</p>
-			<p>If \(\mathcal{F}=\emptyset\), then \(f:=\emptyset\) is a choice function for \(\mathcal{F}\). Let \(n_{0}\in\mathbb{N}\) be such that every set with \(n_{0}\) elements has a choice function. Let \(\mathcal{F}_{0}\) be a set with \(n_{0}+1\) elements, and let \(A\in\mathcal{F}_{0}\). The set \(\mathcal{F}_{0}\setminus\{A\}\) has \(n_{0}\) elements, and therefore it has a choice function \(f_{0}\). If \(A=\emptyset\), then \(f_{0}\cup\{(A,\emptyset)\}\) is a choice function for \(\mathcal{F}_{0}\). Otherwise, let \(a\in A\), and \(f_{0}\cup\{(A,a)\}\) is a choice function for \(\mathcal{F}_{0}\). Hence, by the principle of induction, for every \(n\in\mathbb{N}\), every set \(\mathcal{F}\) with \(n\) elements has a choice function.</p>
+			<p>If \(\mathcal{F}=\emptyset\), then \(f:=\emptyset\) is a choice function for \(\mathcal{F}\). Let \(n_{0}\in\mathbb{N}\) be such that every set with \(n_{0}\) elements has a choice function. Let \(\mathcal{F}_{0}\) be a set with \(n_{0}+1\) elements, and let \(A\in\mathcal{F}_{0}\). The set \(\mathcal{F}_{0}\setminus\{A\}\) has \(n_{0}\) elements, and therefore it has a choice function \(f_{0}\). If \(A=\emptyset\), then \(f_{0}\) is already a choice function for \(\mathcal{F}_{0}\). Otherwise, let \(a\in A\), and \(f_{0}\cup\{(A,a)\}\) is a choice function for \(\mathcal{F}_{0}\). Hence, by the principle of induction, for every \(n\in\mathbb{N}\), every set \(\mathcal{F}\) with \(n\) elements has a choice function.</p>
 
 			<p class="label">Claim (Dependent Choice):</p>
-			<p>Let \(A\) be a set such that \(P(A)\) has a choice function, and let \(\prec\subseteq A\times A\) be a relation such that for every \(a\in A\), there exists \(b\in A\) such that \(a\prec b\). Then there exists a function \(f:\mathbb{N}\rightarrow A\) such that for every \(n\in\mathbb{N}\), \(f(n)\prec f(n+1)\).</p>
+			<p>Let \(A\neq\emptyset\) be a set such that \(P(A)\) has a choice function, and let \(\prec\subseteq A\times A\) be a relation such that for every \(a\in A\), there exists \(b\in A\) such that \(a\prec b\). Then there exists a function \(f:\mathbb{N}\rightarrow A\) such that for every \(n\in\mathbb{N}\), \(f(n)\prec f(n+1)\).</p>
 
 			<p class="label">Proof:</p>
-			<p>Let \(g:P(A)\rightarrow\bigcup P(A)\) be a choice function for \(P(A)\). For every \(a\in A\), write \(A_{a}:=\{b\in A:a\prec b\}\), and let \(a_{0}\in A\). Define \(f:\mathbb{N}\rightarrow A\) by
+			<p>Let \(g:P(A)\setminus\{\emptyset\}\rightarrow A\) be a choice function for \(P(A)\). For every \(a\in A\), write \(A_{a}:=\{b\in A:a\prec b\}\), and let \(a_{0}\in A\). Define \(f:\mathbb{N}\rightarrow A\) by
 			\[
 				f(n):=\begin{cases}
 					a_{0} & n=0\\
@@ -65,10 +65,10 @@
 			\]</p>
 
 			<p class="label">Claim (Countable Choice):</p>
-			<p>Assume that for every set \(A\) with a relation \(\prec\subseteq A\times A\), if for every \(a\in A\) there exists \(b\in A\) such that \(a\prec b\), then there exists a function \(f:\mathbb{N}\rightarrow A\) such that for every \(n\in\mathbb{N}\), \(f(n)\prec f(n+1)\). Then every countable set \(\mathcal{F}\) has a choice function.</p>
+			<p>Assume that for every nonempty set \(A\) with a relation \(\prec\subseteq A\times A\), if for every \(a\in A\) there exists \(b\in A\) such that \(a\prec b\), then there exists a function \(f:\mathbb{N}\rightarrow A\) such that for every \(n\in\mathbb{N}\), \(f(n)\prec f(n+1)\). Then every countable set \(\mathcal{F}\) has a choice function.</p>
 
 			<p class="label">Proof:</p>
-			<p>Let \(\mathcal{F}\) be countable. Then there exists a one-to-one and onto function \(F:\mathbb{N}\rightarrow\mathcal{F}\setminus\{\emptyset\}\). Let
+			<p>Let \(\mathcal{F}\) be countable. If \(\mathcal{F}\setminus\{\emptyset\}\) is finite, then by finite choice \(\mathcal{F}\) has a choice function. Otherwise, there exists a one-to-one and onto function \(F:\mathbb{N}\rightarrow\mathcal{F}\setminus\{\emptyset\}\). Let
 			\[
 				A:=\{(n,x)\in\mathbb{N}\times\bigcup\mathcal{F}:x\in F(n)\}.
 			\]
@@ -98,24 +98,28 @@
 			<p class="label">Proof:</p>
 			<p>Assume that every family of pairwise disjoint sets has a choice function. Let \(\mathcal{F}\) be a set. If \(\mathcal{F}\) is finite, then it has a choice function and we are done. Otherwise, define
 			\[
-				\mathcal{F}':=\left\{\{(a,A):a\in A\}:A\in\mathcal{F}\right\}.
+				\mathcal{F}':=\left\{\{(a,A):a\in A\}:A\in\mathcal{F}\setminus\{\emptyset\}\right\}.
 			\]
-			Let \(\{A,B\}\subseteq\mathcal{F}'\) be distinct, and assume for contradiction that there exists \((a_{0},A_{0})\in A\cap B\). Then there exists \(A_{0}\in\mathcal{F}\) such that \(A=\{(a,A_{0}):a\in A_{0}\}=B\), contradicting that \(A,B\) are distinct. Hence \(\mathcal{F}'\) is a family of pairwise disjoint sets, and it has a choice function \(g:\mathcal{F}'\rightarrow\bigcup\mathcal{F}'\). Define \(h:\bigcup\mathcal{F}'\rightarrow\bigcup\mathcal{F}\) by \(h(a,A):=a\). Then \(f:=h\circ g\) is a choice function for \(\mathcal{F}\).</p>
+			Let \(\{X,Y\}\subseteq\mathcal{F}'\) be distinct, and assume for contradiction that there exists \((a_{0},A_{0})\in X\cap Y\). Then \(X=\{(a,A_{0}):a\in A_{0}\}=Y\), contradicting that \(X,Y\) are distinct. Hence \(\mathcal{F}'\) is a family of pairwise disjoint sets, and it has a choice function \(g:\mathcal{F}'\setminus\{\emptyset\}\rightarrow\bigcup\mathcal{F}'\). Define \(h:\bigcup\mathcal{F}'\rightarrow\bigcup\mathcal{F}\) by \(h(a,A):=a\). For \(A\in\mathcal{F}\setminus\{\emptyset\}\), define
+			\[
+				f(A):=h\left(g(\{(a,A):a\in A\})\right).
+			\]
+			Then \(f(A)\in A\), so \(f\) is a choice function for \(\mathcal{F}\).</p>
 
 			<p class="label">Claim:</p>
-			<p>For all sets \(A,B\), if there exists an onto function \(f:A\rightarrow B\), then there exists a one-to-one function \(g:B\rightarrow A\), if and only if every set has a choice function.</p>
+			<p>For all sets \(A,B\), if there exists an onto function \(f:A\rightarrow B\), then there exists a function \(g:B\rightarrow A\) such that \(f\circ g=\operatorname{id}_{B}\), if and only if every set has a choice function.</p>
 
 			<p class="label">Proof:</p>
 			<p>Assume that every set has a choice function. Let \(A,B\) be sets, and let \(f:A\rightarrow B\) be onto. Define
 			\[
 				\mathcal{F}:=\{f^{-1}(\{b\}):b\in B\}.
 			\]
-			Let \(h\) be a choice function for \(\mathcal{F}\). Then \(g:B\rightarrow A\), defined by \(g(b):=h(f^{-1}(\{b\}))\), is one-to-one.</p>
-			<p>Conversely, let \(B\) be a family of pairwise disjoint sets. If \(B\) is finite, then it has a choice function and we are done. Otherwise, define \(A:=\bigcup B\), and define \(f:A\rightarrow B\) by
+			Let \(h\) be a choice function for \(\mathcal{F}\). Then \(g:B\rightarrow A\), defined by \(g(b):=h(f^{-1}(\{b\}))\), satisfies \(f(g(b))=b\) for every \(b\in B\). Hence \(f\circ g=\operatorname{id}_{B}\).</p>
+			<p>Conversely, let \(B\) be a family of pairwise disjoint nonempty sets. If \(B\) is finite, then it has a choice function and we are done. Otherwise, define \(A:=\bigcup B\), and define \(f:A\rightarrow B\) by
 			\[
 				f:=\{(a,b)\in A\times B:a\in b\}.
 			\]
-			This is an onto function. Assume that there exists a one-to-one function \(g:B\rightarrow A\). Then \(g\) is a choice function for \(B\). Since every family of pairwise disjoint sets has a choice function, every set has a choice function.</p>
+			Since \(B\) is pairwise disjoint, \(f\) is a well-defined onto function. By the assumption, there exists \(g:B\rightarrow A\) such that \(f\circ g=\operatorname{id}_{B}\). Therefore \(g(b)\in b\) for every \(b\in B\), so \(g\) is a choice function for \(B\). Since every family of pairwise disjoint sets has a choice function, every set has a choice function.</p>
 
 			<p class="label">Claim (The Principle of Transfinite Induction):</p>
 			<p>Let \(\alpha\in\mathcal{O}\), and let \(\varphi\) be a property. If:</p>
@@ -147,9 +151,9 @@
 			<p>Every set has a well-ordering relation if and only if every set has a choice function.</p>
 
 			<p class="label">Proof:</p>
-			<p>Let \(A\) be a nonempty set.</p>
-			<p>Assume that every \(B\in A\) is well-ordered. Define \(g:A\setminus\{\emptyset\}\rightarrow\bigcup A\) by \(g(B):=\min B\). Then for every \(B\in A\setminus\{\emptyset\}\), \(g(B)\in B\).</p>
-			<p>Now assume that \(P(A)\) has a choice function \(g:P(A)\setminus\{\emptyset\}\rightarrow A\), and define \(h:P(A)\rightarrow P(A)\) by
+			<p>Let \(A\) be a set.</p>
+			<p>Assume that every set has a well-ordering relation, and choose a well-ordering of \(\bigcup A\). Define \(g:A\setminus\{\emptyset\}\rightarrow\bigcup A\) by \(g(B):=\min B\), where the minimum is taken with respect to this well-ordering. Then for every \(B\in A\setminus\{\emptyset\}\), \(g(B)\in B\), so \(g\) is a choice function for \(A\).</p>
+			<p>Conversely, assume that every set has a choice function. If \(A=\emptyset\), then it is well-ordered by the empty relation. Otherwise, let \(g:P(A)\setminus\{\emptyset\}\rightarrow A\) be a choice function, and define \(h:P(A)\rightarrow P(A)\) by
 			\[
 				h(a):=\begin{cases}
 					\emptyset & a=\emptyset\\
@@ -160,7 +164,12 @@
 			\[
 				A_{\alpha}:=A\setminus\bigcup_{\beta&lt;\alpha}h(A_{\beta}).
 			\]
-			Let \(\alpha\in\mathcal{O}\) be an ordinal such that for every \(\beta&lt;\alpha\), \(A_{\beta}\neq\emptyset\). By the theorem of transfinite recursion, there exists a function \(f_{\alpha}:A\rightarrow\alpha\) such that \(f_{\alpha}(\beta)=g(A_{\beta})\). Let \(\beta_{0}&lt;\beta_{1}&lt;\alpha\). Then \(g(A_{\beta_{0}})\in A_{\beta_{0}}\), and also \(g(A_{\beta_{0}})\in\bigcup_{\beta&lt;\beta_{1}}\{g(A_{\beta})\}\). Hence \(g(A_{\beta_{0}})\notin A\setminus\bigcup_{\beta&lt;\beta_{1}}h(A_{\beta})=A_{\beta_{1}}\). Since \(g(A_{\beta_{1}})\in A_{\beta_{1}}\), we get \(f_{\alpha}(\beta_{0})=g(A_{\beta_{0}})\neq g(A_{\beta_{1}})=f_{\alpha}(\beta_{1})\), and therefore \(f_{\alpha}\) is one-to-one. By the claim above, there exists a minimal ordinal \(\kappa\in\mathcal{O}\) such that \(A_{\kappa}=\emptyset\). Then the function \(f_{\kappa}:A\rightarrow\kappa\) is one-to-one and onto, and the order \(\{(a,b)\in A\times A:f_{\kappa}(a)\le f_{\kappa}(b)\}\) is a well-ordering.</p>
+			Let \(\alpha\in\mathcal{O}\) be an ordinal such that for every \(\beta&lt;\alpha\), \(A_{\beta}\neq\emptyset\). By the theorem of transfinite recursion, there exists a function \(f_{\alpha}:\alpha\rightarrow A\) such that \(f_{\alpha}(\beta)=g(A_{\beta})\). Let \(\beta_{0}&lt;\beta_{1}&lt;\alpha\). Then \(g(A_{\beta_{0}})\in A_{\beta_{0}}\), and also \(g(A_{\beta_{0}})\in\bigcup_{\beta&lt;\beta_{1}}\{g(A_{\beta})\}\). Hence \(g(A_{\beta_{0}})\notin A\setminus\bigcup_{\beta&lt;\beta_{1}}h(A_{\beta})=A_{\beta_{1}}\). Since \(g(A_{\beta_{1}})\in A_{\beta_{1}}\), we get \(f_{\alpha}(\beta_{0})=g(A_{\beta_{0}})\neq g(A_{\beta_{1}})=f_{\alpha}(\beta_{1})\), and therefore \(f_{\alpha}\) is one-to-one.</p>
+			<p>By the claim above, there exists a minimal ordinal \(\kappa\in\mathcal{O}\) such that \(A_{\kappa}=\emptyset\). The function \(f_{\kappa}:\kappa\rightarrow A\) is one-to-one by the previous paragraph, and it is onto since \(A_{\kappa}=\emptyset\). Hence \(f_{\kappa}^{-1}:A\rightarrow\kappa\) is one-to-one and onto. The order
+			\[
+				a\preccurlyeq b\Longleftrightarrow f_{\kappa}^{-1}(a)\le f_{\kappa}^{-1}(b).
+			\]
+			is therefore a well-ordering of \(A\).</p>
 
 			<p class="label">Definition:</p>
 			<p>Let \(A\) be ordered with respect to \(\preccurlyeq\). A subset \(B\subseteq A\) is called a chain if it is linearly ordered with respect to \(\preccurlyeq\).</p>
@@ -179,21 +188,26 @@
 			<p>If every set has a choice function, then every nonempty ordered set in which every nonempty chain has an upper bound has a maximal element.</p>
 
 			<p class="label">Proof:</p>
-			<p>Let \(A\) be a nonempty set ordered by \(\preccurlyeq\), such that every nonempty chain in \(A\) has an upper bound, and let \(g:P(A)\setminus\{\emptyset\}\rightarrow A\) be a choice function. For every nonempty chain \(C\subseteq A\), define
+			<p>Let \(A\) be a nonempty set ordered by \(\preccurlyeq\), such that every nonempty chain in \(A\) has an upper bound, and let \(g:P(A)\setminus\{\emptyset\}\rightarrow A\) be a choice function. For every chain \(C\subseteq A\), define
 			\[
 				\operatorname{Upp}(C):=\{a\in A\setminus C:\text{for all }c\in C,\ c\prec a\}.
 			\]
 			Write \(a_{0}:=g(A)\), let \(b\notin A\), and for every ordinal \(\alpha\in\mathcal{O}\), write
 			\[
 				a_{\alpha}:=\begin{cases}
+					b & b\in\{a_{\beta}\}_{\beta&lt;\alpha}\\
 					b & \operatorname{Upp}(\{a_{\beta}\}_{\beta&lt;\alpha})=\emptyset\\
 					g(\operatorname{Upp}(\{a_{\beta}\}_{\beta&lt;\alpha})) & \text{otherwise}.
 				\end{cases}
 			\]
-			Then there exists a minimal ordinal \(\kappa\in\mathcal{O}\) such that \(a_{\kappa}=b\). Thus \(\operatorname{Upp}(\{a_{\beta}\}_{\beta&lt;\kappa})=\emptyset\). Hence \(\{a_{\beta}\}_{\beta&lt;\kappa}\) is a chain with an upper bound contained in it, and therefore it has a maximal element \(m\). If we assume for contradiction that there exists another element \(a\in A\) such that \(m\prec a\), then \(a\in\operatorname{Upp}(\{a_{\beta}\}_{\beta&lt;\kappa})\), a contradiction. Therefore \(m\) is a maximal element of \(A\).</p>
+			By transfinite induction, as long as \(a_{\alpha}\neq b\), the set \(\{a_{\beta}\}_{\beta&lt;\alpha}\) is a chain: the next element, when it exists, is chosen from \(\operatorname{Upp}(\{a_{\beta}\}_{\beta&lt;\alpha})\), so it is strictly above all previous elements and is not already in the chain. Therefore the recursive definition is legitimate.</p>
+			<p>There exists a minimal ordinal \(\kappa\in\mathcal{O}\) such that \(a_{\kappa}=b\). Thus \(\operatorname{Upp}(\{a_{\beta}\}_{\beta&lt;\kappa})=\emptyset\). The set \(C:=\{a_{\beta}\}_{\beta&lt;\kappa}\) is a nonempty chain, so it has an upper bound \(m\in A\). If \(m\notin C\), then every \(c\in C\) satisfies \(c\prec m\), so \(m\in\operatorname{Upp}(C)\), a contradiction. Hence \(m\in C\), and since \(m\) is an upper bound for \(C\), it is a maximal element of \(C\). If we assume for contradiction that there exists \(a\in A\) such that \(m\prec a\), then \(a\in\operatorname{Upp}(C)\), again a contradiction. Therefore \(m\) is a maximal element of \(A\).</p>
 
 			<p class="label">Definition:</p>
 			<p>Let \(\mathcal{M}\) be a model of set theory. If it satisfies that every set in it has a choice function, then it is called a model of set theory with choice.</p>
+
+			<p class="label">Convention:</p>
+			<p>From now on, we assume the axiom of choice, and we will not mention this assumption explicitly every time it is used.</p>
 
 			<nav class="nav" aria-label="Section navigation">
 				<a href="ordinals.html">Previous: Ordinals</a>
