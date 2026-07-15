@@ -177,6 +177,8 @@
 			<p class="axiom">6. Axiom of Power Set:</p>
 			<p>Let \(A\in{\cal M}\). Then there exists \(C\in{\cal M}\) such that for every \(B\in{\cal M}\), \(B\in C\) if and only if \(B\subseteq A\). We denote it by \(P(A)\), and call it the <i>power set</i> of \(A\).</p>
 			<div class="axiom-details">
+			<p class="label">Corollary:</p>
+			<p>Let \(A\in{\cal M}\). Then:</p>
 			<ol>
 				<li>\(\emptyset\in P(A)\).</li>
 				<li>\(A\in P(A)\).</li>
@@ -188,11 +190,17 @@
 			<p class="axiom">7. Axiom of Foundation:</p>
 			<p>Let \(A\neq\emptyset\). Then there exists \(B\in A\) such that \(A\cap B=\emptyset\).</p>
 			<div class="axiom-details">
+			<p class="label">Claims:</p>
+			<p>Let \(A\in\mathcal{M},B\in\mathcal{M}\). Then:</p>
 			<ol>
 				<li>\(A\notin A\).</li>
 				<li>\(A\notin B\) or \(B\notin A\).</li>
+			</ol>
+
+			<p class="label">Proof:</p>
+			<ol>
 				<li>\(A\in\mathcal{M}\), hence \(\{A\}\in\mathcal{M}\), and therefore by the axiom of foundation \(A\cap\{A\}=\emptyset\). Hence \(A\notin A\).</li>
-				<li>\(A\in\mathcal{M},B\in\mathcal{M}\), hence \(\{A,B\}\in\mathcal{M}\), and therefore by the axiom of separation \(A\cap\{A,B\}=\emptyset\) or \(B\cap\{A,B\}=\emptyset\). Hence \(A\notin B\) or \(B\notin A\).</li>
+				<li>\(A\in\mathcal{M},B\in\mathcal{M}\), hence \(\{A,B\}\in\mathcal{M}\), and therefore by the axiom of foundation \(A\cap\{A,B\}=\emptyset\) or \(B\cap\{A,B\}=\emptyset\). Hence \(A\notin B\) or \(B\notin A\).</li>
 			</ol>
 			</div>
 
