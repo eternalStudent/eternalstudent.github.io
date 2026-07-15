@@ -73,6 +73,12 @@ p {
 	font-weight: bold;
 	margin-bottom: -8px;
 }
+.axiom-details {
+	margin-left: 28px;
+}
+.axiom-details > :first-child {
+	margin-top: 0;
+}
 ol.toc {
 	list-style: none;
 	padding: 0;
@@ -107,5 +113,8 @@ ol.toc {
 	.content {
 		margin: 0 auto;
 		width: 728px;
+	}
+	.axiom-details {
+		margin-left: 42px;
 	}
 }
