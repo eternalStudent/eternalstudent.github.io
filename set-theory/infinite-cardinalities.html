@@ -148,7 +148,7 @@
 					g(a):=\sup\left\{\sum_{k=0}^{n}\frac{2a(k)}{3^{k+1}}:n\in\mathbb{N}\right\}
 				\]
 				is also one-to-one, so \(|2^{\mathbb{N}}|\le|[0..1]|\). By Cantor-Bernstein, \(|[0..1]|=|2^{\mathbb{N}}|\).</li>
-				<li>(Draft proof.) Define \(f:[0..1]\rightarrow(0..1)\) by
+				<li>Define \(f:[0..1]\rightarrow(0..1)\) by
 				\[
 					f(x):=\begin{cases}
 						\frac{1}{2} & x=0\\
@@ -156,15 +156,30 @@
 						x & \text{otherwise}.
 					\end{cases}
 				\]
-				It is easy to be convinced that this is an invertible function.</li>
-				<li>(Draft proof.) Define \(f:\mathbb{R}\rightarrow(0..1)\) by
+				Define \(g:(0..1)\rightarrow[0..1]\) by
+				\[
+					g(y):=\begin{cases}
+						0 & y=\frac{1}{2}\\
+						\frac{1}{2^{n}} & \text{there exists }n\in\mathbb{N}\text{ such that }y=\frac{1}{2^{n+2}}\\
+						y & \text{otherwise}.
+					\end{cases}
+				\]
+				Then \(g(f(x))=x\) for every \(x\in[0..1]\), and \(f(g(y))=y\) for every \(y\in(0..1)\). Therefore \(f\) is invertible.</li>
+				<li>Define \(f:\mathbb{R}\rightarrow(0..1)\) by
 				\[
 					f(x):=\begin{cases}
 						\frac{1}{2+x} & x\ge0\\[6pt]
 						\frac{1-x}{2-x} & x&lt;0.
 					\end{cases}
 				\]
-				It is easy to be convinced that this is an invertible function.</li>
+				Define \(g:(0..1)\rightarrow\mathbb{R}\) by
+				\[
+					g(y):=\begin{cases}
+						\frac{1}{y}-2 & 0&lt;y\le\frac{1}{2}\\[6pt]
+						\frac{1-2y}{1-y} & \frac{1}{2}&lt;y&lt;1.
+					\end{cases}
+				\]
+				Then \(g(f(x))=x\) for every \(x\in\mathbb{R}\), and \(f(g(y))=y\) for every \(y\in(0..1)\). Therefore \(f\) is invertible.</li>
 			</ol>
 
 			<p class="label">Corollary:</p>
