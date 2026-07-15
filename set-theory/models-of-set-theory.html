@@ -41,32 +41,20 @@
 			<h1 class="post-title">Models of Set Theory</h1>
 			<p><a class="toc-link" href="index.html">Table of contents</a></p>
 
-			<h2>Basic Concepts in Logic</h2>
-			<blockquote>
-				<p>The main problem with starting mathematics from the beginning is that there is no beginning. In order to start with set theory, one has to know some basic logic, and in order to understand the basic logic, one has to know some basic set theory. This creates a “strange loop.” To break the loop and still find a starting point, I will assume an intuitive understanding of concepts such as “statement,” “truth,” and “identity.” I will wave my hands a little about models, axioms, elements, and rules of inference, all so that I have a basis from which to start speaking in mathematical language.</p>
-			</blockquote>
-
-			<p class="label">Definition:</p>
-			<p>Let \(\varphi(a)\) be a verbal statement about \(a\). Then \(\varphi\) is called a property of \(a\) if the statement \(\varphi(a)\) is true.</p>
-
-			<p class="label">Definition:</p>
-			<p>Let \(\varphi\) be a property. The collection of all \(a\)'s for which the statement \(\varphi(a)\) is true is called a class, and is denoted \(\left\{ a:\varphi(a)\right\}\).</p>
-
-			<p class="label">Notation:</p>
-			<p>Let \(\varphi\) be a property, and write \(A:=\left\{ a:\varphi(a)\right\}\). Let \(a\) be given. If \(\varphi(a)\) is true, we write \(a\in A\); otherwise, we write \(a\notin A\).</p>
-
-			<p class="label">Notation:</p>
-			<p>Let \(a,b\) be given. If they are identical we write \(a=b\); otherwise, \(a\neq b\).</p>
-
 			<h2>The Axioms</h2>
-			<blockquote>
-				<p>With the discovery of paradoxes in Cantor's naive set theory, a movement began among mathematicians and logicians to find a more rigorous foundation for mathematics. In 1908 Ernst Zermelo proposed the first axiom system, and later Abraham Fraenkel formulated corrections to it. Together this axiom system is called Zermelo-Fraenkel, and is sometimes denoted \(\text{ZF}\).</p>
-			</blockquote>
+			<p>Following the discovery of considerable <a href="https://en.wikipedia.org/wiki/Russell%27s_paradox">paradoxes</a> in <a href="https://en.wikipedia.org/wiki/Georg_Cantor">Cantor's</a> <a href="https://en.wikipedia.org/wiki/Naive_set_theory">naive set theory</a>, <a href="https://en.wikipedia.org/wiki/Foundations_of_mathematics#Foundational_crisis">a movement</a> grew among mathematicians and logicians to find a more rigorous basis for mathematics. In 1908 <a href="https://en.wikipedia.org/wiki/Ernst_Zermelo">Ernst Zermelo</a> proposed the <a href="https://en.wikipedia.org/wiki/Zermelo_set_theory">first axiomatic system</a>, and later <a href="https://en.wikipedia.org/wiki/Abraham_Fraenkel">Abraham Fraenkel</a> proposed refinements to it. Together their axiomatic system is often referred to as <a href="https://en.wikipedia.org/wiki/Zermelo–Fraenkel_set_theory">Zermelo-Fraenkel</a>, and is denoted by \(ZF\).</p>
+			<blockquote style="border-left: 4px solid lightgrey; padding: 16px; font-style: italic;">In the beginning there was math. And math was without form, and structure; and uncertainty was upon the face of the <a href="https://en.wikipedia.org/wiki/International_Congress_of_Mathematicians">Congress</a>. And the spirit of Cantor moved upon the discarded drafts.<br>And Zermelo said, Let there be an empty set, and there was an empty set, and it was unique.</blockquote>
 
-			<p>Let \({\cal M}\) be a collection of classes. Then \({\cal M}\) is called a model of set theory if the following axioms hold:</p>
+			<p><b>This is not <i>the</i> start, but it's <i>a</i> start:</b> Let there be \(a\), and let \(\varphi(a)\) be a statement about \(a\), then if \(\varphi(a)\) is true, \(\varphi\) is called a <i>property</i> of \(a\), or a <i>formula</i>.
+
+	The collection of all \(a\), such that the statement \(\varphi(a)\) is true, is called a <i>class</i> and is denoted by \(\{a : \varphi(a)\}\).
+
+	If we have \(A:=\{a : \varphi(a)\}\), we can denote that \(\varphi(a_{0})\) is true by \(a_{0} \in A\), or false by \(a_{0} \notin A\).</p>
+
+			<p>Let \({\cal M}\) be a collection of classes. Then \({\cal M}\) is called a <i>model of set theory</i> if the following axioms hold:</p>
 
 			<p class="axiom">1. Axiom of Existence:</p>
-			<p>There exists \(E\in{\cal M}\) such that for every \(x\in{\cal M}\), \(x\notin E\). We call such a class empty.</p>
+			<p>There exists \(E\in{\cal M}\) such that for every \(x\in{\cal M}\), \(x\notin E\). We call such a class <i>empty</i>.</p>
 			<ol>
 				<li>For every empty \(E\in{\cal M}\), \(E\subseteq A\).</li>
 				<li>\(A\subseteq A\).</li>
@@ -91,7 +79,7 @@
 				<li>\(\{A,B\}\in{\cal M}\)</li>
 				<li>\(\{A\}\in{\cal M}\)</li>
 				<li>\(\bigcup{\cal A}:=\{a:\text{exists }A\in{\cal A}\text{ s.t. }a\in A\}\). We also write \(\bigcup\limits _{A\in{\cal A}}A\).</li>
-				<li>For \({\cal A}\neq\emptyset\), define \(\bigcap{\cal A}:=\{a:\text{for all }A\in{\cal A}\text{ s.t. }a\in A\}\). We also write \(\bigcap\limits _{A\in{\cal A}}A\).</li>
+				<li>For \({\cal A}\neq\emptyset\), define \(\bigcap{\cal A}:=\{a:\text{for all }A\in{\cal A}\text{ h.t. }a\in A\}\). We also write \(\bigcap\limits _{A\in{\cal A}}A\).</li>
 			</ol>
 
 			<p class="axiom">5. Axiom of Union:</p>
@@ -109,7 +97,7 @@
 			</ol>
 
 			<p class="axiom">6. Axiom of Power Set:</p>
-			<p>Let \(A\in{\cal M}\). Then there exists \(C\in{\cal M}\) such that for every \(B\in{\cal M}\), \(B\in C\) if and only if \(B\subseteq A\). We denote it by \(P(A)\), and call it the power set of \(A\).</p>
+			<p>Let \(A\in{\cal M}\). Then there exists \(C\in{\cal M}\) such that for every \(B\in{\cal M}\), \(B\in C\) if and only if \(B\subseteq A\). We denote it by \(P(A)\), and call it the <i>power set</i> of \(A\).</p>
 			<ol>
 				<li>\(\emptyset\in P(A)\).</li>
 				<li>\(A\in P(A)\).</li>
@@ -133,13 +121,13 @@
 			<p>Let \(A\in{\cal M}\). Then for every property \(\varphi\) such that for every \(a\in A\) there exists a unique \(b\in{\cal M}\) for which the statement \(\varphi(a,b)\) is true, we have \(\{b:a\in A\text{ and }\varphi(a,b)\}\in{\cal M}\).</p>
 
 			<p class="label">Definition:</p>
-			<p>Let \({\cal M}\) be a model of set theory, and let \(A\in{\cal M}\). Then \(A\) is called a set or a family.</p>
+			<p>Let \({\cal M}\) be a model of set theory, and let \(A\in{\cal M}\). Then \(A\) is called a <i>set</i> or a <i>family</i>.</p>
 
 			<p class="label">Definition:</p>
-			<p>Let \(A\) be a set, and let \(B\subseteq A\) be a set. Then \(B\) is called a subset of \(A\).</p>
+			<p>Let \(A\) be a set, and let \(B\subseteq A\) be a set. Then \(B\) is called a <i>subset</i> of \(A\).</p>
 
 			<p class="label">Definition:</p>
-			<p>Let \({\cal F}\) be a set such that for every pair of distinct sets \(\{A,B\}\subseteq{\cal F}\), \(A\cap B=\emptyset\). Then we say that \({\cal F}\) is a family of pairwise disjoint sets.</p>
+			<p>Let \({\cal F}\) be a set such that for every pair of distinct sets \(\{A,B\}\subseteq{\cal F}\), \(A\cap B=\emptyset\). Then we say that \({\cal F}\) is a family of <i>pairwise disjoint sets</i>.</p>
 
 			<nav class="nav" aria-label="Section navigation">
 				<a href="index.html">Previous: Table of contents</a>
@@ -149,5 +137,6 @@
 	</div>
 </body>
 </html>
+
 
 

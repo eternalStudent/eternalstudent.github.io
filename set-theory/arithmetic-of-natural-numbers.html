@@ -1,4 +1,4 @@
-<!doctype html>
+﻿<!doctype html>
 <html lang="en">
 <head>
 	<meta charset="utf-8">
@@ -66,7 +66,7 @@
 			<p>Let \(B_{0}\) be a set with \(S(m_{0})\) elements such that \(A\cap B_{0}=\emptyset\), and let \(b\in B_{0}\). Then \(|B_{0}\setminus\{b\}|=m_{0}\). Since \(B_{0}\setminus\{b\}\subset B_{0}\), we also have \(A\cap(B_{0}\setminus\{b\})=\emptyset\), and therefore \(|A\cup(B_{0}\setminus\{b\})|=k_{0}\). Hence, by the previous claim, \(|A\cup B_{0}|=|(A\cup(B_{0}\setminus\{b\}))\cup\{b\}|=S(k_{0})\). By the principle of induction, the claim is true for every natural \(m\in\mathbb{N}\).</p>
 
 			<p class="label">Definition:</p>
-			<p>Let \(\{n,m\}\subset\mathbb{N}\) be natural numbers. We denote by \(m+n\) the unique \(k\in\mathbb{N}\) such that for every pair of disjoint sets \(A,B\) satisfying \(|A|=n\) and \(|B|=m\), \(|A\cup B|=k\). We call \(k\) the sum of \(n\) and \(m\).</p>
+			<p>Let \(\{n,m\}\subset\mathbb{N}\) be natural numbers. We denote by \(m+n\) the unique \(k\in\mathbb{N}\) such that for every pair of disjoint sets \(A,B\) satisfying \(|A|=n\) and \(|B|=m\), \(|A\cup B|=k\). We call \(k\) the <i>sum</i> of \(n\) and \(m\).</p>
 
 			<p class="label">Corollaries:</p>
 			<p>Let \(\{n,m,k\}\subset\mathbb{N}\) be natural numbers. Then:</p>
@@ -109,7 +109,7 @@
 			<p>Since \(n_{0}\le m_{0}\), we get \(n_{0}+n_{1}\le m_{0}+n_{1}\). Since \(n_{1}\le m_{1}\), there exists \(k\in\mathbb{N}\) such that \(n_{1}+k=m_{1}\). Therefore \(n_{0}+n_{1}\le m_{0}+n_{1}\le m_{0}+n_{1}+k=m_{0}+m_{1}\), as desired.</p>
 
 			<p class="label">Notation:</p>
-			<p>Let \(\{n_{i}\}_{i\in m+1}\subset\mathbb{N}\) be a finite set of natural numbers. We denote \(n_{0}+n_{1}+\cdots+n_{m}\) by \(\sum\limits _{i\in m+1}n_{i}\), or \(\sum\limits _{i=0}^{m}n_{i}\), or \(\sum\limits _{i&lt;m+1}n_{i}\). We define the empty sum \(\sum\limits _{i&lt;0}n_{i}:=0\).</p>
+			<p>Let \(\{n_{i}\}_{i\in m+1}\subset\mathbb{N}\) be a finite set of natural numbers. We denote \(n_{0}+n_{1}+\cdots+n_{m}\) by \(\sum\limits _{i\in m+1}n_{i}\), or \(\sum\limits _{i=0}^{m}n_{i}\), or \(\sum\limits _{i&lt;m+1}n_{i}\). We define the <i>empty sum</i> \(\sum\limits _{i&lt;0}n_{i}:=0\).</p>
 
 			<h2>Multiplication</h2>
 			<blockquote>
@@ -137,7 +137,7 @@
 			<p>Since \((A\times(B_{0}\setminus\{b\}))\cap(A\times\{b\})=\emptyset\), by the choice of \(m_{0}\) we get \(|(A\times(B_{0}\setminus\{b\}))\cup(A\times\{b\})|=k_{0}+n\).</p>
 
 			<p class="label">Definition:</p>
-			<p>Let \(\{n,m\}\subset\mathbb{N}\) be natural numbers. We denote by \(n\cdot m\), or by \(nm\), the unique \(k\in\mathbb{N}\) such that for every set \(A\) with \(n\) elements and every set \(B\) with \(m\) elements, \(|A\times B|=k\). We call \(k\) the product of \(n\) and \(m\).</p>
+			<p>Let \(\{n,m\}\subset\mathbb{N}\) be natural numbers. We denote by \(n\cdot m\), or by \(nm\), the unique \(k\in\mathbb{N}\) such that for every set \(A\) with \(n\) elements and every set \(B\) with \(m\) elements, \(|A\times B|=k\). We call \(k\) the <i>product</i> of \(n\) and \(m\).</p>
 
 			<p class="label">Corollaries:</p>
 			<p>Let \(\{n,m,k\}\subset\mathbb{N}\). Then:</p>
@@ -188,13 +188,13 @@
 			<p>Define \(g:A^{B_{0}\setminus\{b\}}\times A\rightarrow A^{B_{0}}\) by \(g(f,a):=f\cup\{(b,a)\}\). Then the function \(h:A^{B_{0}}\rightarrow A^{B_{0}\setminus\{b\}}\times A\) defined by \(h(f):=(f\upharpoonright(B_{0}\setminus\{b\}),f(b))\) is its inverse. Hence \(g\) is one-to-one and onto, and \(|A^{B_{0}}|=|A^{B_{0}\setminus\{b\}}\times A|=k_{0}\cdot n\). By the principle of induction, the claim holds for every natural \(m\in\mathbb{N}\).</p>
 
 			<p class="label">Definition:</p>
-			<p>Let \(\{n,m\}\subset\mathbb{N}\) be natural numbers. We denote by \(m^{n}\) the unique \(k\in\mathbb{N}\) such that for every set \(A\) with \(n\) elements and every set \(B\) with \(m\) elements, \(|B^{A}|=k\). We call \(k\) the power of \(m\) by \(n\).</p>
+			<p>Let \(\{n,m\}\subset\mathbb{N}\) be natural numbers. We denote by \(m^{n}\) the unique \(k\in\mathbb{N}\) such that for every set \(A\) with \(n\) elements and every set \(B\) with \(m\) elements, \(|B^{A}|=k\). We call \(k\) the <i>power</i> of \(m\) by \(n\).</p>
 
 			<p class="label">Definition:</p>
 			<p>Let \(\{A_{\alpha}\}_{\alpha\in I}\) be nonempty sets, and write \(A:=\bigcup\limits _{\alpha\in I}A_{\alpha}\). Then \(\prod\limits _{\alpha\in I}A_{\alpha}:=\left\{ f\in A^{I}:\text{for all }\alpha\in I\text{, }f(\alpha)\in A_{\alpha}\right\}\).</p>
 
 			<p class="label">Definition:</p>
-			<p>Let \(m\in\mathbb{N}\) be natural, and let \(\{n_{i}\}_{i&lt;m+1}\subset\mathbb{N}\) be natural numbers. Then we denote \(\prod\limits _{i&lt;m+1}n_{i}:=n_{0}\cdot n_{1}\cdots n_{m}\), and define the empty product \(\prod\limits _{i&lt;0}n_{i}:=1\).</p>
+			<p>Let \(m\in\mathbb{N}\) be natural, and let \(\{n_{i}\}_{i&lt;m+1}\subset\mathbb{N}\) be natural numbers. Then we denote \(\prod\limits _{i&lt;m+1}n_{i}:=n_{0}\cdot n_{1}\cdots n_{m}\), and define the <i>empty product</i> \(\prod\limits _{i&lt;0}n_{i}:=1\).</p>
 
 			<p class="label">Claim:</p>
 			<p>Let \(n\in\mathbb{N}\), and let \(\{A_{i}\}_{i&lt;n}\) be finite sets. Then \(|\prod\limits _{i&lt;n}A_{i}|=\prod\limits _{i&lt;n}|A_{i}|\).</p>
@@ -284,3 +284,4 @@
 	</div>
 </body>
 </html>
+
